@@ -7,7 +7,7 @@ title: "Unidad 3 — BD Transaccionales: aspectos avanzados"
 
 ## Teoría
 
-- [Apunte completo](./teoria/unidad-3.md)
+- [Apunte completo](./teoria/)
   - Transacciones — ACID, control explícito, puntos de guardado
   - Concurrencia — problemas clásicos y niveles de aislamiento
   - Bloqueos — tipos, deadlocks, detección

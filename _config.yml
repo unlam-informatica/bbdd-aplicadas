@@ -19,15 +19,44 @@ social:
   links:
     - https://github.com/unlam-informatica
 
+webmaster_verifications:
+  google:
+  bing:
+
+analytics:
+  google:
+    id:
+
 theme: jekyll-theme-chirpy
 
+theme_mode: # [light | dark]
+
+avatar:
 toc: true
 
 comments:
-  active: ""
+  provider: # [disqus | utterances | giscus]
+  disqus:
+    shortname:
+  utterances:
+    repo:
+    issue_term:
+  giscus:
+    repo:
+    repo_id:
+    category:
+    category_id:
+    mapping:
+    strict:
+    input_position:
+    lang:
+    reactions_enabled:
 
 pwa:
-  enabled: false
+  enabled: true
+  cache:
+    enabled: true
+    deny_paths:
 
 paginate: 10
 
@@ -50,6 +79,18 @@ collections:
 defaults:
   - scope:
       path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+      toc: true
+      permalink: /posts/:title/
+  - scope:
+      path: _drafts
+    values:
+      comments: false
+  - scope:
+      path: ""
       type: tabs
     values:
       layout: page
@@ -65,18 +106,24 @@ compress_html:
   profile: false
   blanklines: false
   ignore:
-    envs: development
+    envs: [development]
 
 exclude:
   - "*.gem"
   - "*.gemspec"
-  - Gemfile
-  - Gemfile.lock
-  - CLAUDE.md
+  - docs
+  - tools
+  - README.md
   - LICENSE
-  - vendor
+  - CLAUDE.md
+  - "*.config.js"
+  - "package*.json"
 
-plugins:
-  - jekyll-feed
-  - jekyll-sitemap
-  - jekyll-seo-tag
+jekyll-archives:
+  enabled: [categories, tags]
+  layouts:
+    category: category
+    tag: tag
+  permalinks:
+    tag: /tags/:name/
+    category: /categories/:name/

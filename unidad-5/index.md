@@ -7,7 +7,7 @@ title: "Unidad 5 — Protección de los datos"
 
 ## Teoría
 
-- [Apunte completo](./teoria/unidad-5.md)
+- [Apunte completo](./teoria/)
   - Seguridad en SQL Server — autenticación y autorización
   - DCL — `GRANT`, `REVOKE`, `DENY`
   - Roles y permisos

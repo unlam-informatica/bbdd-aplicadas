@@ -7,7 +7,7 @@ title: "Unidad 4 — BD No Transaccionales (NoSQL)"
 
 ## Teoría
 
-- [Apunte completo](./teoria/unidad-4.md)
+- [Apunte completo](./teoria/)
   - NoSQL — características, tipos y casos de uso
   - MongoDB — documentos, colecciones, BSON
   - MongoDB Query Language — CRUD y aggregation pipeline

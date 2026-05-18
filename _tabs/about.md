@@ -2,7 +2,7 @@
 layout: page
 title: Acerca de
 icon: fas fa-info-circle
-order: 1
+order: 2
 ---
 
 ## Bases de Datos Aplicadas — UNLaM

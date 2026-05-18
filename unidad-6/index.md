@@ -7,7 +7,7 @@ title: "Unidad 6 — Calidad en bases de datos"
 
 ## Teoría
 
-- [Apunte completo](./teoria/unidad-6.md)
+- [Apunte completo](./teoria/)
   - Calidad de datos — dimensiones y métricas
   - ISO/IEC 25012 — modelo de calidad de datos
   - GDPR — Reglamento General de Protección de Datos

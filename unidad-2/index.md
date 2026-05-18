@@ -7,7 +7,7 @@ title: "Unidad 2 — BD Transaccionales: aspectos básicos"
 
 ## Teoría
 
-- [Apunte completo](./teoria/unidad-2.md)
+- [Apunte completo](./teoria/)
   - Arquitectura de SQL Server — componentes, servicios, instancias
   - Instalación y configuración
   - ODBC y JDBC — conectores y drivers
