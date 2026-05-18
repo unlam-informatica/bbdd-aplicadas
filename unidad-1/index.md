@@ -1,4 +1,7 @@
-# Unidad 1 — Conceptos básicos. Repaso SQL
+---
+layout: page
+title: "Unidad 1 — Conceptos básicos. Repaso SQL"
+---
 
 [← Inicio](../)  · **1er parcial**
 

@@ -1,4 +1,8 @@
-# Window Functions
+---
+layout: page
+title: "Window Functions"
+permalink: /unidad-1/guias/window-functions/
+---
 
 ## ¿Qué son las Window Functions?
 

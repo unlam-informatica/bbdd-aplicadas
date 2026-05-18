@@ -1,3 +1,9 @@
+---
+layout: page
+title: "Unidad 3 — Apunte completo"
+permalink: /unidad-3/teoria/
+---
+
 [← Unidad 3](../)
 
 - [Transacciones](#transacciones)

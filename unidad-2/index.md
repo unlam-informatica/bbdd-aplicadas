@@ -1,4 +1,7 @@
-# Unidad 2 — BD Transaccionales: aspectos básicos
+---
+layout: page
+title: "Unidad 2 — BD Transaccionales: aspectos básicos"
+---
 
 [← Inicio](../)  · **1er parcial**
 

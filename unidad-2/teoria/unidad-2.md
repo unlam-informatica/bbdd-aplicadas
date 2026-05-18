@@ -1,3 +1,9 @@
+---
+layout: page
+title: "Unidad 2 — Apunte completo"
+permalink: /unidad-2/teoria/
+---
+
 [← Unidad 2](../)
 
 - [Arquitectura de SQL Server](#arquitectura-de-sql-server)

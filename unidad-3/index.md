@@ -1,4 +1,7 @@
-# Unidad 3 — BD Transaccionales: aspectos avanzados
+---
+layout: page
+title: "Unidad 3 — BD Transaccionales: aspectos avanzados"
+---
 
 [← Inicio](../)  · **1er parcial**
 

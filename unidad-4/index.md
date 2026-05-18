@@ -1,4 +1,7 @@
-# Unidad 4 — BD No Transaccionales (NoSQL)
+---
+layout: page
+title: "Unidad 4 — BD No Transaccionales (NoSQL)"
+---
 
 [← Inicio](../)  · **2do parcial**
 

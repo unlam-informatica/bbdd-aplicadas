@@ -1,4 +1,7 @@
-# Unidad 5 — Protección de los datos
+---
+layout: page
+title: "Unidad 5 — Protección de los datos"
+---
 
 [← Inicio](../)  · **2do parcial**
 

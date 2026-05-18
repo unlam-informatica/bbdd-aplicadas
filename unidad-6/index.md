@@ -1,4 +1,7 @@
-# Unidad 6 — Calidad en bases de datos
+---
+layout: page
+title: "Unidad 6 — Calidad en bases de datos"
+---
 
 [← Inicio](../)  · **2do parcial**
 

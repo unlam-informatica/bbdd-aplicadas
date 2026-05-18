@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-Study notes, guides, and SQL exercises for the "Bases de Datos Aplicadas" course at UNLaM. Published as a GitHub Pages site using the Jekyll `midnight` theme (`_config.yml`).
+Study notes, guides, and SQL exercises for the "Bases de Datos Aplicadas" course at UNLaM. Published as a GitHub Pages site using the `jekyll-theme-chirpy` theme, built via GitHub Actions (`.github/workflows/pages-deploy.yml`).
 
-There is no build step to run locally — content is Markdown and SQL files consumed directly by GitHub Pages.
+The site requires a build step via `bundle exec jekyll build`. GitHub Actions handles this automatically on push to `main`.
 
 ## Repository structure
 
@@ -26,7 +26,7 @@ Units 2–6 are planned but not yet created. When adding content, follow the sam
 
 - **Language**: All content is written in Spanish.
 - **SQL dialect**: SQL Server / T-SQL (the course uses SQL Server).
-- **Markdown**: GitHub-flavored Markdown. Tables, fenced code blocks with language tags (` ```sql `), and heading-based `#` anchors are used throughout.
+- **Markdown**: GitHub-flavored Markdown. Tables, fenced code blocks with language tags (` ```sql `), and heading-based `#` anchors are used throughout. All pages must have Jekyll front matter (`layout: page`, `title`, and `permalink` for non-index pages).
 - **Guides** (`guias/`) are self-contained reference documents with examples — not summaries of the teoria. They cover a single specific topic (e.g., window functions).
 - **Teoria files** (`teoria/`) are comprehensive unit summaries covering all topics in the syllabus for that unit.
 - SQL files in `practica/` contain commented exercises, not runnable scripts with setup DDL.

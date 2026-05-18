@@ -1,3 +1,9 @@
+---
+layout: page
+title: "Unidad 1 — Apunte completo"
+permalink: /unidad-1/teoria/
+---
+
 - [Parte 1: Conceptos básicos](#parte-1-conceptos-básicos)
   - [Qué es una base de datos](#qué-es-una-base-de-datos)
   - [Qué es un DBMS](#qué-es-un-dbms)

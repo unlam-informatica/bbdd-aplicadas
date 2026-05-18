@@ -1,3 +1,9 @@
+---
+layout: page
+title: "Unidad 6 — Apunte completo"
+permalink: /unidad-6/teoria/
+---
+
 [← Unidad 6](../)
 
 - [Calidad de datos](#calidad-de-datos)
