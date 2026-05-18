@@ -1,54 +1,50 @@
-# Bases de Datos Aplicada — UNLaM
+# Bases de Datos Aplicadas — UNLaM
 
-Apuntes, resúmenes y ejercicios prácticos organizados por unidad.
+Apuntes, guías de referencia y ejercicios prácticos de la cursada, organizados por unidad.
 
-## Estructura del repositorio
+---
 
-```
-BBDD-APLICADAS/
-├── unidad-1/               # Conceptos básicos + repaso SQL
-│   ├── teoria/
-│   │   └── unidad-1.md
-│   ├── guias/              # Referencias de temas puntuales
-│   │   └── window-functions.md
-│   ├── practica/           # Ejercicios .sql
-│   │   └── window-functions.sql
-│   └── images/
-│       └── db-organization.png
-│
-├── unidad-2/               # BD transaccionales: aspectos básicos
-├── unidad-3/               # BD transaccionales: aspectos avanzados
-├── unidad-4/               # BD no transaccionales (NoSQL)
-├── unidad-5/               # Protección de los datos
-└── unidad-6/               # Calidad en bases de datos
-```
+## 1er Parcial — Semana 7 · Unidades 1, 2 y 3
 
-Cada unidad sigue la misma estructura interna: `teoria/` para resúmenes, `guias/` para referencias técnicas de temas específicos, `practica/` para archivos `.sql` e `images/` para recursos visuales referenciados desde los markdowns.
+### [Unidad 1 — Conceptos básicos. Repaso SQL](./unidad-1/)
+DDL, DML, constraints, NULL, JOINs, vistas, procedimientos almacenados, triggers, funciones de usuario, window functions, CTE, SQL dinámico, PIVOT.
 
-## Contenido por unidad
+### [Unidad 2 — BD Transaccionales: aspectos básicos](./unidad-2/)
+Arquitectura de SQL Server, instalación, ODBC/JDBC, collation.
 
-| Unidad | Tema | Parcial |
-|--------|------|---------|
-| [Unidad 1](./unidad-1/) | Conceptos básicos. Repaso SQL: DDL, DML, constraints, window functions, CTE, pivot | 1er parcial |
-| [Unidad 2](./unidad-2/) | BD transaccionales: arquitectura, instalación, ODBC/JDBC, collation | 1er parcial |
-| [Unidad 3](./unidad-3/) | Transacciones, concurrencia, índices, optimización de consultas | 1er parcial |
-| [Unidad 4](./unidad-4/) | NoSQL, MongoDB Query Language, Data Lakes, KDD | 2do parcial |
-| [Unidad 5](./unidad-5/) | Seguridad, DCL, roles, backups, alta disponibilidad, réplicas | 2do parcial |
-| [Unidad 6](./unidad-6/) | Calidad de datos, GDPR, ISO/IEC 25012 | 2do parcial |
+### [Unidad 3 — BD Transaccionales: aspectos avanzados](./unidad-3/)
+Transacciones, ACID, concurrencia, bloqueos, índices, optimización de consultas.
+
+---
+
+## 2do Parcial — Semana 13 · Unidades 4, 5 y 6
+
+### [Unidad 4 — BD No Transaccionales (NoSQL)](./unidad-4/)
+NoSQL, MongoDB, MongoDB Query Language, Data Lakes, KDD.
+
+### [Unidad 5 — Protección de los datos](./unidad-5/)
+Seguridad, DCL, roles, backups, alta disponibilidad, réplicas.
+
+### [Unidad 6 — Calidad en bases de datos](./unidad-6/)
+Calidad de datos, ISO/IEC 25012, GDPR, gobierno de datos.
+
+---
 
 ## Evaluación
 
+Los parciales combinan preguntas teóricas y prácticas (mínimo 50% práctico). Condición necesaria para rendir: TP grupal aprobado antes de cada instancia.
+
 | Instancia | Semana | Unidades |
-|-----------|--------|----------|
+|-----------|:------:|:--------:|
 | 1er parcial | 7 | 1, 2 y 3 |
 | 2do parcial | 13 | 4, 5 y 6 |
 | Recuperatorio | 15 | — |
 
-Los parciales combinan preguntas teóricas y prácticas (mínimo 50% práctico). Condición necesaria para rendir: tener aprobado el TP grupal correspondiente.
+---
 
 ## Bibliografía
 
-- Elmasri, Navathe — *Fundamentos de Sistemas de Bases de Datos* · Pearson · 5ta ed. · 2007  
+- Elmasri, Navathe — *Fundamentos de Sistemas de Bases de Datos* · Pearson · 5ta ed. · 2007
 - Silberschatz, Korth, Sudarshan — *Fundamentos de Bases de Datos* · McGraw-Hill · 4ta ed. · 2002
 
 **Recursos online**
