@@ -21,6 +21,7 @@
     - [Clave foránea (FK)](#clave-foránea-fk)
   - [Restricciones (constraints)](#restricciones-constraints)
   - [NULL](#null)
+    - [ISNULL vs COALESCE](#isnull-vs-coalesce)
   - [Consultas básicas](#consultas-básicas)
     - [Subconsultas](#subconsultas)
   - [JOINs y UNIONs](#joins-y-unions)
@@ -30,6 +31,9 @@
   - [Vistas](#vistas)
   - [Procedimientos almacenados](#procedimientos-almacenados)
   - [Triggers](#triggers)
+    - [Tabla (DML trigger)](#tabla-dml-trigger)
+    - [Vista (INSTEAD OF trigger)](#vista-instead-of-trigger)
+    - [Base de datos (DDL trigger)](#base-de-datos-ddl-trigger)
   - [Funciones de usuario](#funciones-de-usuario)
   - [Window Functions](#window-functions)
     - [Tipos de window functions](#tipos-de-window-functions)
@@ -134,8 +138,6 @@ Un **modelo de datos** es una colección de conceptos que describen la *estructu
 
 > 📌 Las restricciones **implícitas y explícitas** las hace cumplir el RDBMS. Las **semánticas** quedan a cargo de la lógica de la aplicación.
 
----
-
 ## Tipos de datos
 
 Los tipos básicos son estándar ANSI; cada RDBMS puede agregar los propios.
@@ -151,8 +153,6 @@ Los tipos básicos son estándar ANSI; cada RDBMS puede agregar los propios.
 | **Texto variable** | `varchar(n)` · `nvarchar(n)` (con Unicode) |
 
 > 💡 Preferir `varchar` sobre `char` cuando la longitud varía mucho. Usar `nvarchar` cuando el sistema debe manejar caracteres de múltiples idiomas.
-
----
 
 ## Esquemas y catálogos
 
@@ -179,9 +179,8 @@ Cuando se trabaja con un catálogo y esquema predeterminados, se puede omitir el
 > El nombre completo `MiDB.dbo.MiTabla` equivale a `catálogo.esquema.objeto`.
 > En MySQL, lo que llaman "database" equivale en realidad a un **esquema**, no a un catálogo.
 
-<img src="../images/db-organization.png" width="45%"/>
-
----
+![db-organization](../images/db-organization.png)
+<!-- <img src="../images/db-organization.png" width="45%"/> -->
 
 ## DDL y DML
 
@@ -206,8 +205,6 @@ Opera sobre los **datos** dentro de las estructuras.
 | `MERGE` | Insertar / actualizar / borrar según la coincidencia con una fuente |
 
 > ℹ️ Los motores modernos no distinguen estrictamente entre DDL, DML, DQL (consultas), DCL (control de acceso) y TCL (transacciones): todos son sentencias SQL de primera clase.
-
----
 
 ## Integridad referencial, PK y FK
 
@@ -235,6 +232,29 @@ CREATE TABLE ddbba.alumno (
 );
 ```
 
+> :warning: Solo puede haber **un único índice clustered por tabla**, porque define el orden físico de almacenamiento de los datos y una tabla solo puede estar ordenada de una manera a la vez.
+
+La distinción es:
+
+| Tipo | Cantidad permitida | Almacenamiento |
+|------|--------------------|----------------|
+| `CLUSTERED` | **1 por tabla** | Los datos de la tabla **son** el índice |
+| `NONCLUSTERED` | Hasta 999 por tabla | Estructura separada que apunta a los datos |
+
+Por eso cuando querés que el clustered esté en una columna distinta a la PK, tenés que declarar la PK explícitamente como `NONCLUSTERED`:
+
+```sql
+CREATE TABLE movimientos (
+    ID      int         CONSTRAINT pk_mov PRIMARY KEY NONCLUSTERED,
+    fecha   datetime,
+    monto   decimal(10,2),
+    INDEX ix_fecha CLUSTERED (fecha)  -- el orden físico lo dicta la fecha
+);
+```
+
+> Si intentás crear un segundo índice clustered SQL Server te lanza un error directamente.
+
+
 ### Clave foránea (FK)
 - Referencia a la PK de otra tabla, estableciendo la relación entre ambas.
 - Genera una restricción implícita: no se puede insertar un valor que no exista en la tabla referenciada.
@@ -261,8 +281,6 @@ CREATE TABLE ddbba.examen (
 
 > ⚠️ Las columnas de FK deben tener **el mismo tipo de dato** que las columnas referenciadas.
 
----
-
 ## Restricciones (constraints)
 
 Además de PK y FK, se pueden definir restricciones adicionales sobre columnas:
@@ -288,8 +306,6 @@ CREATE TABLE ddbba.alumno (
 
 > 📌 Las restricciones nombradas con `CONSTRAINT` se identifican en el catálogo y facilitan su posterior eliminación o modificación.
 
----
-
 ## NULL
 
 `NULL` representa un valor **ausente, desconocido o no aplicable**. Su manejo tiene particularidades importantes:
@@ -304,8 +320,37 @@ CREATE TABLE ddbba.alumno (
 | Concatenación | `'Hola' + NULL` → `NULL` |
 | JOIN | Las filas con NULL en el campo de unión **no aparecen** en un INNER JOIN |
 
----
+### ISNULL vs COALESCE
 
+Ambas reemplazan un `NULL` por un valor alternativo, pero tienen diferencias importantes:
+
+| | `ISNULL` | `COALESCE` |
+|---|---|---|
+| Estándar | SQL Server / Sybase | **ANSI SQL** (funciona en todos los motores) |
+| Parámetros | Exactamente 2 | 2 o más |
+| Tipo de retorno | El tipo del **primer** parámetro | El tipo de **mayor precedencia** entre los parámetros |
+
+La diferencia más práctica es que `COALESCE` acepta múltiples valores y devuelve el primero que no sea `NULL`:
+
+```sql
+-- Con ISNULL solo podés tener un fallback
+SELECT ISNULL(telefono, 'Sin teléfono')
+
+-- Con COALESCE podés encadenar varios fallbacks
+SELECT COALESCE(telefono_celular, telefono_fijo, telefono_trabajo, 'Sin teléfono')
+```
+
+La diferencia de tipo de retorno puede generar comportamientos inesperados con `ISNULL`:
+
+```sql
+DECLARE @valor char(3) = NULL;
+
+SELECT ISNULL(@valor, 'valor por defecto')   -- devuelve 'val'  ← trunca al tipo del primer parámetro (char(3))
+SELECT COALESCE(@valor, 'valor por defecto') -- devuelve 'valor por defecto'  ← respeta el tipo más amplio
+```
+
+> 💡 En general conviene usar `COALESCE` por ser estándar y más predecible en cuanto a tipos. `ISNULL` es exclusivo de SQL Server y puede sorprenderte con el truncamiento.
+> 
 ## Consultas básicas
 
 ```sql
@@ -345,8 +390,6 @@ FROM (
 ) AS t
 WHERE t.total > 1000;
 ```
-
----
 
 ## JOINs y UNIONs
 
@@ -392,8 +435,6 @@ UNION ALL      -- mantiene duplicados (más rápido)
 SELECT nombre FROM proveedores;
 ```
 
----
-
 ## Funciones de agregado
 
 Resumen grupos de filas en un único valor por grupo.
@@ -416,11 +457,10 @@ HAVING  SUM(inscriptos) > 90
 ORDER BY total_inscriptos DESC;
 ```
 
-> 📌 **`WHERE`** filtra filas **antes** del agrupamiento.  
+> 📌 
+> **`WHERE`** filtra filas **antes** del agrupamiento.  
 > **`HAVING`** filtra grupos **después** de aplicar las funciones de agregado.  
 > Agregar `DISTINCT` dentro de la función: `COUNT(DISTINCT campo)` para contar valores únicos.
-
----
 
 ## Vistas
 
@@ -446,8 +486,6 @@ AS
 - Mantener retrocompatibilidad cuando cambia la estructura de las tablas base.
 
 > ⚠️ Para usar `INSERT`/`UPDATE`/`DELETE` sobre una vista hay restricciones: no puede incluir `GROUP BY`, `DISTINCT`, funciones de agregado, `UNION`, ni más de una tabla base (en la mayoría de RDBMS).
-
----
 
 ## Procedimientos almacenados
 
@@ -481,8 +519,6 @@ PRINT @res;
 
 **Ventajas:** reutilización, seguridad (se otorga permiso al SP, no a las tablas), plan de ejecución cacheado.
 
----
-
 ## Triggers
 
 SP especial que se ejecuta **automáticamente** ante eventos DML (`INSERT`, `UPDATE`, `DELETE`) o DDL.
@@ -508,8 +544,59 @@ END;
 
 > ⚠️ No reciben parámetros. Usar las pseudotablas `inserted` y `deleted` para acceder a los datos afectados.
 
----
+En SQL Server los triggers se pueden aplicar a tres tipos de objetos:
 
+| Objeto | Tipo de trigger | Eventos |
+|--------|----------------|---------|
+| **Tabla** | DML trigger | `INSERT`, `UPDATE`, `DELETE` |
+| **Vista** | DML trigger (`INSTEAD OF`) | `INSERT`, `UPDATE`, `DELETE` |
+| **Base de datos** | DDL trigger | `CREATE`, `ALTER`, `DROP` y otros |
+
+### Tabla (DML trigger)
+El más común. Se dispara ante cambios en los datos.
+
+```sql
+CREATE TRIGGER ddbba.tg_auditoria
+ON ddbba.empleados
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    INSERT INTO ddbba.log (fecha, cantidad)
+    SELECT GETDATE(), COUNT(*) FROM inserted;
+END;
+```
+
+### Vista (INSTEAD OF trigger)
+Se usa para hacer `INSERT`/`UPDATE`/`DELETE` sobre vistas que normalmente no lo permiten. **Reemplaza** la operación en lugar de ejecutarse después.
+
+```sql
+CREATE TRIGGER ddbba.tg_vista_empleados
+ON ddbba.v_empleados    -- vista
+INSTEAD OF INSERT
+AS
+BEGIN
+    -- redirige la inserción a las tablas base
+    INSERT INTO ddbba.empleados (nombre, id_depto)
+    SELECT nombre, id_depto FROM inserted;
+END;
+```
+
+### Base de datos (DDL trigger)
+Se dispara ante cambios estructurales. Útil para auditar o prevenir modificaciones no autorizadas.
+
+```sql
+-- Impedir que se eliminen tablas en producción
+CREATE TRIGGER tg_no_drop
+ON DATABASE
+FOR DROP_TABLE
+AS
+BEGIN
+    PRINT 'No se permite eliminar tablas.';
+    ROLLBACK;
+END;
+```
+
+> 💡 También existe el **logon trigger** a nivel de instancia, que se dispara cuando un usuario inicia sesión. Se usa para restricciones de acceso como limitar conexiones simultáneas por usuario, pero es poco frecuente.
 ## Funciones de usuario
 
 Similar a un SP pero **retorna un valor** (escalar o tabla) y puede usarse dentro de una consulta.
@@ -538,8 +625,6 @@ FROM   ddbba.alumno;
 | Parámetros de salida | Solo retorno | Admite OUTPUT |
 | Uso en SELECT/WHERE | ✅ | ❌ |
 | Puede modificar datos | ❌ (generalmente) | ✅ |
-
----
 
 ## Window Functions
 
@@ -587,8 +672,6 @@ FROM (
 WHERE pos <= 3;
 ```
 
----
-
 ## Common Table Expressions (CTE)
 
 Resultados temporales **con nombre**, válidos solo durante una consulta. Hacen el código más legible que las subconsultas anidadas.
@@ -633,8 +716,6 @@ SELECT * FROM Jerarquia ORDER BY nivel, nombre;
 
 > ⚠️ La recursividad puede volverse costosa. Preferir bucles iterativos si la profundidad es variable o desconocida.
 
----
-
 ## SQL Dinámico
 
 Permite construir y ejecutar sentencias SQL en **tiempo de ejecución**, útil cuando la consulta no se puede conocer de antemano (columnas o tablas variables, filtros opcionales, etc.).
@@ -660,8 +741,6 @@ EXEC sp_executesql @sql,
                    N'@p_dni int',
                    @p_dni = 12345678;
 ```
-
----
 
 ## PIVOT
 
@@ -696,8 +775,6 @@ PIVOT (
 
 > 📌 Cuando las columnas del PIVOT no se conocen de antemano (p. ej. meses dinámicos), combinar con **SQL Dinámico** para generarlas automáticamente.
 
----
-
 ## Resumen rápido de objetos de una BD
 
 | Objeto | Para qué sirve |
@@ -709,7 +786,5 @@ PIVOT (
 | **Trigger** | Se dispara automáticamente ante eventos DML/DDL |
 | **Índice** | Acelera búsquedas; el clúster define el orden físico |
 | **Constraint** | Regla de integridad (PK, FK, UNIQUE, CHECK, DEFAULT) |
-
----
 
 *Fuentes: Elmasri-Navathe (caps. 2, 3, 4, 5, 13, 16) · Silberschatz-Korth (caps. 4, 6, 22) · learn.microsoft.com*

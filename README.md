@@ -2,8 +2,6 @@
 
 Apuntes, resúmenes y ejercicios prácticos organizados por unidad.
 
----
-
 ## Estructura del repositorio
 
 ```
@@ -27,8 +25,6 @@ BBDD-APLICADAS/
 
 Cada unidad sigue la misma estructura interna: `teoria/` para resúmenes, `guias/` para referencias técnicas de temas específicos, `practica/` para archivos `.sql` e `images/` para recursos visuales referenciados desde los markdowns.
 
----
-
 ## Contenido por unidad
 
 | Unidad | Tema | Parcial |
@@ -40,8 +36,6 @@ Cada unidad sigue la misma estructura interna: `teoria/` para resúmenes, `guias
 | [Unidad 5](./unidad-5/) | Seguridad, DCL, roles, backups, alta disponibilidad, réplicas | 2do parcial |
 | [Unidad 6](./unidad-6/) | Calidad de datos, GDPR, ISO/IEC 25012 | 2do parcial |
 
----
-
 ## Evaluación
 
 | Instancia | Semana | Unidades |
@@ -51,8 +45,6 @@ Cada unidad sigue la misma estructura interna: `teoria/` para resúmenes, `guias
 | Recuperatorio | 15 | — |
 
 Los parciales combinan preguntas teóricas y prácticas (mínimo 50% práctico). Condición necesaria para rendir: tener aprobado el TP grupal correspondiente.
-
----
 
 ## Bibliografía
 
