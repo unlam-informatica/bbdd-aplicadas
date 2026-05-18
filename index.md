@@ -1,8 +1,39 @@
+---
+layout: default
+title: Bases de Datos Aplicadas — UNLaM
+---
+
 # Bases de Datos Aplicadas — UNLaM
 
 Apuntes, guías de referencia y ejercicios prácticos de la cursada, organizados por unidad.
 
-**Sitio web:** [unlam-informatica.github.io/bbdd-aplicadas](https://unlam-informatica.github.io/bbdd-aplicadas/)
+---
+
+## 1er Parcial — Semana 7 · Unidades 1, 2 y 3
+
+### [Unidad 1 — Conceptos básicos. Repaso SQL](./unidad-1/)
+DDL, DML, constraints, NULL, JOINs, vistas, procedimientos almacenados, triggers, funciones de usuario, window functions, CTE, SQL dinámico, PIVOT.
+
+### [Unidad 2 — BD Transaccionales: aspectos básicos](./unidad-2/)
+Arquitectura de SQL Server, instalación, ODBC/JDBC, collation.
+
+### [Unidad 3 — BD Transaccionales: aspectos avanzados](./unidad-3/)
+Transacciones, ACID, concurrencia, bloqueos, índices, optimización de consultas.
+
+---
+
+## 2do Parcial — Semana 13 · Unidades 4, 5 y 6
+
+### [Unidad 4 — BD No Transaccionales (NoSQL)](./unidad-4/)
+NoSQL, MongoDB, MongoDB Query Language, Data Lakes, KDD.
+
+### [Unidad 5 — Protección de los datos](./unidad-5/)
+Seguridad, DCL, roles, backups, alta disponibilidad, réplicas.
+
+### [Unidad 6 — Calidad en bases de datos](./unidad-6/)
+Calidad de datos, ISO/IEC 25012, GDPR, gobierno de datos.
+
+---
 
 ## Evaluación
 
@@ -14,6 +45,7 @@ Los parciales combinan preguntas teóricas y prácticas (mínimo 50% práctico).
 | 2do parcial | 13 | 4, 5 y 6 |
 | Recuperatorio | 15 | — |
 
+---
 
 ## Bibliografía
 
