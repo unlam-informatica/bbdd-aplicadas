@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Unidad 6 — Calidad en bases de datos"
 ---
 

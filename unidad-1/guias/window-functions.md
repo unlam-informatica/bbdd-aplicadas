@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Window Functions"
 permalink: /unidad-1/guias/window-functions/
 ---

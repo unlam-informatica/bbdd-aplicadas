@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Unidad 1 — Apunte completo"
 permalink: /unidad-1/teoria/
 ---

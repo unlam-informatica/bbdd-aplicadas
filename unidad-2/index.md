@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Unidad 2 — BD Transaccionales: aspectos básicos"
 ---
 

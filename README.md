@@ -1,3 +1,8 @@
+---
+layout: default
+title: Bases de Datos Aplicadas — UNLaM
+---
+
 # Bases de Datos Aplicadas — UNLaM
 
 Apuntes, guías de referencia y ejercicios prácticos de la cursada, organizados por unidad.

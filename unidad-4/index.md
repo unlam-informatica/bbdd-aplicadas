@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Unidad 4 — BD No Transaccionales (NoSQL)"
 ---
 

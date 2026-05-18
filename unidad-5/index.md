@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title: "Unidad 5 — Protección de los datos"
 ---
 
