@@ -1,22 +1,10 @@
 ---
 layout: default
-title: "Unidad 6 — Calidad en bases de datos"
+title: Unidad 6
+nav_order: 7
+has_children: true
 ---
 
-[← Inicio](../)  · **2do parcial**
+## Calidad en bases de datos · 2do parcial
 
-## Teoría
-
-- [Apunte completo](./teoria/)
-  - Calidad de datos — dimensiones y métricas
-  - ISO/IEC 25012 — modelo de calidad de datos
-  - GDPR — Reglamento General de Protección de Datos
-  - Gobierno de datos
-
-## Guías
-
-> Próximamente.
-
-## Práctica
-
-> Próximamente.
+Calidad de datos, ISO/IEC 25012, GDPR, gobierno de datos.

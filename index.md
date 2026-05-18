@@ -1,6 +1,7 @@
 ---
-layout: default
-title: Bases de Datos Aplicadas — UNLaM
+layout: home
+title: Inicio
+nav_order: 1
 ---
 
 # Bases de Datos Aplicadas — UNLaM

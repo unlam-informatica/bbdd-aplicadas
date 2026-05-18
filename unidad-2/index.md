@@ -1,22 +1,10 @@
 ---
 layout: default
-title: "Unidad 2 — BD Transaccionales: aspectos básicos"
+title: Unidad 2
+nav_order: 3
+has_children: true
 ---
 
-[← Inicio](../)  · **1er parcial**
+## BD Transaccionales: aspectos básicos · 1er parcial
 
-## Teoría
-
-- [Apunte completo](./teoria/)
-  - Arquitectura de SQL Server — componentes, servicios, instancias
-  - Instalación y configuración
-  - ODBC y JDBC — conectores y drivers
-  - Collation — juegos de caracteres, ordenamiento, sensibilidad
-
-## Guías
-
-> Próximamente.
-
-## Práctica
-
-> Próximamente.
+Arquitectura de SQL Server, instalación, ODBC/JDBC, collation.

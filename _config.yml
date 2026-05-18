@@ -1,3 +1,20 @@
 title: Bases de Datos Aplicadas
 description: Apuntes, ejercicios y material de cursada — UNLaM
-theme: jekyll-theme-hacker
+
+remote_theme: just-the-docs/just-the-docs
+
+url: https://unlam-informatica.github.io
+baseurl: /bbdd-aplicadas
+
+color_scheme: dark
+
+search_enabled: true
+heading_anchors: true
+
+aux_links:
+  "GitHub":
+    - "https://github.com/unlam-informatica/bbdd-aplicadas"
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag

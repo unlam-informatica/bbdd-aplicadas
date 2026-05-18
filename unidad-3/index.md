@@ -1,23 +1,10 @@
 ---
 layout: default
-title: "Unidad 3 — BD Transaccionales: aspectos avanzados"
+title: Unidad 3
+nav_order: 4
+has_children: true
 ---
 
-[← Inicio](../)  · **1er parcial**
+## BD Transaccionales: aspectos avanzados · 1er parcial
 
-## Teoría
-
-- [Apunte completo](./teoria/)
-  - Transacciones — ACID, control explícito, puntos de guardado
-  - Concurrencia — problemas clásicos y niveles de aislamiento
-  - Bloqueos — tipos, deadlocks, detección
-  - Índices — clustered, nonclustered, estrategias
-  - Optimización de consultas — planes de ejecución, estadísticas
-
-## Guías
-
-> Próximamente.
-
-## Práctica
-
-> Próximamente.
+Transacciones, ACID, concurrencia, bloqueos, índices, optimización de consultas.

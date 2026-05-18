@@ -1,6 +1,8 @@
 ---
 layout: default
-title: "Unidad 1 — Apunte completo"
+title: Apunte completo
+parent: Unidad 1
+nav_order: 1
 permalink: /unidad-1/teoria/
 ---
 

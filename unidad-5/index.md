@@ -1,24 +1,10 @@
 ---
 layout: default
-title: "Unidad 5 — Protección de los datos"
+title: Unidad 5
+nav_order: 6
+has_children: true
 ---
 
-[← Inicio](../)  · **2do parcial**
+## Protección de los datos · 2do parcial
 
-## Teoría
-
-- [Apunte completo](./teoria/)
-  - Seguridad en SQL Server — autenticación y autorización
-  - DCL — `GRANT`, `REVOKE`, `DENY`
-  - Roles y permisos
-  - Backups — completo, diferencial, log de transacciones
-  - Alta disponibilidad — Always On, clustering
-  - Réplicas
-
-## Guías
-
-> Próximamente.
-
-## Práctica
-
-> Próximamente.
+Seguridad, DCL, roles, backups, alta disponibilidad, réplicas.

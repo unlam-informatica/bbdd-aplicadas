@@ -1,6 +1,8 @@
 ---
 layout: default
-title: "Window Functions"
+title: Window Functions
+parent: Unidad 1
+nav_order: 2
 permalink: /unidad-1/guias/window-functions/
 ---
 
