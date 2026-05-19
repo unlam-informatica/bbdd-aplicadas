@@ -6,20 +6,27 @@ nav_order: 1
 permalink: /unidad-1/teoria/
 ---
 
-- [Parte 1: Conceptos básicos](#parte-1-conceptos-básicos)
+- [Conceptos básicos](#conceptos-básicos)
   - [Qué es una base de datos](#qué-es-una-base-de-datos)
   - [Qué es un DBMS](#qué-es-un-dbms)
   - [¿Siempre conviene usar un DBMS?](#siempre-conviene-usar-un-dbms)
   - [DBMS más utilizados](#dbms-más-utilizados)
   - [Cómo elegir un DBMS](#cómo-elegir-un-dbms)
   - [DBA vs programador de base de datos](#dba-vs-programador-de-base-de-datos)
-- [Parte 2: Repaso de SQL](#parte-2-repaso-de-sql)
+- [Repaso de SQL](#repaso-de-sql)
   - [Modelo de datos y abstracción](#modelo-de-datos-y-abstracción)
     - [Tipos de restricciones (constraints)](#tipos-de-restricciones-constraints)
   - [Tipos de datos](#tipos-de-datos)
-  - [Esquemas y catálogos](#esquemas-y-catálogos)
-    - [Esquema (schema)](#esquema-schema)
-    - [Catálogo](#catálogo)
+  - [Catálogos y schemas](#catálogos-y-schemas)
+  - [Crear un catálogo / base de datos](#crear-un-catálogo--base-de-datos)
+    - [`COLLATE` en SQL Server](#collate-en-sql-server)
+    - [Ejemplo](#ejemplo)
+    - [¿Se puede modificar después?](#se-puede-modificar-después)
+    - [Idea clave](#idea-clave)
+  - [Crear un schema](#crear-un-schema)
+  - [Crear tablas dentro del schema](#crear-tablas-dentro-del-schema)
+  - [Consultar usando el schema](#consultar-usando-el-schema)
+  - [Diferencia conceptual](#diferencia-conceptual)
   - [DDL y DML](#ddl-y-dml)
     - [DDL — Data Definition Language](#ddl--data-definition-language)
     - [DML — Data Manipulation Language](#dml--data-manipulation-language)
@@ -38,6 +45,8 @@ permalink: /unidad-1/teoria/
   - [Funciones de agregado](#funciones-de-agregado)
   - [Vistas](#vistas)
   - [Procedimientos almacenados](#procedimientos-almacenados)
+    - [Explicación breve](#explicación-breve)
+    - [Invocación](#invocación)
   - [Triggers](#triggers)
     - [Tabla (DML trigger)](#tabla-dml-trigger)
     - [Vista (INSTEAD OF trigger)](#vista-instead-of-trigger)
@@ -52,7 +61,7 @@ permalink: /unidad-1/teoria/
   - [Resumen rápido de objetos de una BD](#resumen-rápido-de-objetos-de-una-bd)
 
 
-# Parte 1: Conceptos básicos
+# Conceptos básicos
 
 ## Qué es una base de datos
 
@@ -128,7 +137,7 @@ disponible*. El programador se asegura de que *esté bien construido*. En equipo
 pequeños, una misma persona suele cumplir ambos roles.
 
 
-# Parte 2: Repaso de SQL
+# Repaso de SQL
 
 ## Modelo de datos y abstracción
 
@@ -162,30 +171,167 @@ Los tipos básicos son estándar ANSI; cada RDBMS puede agregar los propios.
 
 > 💡 Preferir `varchar` sobre `char` cuando la longitud varía mucho. Usar `nvarchar` cuando el sistema debe manejar caracteres de múltiples idiomas.
 
-## Esquemas y catálogos
+## Catálogos y schemas
 
-### Esquema (schema)
-Equivale a un *namespace*: agrupa objetos de la base de datos bajo un nombre.
+En SQL Server, el concepto de **catálogo** se corresponde normalmente con una **base de datos**.
+
+Es decir:
+
+```text
+Catálogo ≈ Database
+Schema   ≈ Esquema dentro de una base de datos
+Tabla    ≈ Objeto dentro de un schema
+```
+
+---
+
+## Crear un catálogo / base de datos
 
 ```sql
-CREATE SCHEMA nombreEsquema;
--- En PostgreSQL se puede eliminar en cascada:
-DROP SCHEMA nombreEsquema CASCADE;
+CREATE DATABASE unlam;
 ```
 
-### Catálogo
-Un **catálogo** es el conjunto de todos los esquemas de una instancia del RDBMS. Cada objeto tiene un nombre completo de tres partes:
+Luego se selecciona esa base de datos para trabajar sobre ella:
 
+```sql
+USE unlam;
 ```
-catalogo.esquema.nombreObjeto
+
+
+### `COLLATE` en SQL Server
+
+En `CREATE DATABASE`, `COLLATE` indica la **collation por defecto** que va a usar la base de datos.
+
+
+```sql
+CREATE DATABASE unlam
+COLLATE Latin1_General_CI_AS;
 ```
 
-Cuando se trabaja con un catálogo y esquema predeterminados, se puede omitir el prefijo.
+Esa collation define reglas para comparar y ordenar texto:
 
+* Mayúsculas/minúsculas
+* Acentos
+* Caracteres especiales
+* Orden alfabético
+* Sensibilidad cultural/idiomática
 
-> 💡 En SQL Server y PostgreSQL el catálogo se implementa como una **base de datos**.
-> El nombre completo `MiDB.dbo.MiTabla` equivale a `catálogo.esquema.objeto`.
-> En MySQL, lo que llaman "database" equivale en realidad a un **esquema**, no a un catálogo.
+### Ejemplo
+
+```sql
+Latin1_General_CI_AS
+```
+
+Significa:
+
+```text
+CI = Case Insensitive
+AS = Accent Sensitive
+```
+
+Entonces:
+
+```text
+'Casa' = 'casa'     -- porque no distingue mayúsculas
+'casa' <> 'casá'    -- porque sí distingue acentos
+```
+
+### ¿Se puede modificar después?
+
+Sí, se puede modificar:
+
+```sql
+ALTER DATABASE unlam
+COLLATE Modern_Spanish_CI_AS;
+```
+
+Pero cuidado: eso cambia la collation **por defecto de la base**, no necesariamente la de columnas `VARCHAR`, `CHAR`, `TEXT`, `NVARCHAR`, etc. que ya fueron creadas con otra collation.
+
+Para cambiar columnas existentes, hay que hacerlo columna por columna:
+
+```sql
+ALTER TABLE bbdda.alumno
+ALTER COLUMN apellido VARCHAR(100)
+COLLATE Modern_Spanish_CI_AS NOT NULL;
+```
+
+### Idea clave
+
+* `COLLATE` define la collation por defecto.
+* Se puede cambiar después.
+* Cambiarla después puede ser costoso si ya existen tablas con columnas de texto.
+* Lo ideal es definirla bien al crear la base.
+
+## Crear un schema
+
+Un **schema** sirve para agrupar objetos dentro de una base de datos.
+
+```sql
+CREATE SCHEMA academico;
+```
+
+## Crear tablas dentro del schema
+
+```sql
+CREATE TABLE academico.alumno (
+    id_alumno INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    email VARCHAR(150) NULL
+);
+```
+
+```sql
+CREATE TABLE academico.materia (
+    id_materia INT IDENTITY(1,1) PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    codigo VARCHAR(20) NOT NULL
+);
+```
+
+```sql
+CREATE TABLE academico.inscripcion (
+    id_inscripcion INT IDENTITY(1,1) PRIMARY KEY,
+    id_alumno INT NOT NULL,
+    id_materia INT NOT NULL,
+    fecha_inscripcion DATE NOT NULL,
+
+    CONSTRAINT FK_inscripcion_alumno
+        FOREIGN KEY (id_alumno)
+        REFERENCES academico.alumno(id_alumno),
+
+    CONSTRAINT FK_inscripcion_materia
+        FOREIGN KEY (id_materia)
+        REFERENCES academico.materia(id_materia)
+);
+```
+
+---
+
+## Consultar usando el schema
+
+Cuando una tabla pertenece a un schema, conviene referenciarla siempre con el formato:
+
+```sql
+schema.tabla
+```
+Ejemplo
+
+```sql
+SELECT * FROM bbdda.alumno;
+```
+
+---
+
+## Diferencia conceptual
+
+| Concepto | En SQL Server | Para qué sirve                    |
+| -------- | ------------- | --------------------------------- |
+| Catálogo | Base de datos | Contenedor principal de datos     |
+| Schema   | Esquema       | Agrupa objetos dentro de una base |
+| Tabla    | Tabla         | Guarda registros                  |
+| Columna  | Campo         | Define un dato de cada registro   |
+
 
 ![db-organization](../images/db-organization.png)
 <!-- <img src="../images/db-organization.png" width="45%"/> -->
@@ -249,7 +395,7 @@ La distinción es:
 | `CLUSTERED` | **1 por tabla** | Los datos de la tabla **son** el índice |
 | `NONCLUSTERED` | Hasta 999 por tabla | Estructura separada que apunta a los datos |
 
-Por eso cuando querés que el clustered esté en una columna distinta a la PK, tenés que declarar la PK explícitamente como `NONCLUSTERED`:
+Por eso cuando queremos que el clustered esté en una columna distinta a la PK, tenemos que declarar la PK explícitamente como `NONCLUSTERED`:
 
 ```sql
 CREATE TABLE movimientos (
@@ -260,7 +406,7 @@ CREATE TABLE movimientos (
 );
 ```
 
-> Si intentás crear un segundo índice clustered SQL Server te lanza un error directamente.
+> Si intentamos crear un segundo índice clustered SQL Server arroja un error.
 
 
 ### Clave foránea (FK)
@@ -270,20 +416,23 @@ CREATE TABLE movimientos (
 - Admite acciones en cascada: `ON UPDATE CASCADE` / `ON DELETE CASCADE`.
 
 ```sql
--- FK de un solo campo
-CREATE TABLE ddbba.comision (
-    ID        int IDENTITY(1,1) PRIMARY KEY,
-    IdMateria int REFERENCES ddbba.materia(Id)
+-- FK de un solo campo en una sola línea
+CREATE TABLE bbdda.comision (
+    id_comision INT IDENTITY(1,1) PRIMARY KEY,
+    id_materia INT NOT NULL REFERENCES bbdda.materia(id_materia)
 );
 
 -- FK compuesta
-CREATE TABLE ddbba.examen (
-    DNI     int,
-    IDCurso int,
-    Nota    tinyint,
-    CONSTRAINT FK_InscripcionComision
-        FOREIGN KEY (IDCurso, DNI)
-        REFERENCES ddbba.Curso (ID, DNI)
+CREATE TABLE bbdda.examen (
+    id_examen INT IDENTITY(1,1) PRIMARY KEY,
+    dni INT NOT NULL,
+    id_curso INT NOT NULL,
+    nota TINYINT NOT NULL,
+
+    CONSTRAINT FK_examen_curso
+        FOREIGN KEY (id_curso, dni)
+        REFERENCES bbdda.curso(id_curso, dni)
+        ON DELETE CASCADE
 );
 ```
 
@@ -295,19 +444,20 @@ Además de PK y FK, se pueden definir restricciones adicionales sobre columnas:
 
 | Constraint | Efecto |
 |------------|--------|
-| `UNIQUE` | Prohíbe duplicados (a diferencia de PK, admite un solo `NULL`) |
-| `CHECK` | Valida que el valor cumpla una condición |
+| `UNIQUE`   | Prohíbe duplicados (a diferencia de PK, admite un solo `NULL`) |
+| `CHECK`    | Valida que el valor cumpla una condición |
 | `NOT NULL` | Prohíbe valores nulos |
-| `DEFAULT` | Asigna un valor por defecto si no se indica ninguno |
+| `DEFAULT`  | Asigna un valor por defecto si no se indica ninguno |
 
 ```sql
-CREATE TABLE ddbba.alumno (
-    DNI     int          CHECK (DNI > 0),
-    nombre  char(20)     UNIQUE,
-    patente char(7),
-    CONSTRAINT CK_patente CHECK (
+CREATE TABLE bbdda.alumno (
+    dni INT CHECK (dni > 0),
+    nombre CHAR(20) UNIQUE,
+    patente CHAR(7),
+
+    CONSTRAINT ck_alumno_patente CHECK (
         patente LIKE '[A-Z][A-Z][0-9][0-9][0-9][A-Z][A-Z]'  -- formato Mercosur
-     OR patente LIKE '[A-Z][A-Z][A-Z][0-9][0-9][0-9]'       -- formato antiguo
+        OR patente LIKE '[A-Z][A-Z][A-Z][0-9][0-9][0-9]'    -- formato antiguo
     )
 );
 ```
@@ -475,20 +625,23 @@ ORDER BY total_inscriptos DESC;
 Una vista es una **tabla virtual** cuya definición es una consulta almacenada. No almacena datos propios (salvo las vistas materializadas).
 
 ```sql
-CREATE OR ALTER VIEW ddbba.cursosCopados
-WITH SCHEMABINDING   -- bloquea cambios en las tablas subyacentes
+CREATE OR ALTER VIEW bbdda.cursos_copados
+WITH SCHEMABINDING
 AS
-    SELECT  nombreCatedra,
-            diaCursada,
-            turno,
-            SUM(inscriptos) AS totalInscriptos
-    FROM    ddbba.cursos
-    WHERE   puntuacion > 3
-    GROUP BY nombreCatedra, diaCursada, turno;
+    SELECT
+        nombre_catedra,
+        dia_cursada,
+        turno,
+        SUM(inscriptos) AS total_inscriptos
+    FROM bbdda.curso
+    WHERE puntuacion > 3
+    GROUP BY
+        nombre_catedra,
+        dia_cursada,
+        turno;
 ```
 
-**Usos frecuentes:**
-
+**Usos frecuentes**
 - Simplificar consultas complejas reutilizables.
 - Controlar el acceso: exponer solo ciertas columnas o filas.
 - Mantener retrocompatibilidad cuando cambia la estructura de las tablas base.
@@ -500,29 +653,59 @@ AS
 Rutinas compiladas y almacenadas en el motor. Se ejecutan en el servidor, reduciendo el tráfico de red.
 
 ```sql
-CREATE OR ALTER PROCEDURE ddbba.sp_inscribir
-    @DNI        int,
-    @IDCurso    int,
-    @resultado  int = 0 OUTPUT   -- parámetro de salida con valor default
+CREATE OR ALTER PROCEDURE bbdda.inscribir_alumno
+    @dni INT,
+    @id_curso INT,
+    @resultado INT = 0 OUTPUT
 AS
 BEGIN
-    -- Lógica del procedimiento
-    IF EXISTS (SELECT 1 FROM ddbba.alumno WHERE DNI = @DNI)
+    SET NOCOUNT ON;
+
+    IF EXISTS (
+        SELECT 1
+        FROM bbdda.alumno
+        WHERE dni = @dni
+    )
     BEGIN
-        INSERT INTO ddbba.inscripcion (DNI, IDCurso, fecha)
-        VALUES (@DNI, @IDCurso, GETDATE());
-        SET @resultado = 1;   -- éxito
+        INSERT INTO bbdda.inscripcion (dni, id_curso, fecha)
+        VALUES (@dni, @id_curso, GETDATE());
+
+        SET @resultado = 1;
     END
     ELSE
-        SET @resultado = -1;  -- alumno no encontrado
+    BEGIN
+        SET @resultado = -1;
+    END
 END;
+GO
 ```
 
-**Invocación:**
+### Explicación breve
+
+* `CREATE OR ALTER PROCEDURE`: crea el procedimiento si no existe, o lo modifica si ya existe.
+* `bbdda.inscribir_alumno`: nombre del procedimiento usando `schema.nombre`.
+* `@dni` y `@id_curso`: parámetros de entrada.
+* `@resultado INT OUTPUT`: parámetro de salida.
+* `SET NOCOUNT ON`: evita mensajes extra de filas afectadas.
+* `IF EXISTS`: verifica si existe el alumno.
+* Si existe, inserta la inscripción y devuelve `1`.
+* Si no existe, devuelve `-1`.
+
+`BEGIN` y `END` se utilizan para englobar los statements a ejecutar si la condicion dentro del `IF` o `ELSE` se cumple
+
+Referencia: https://learn.microsoft.com/en-us/sql/t-sql/language-elements/begin-end-transact-sql?view=sql-server-ver17
+
+### Invocación
+
 ```sql
-DECLARE @res int;
-EXEC ddbba.sp_inscribir 12345678, 42, @resultado = @res OUTPUT;
-PRINT @res;
+DECLARE @resultado INT;
+
+EXEC bbdda.inscribir_alumno
+    @dni = 12345678,
+    @id_curso = 10,
+    @resultado = @resultado OUTPUT;
+
+SELECT @resultado AS resultado;
 ```
 
 **Ventajas:** reutilización, seguridad (se otorga permiso al SP, no a las tablas), plan de ejecución cacheado.
@@ -605,6 +788,7 @@ END;
 ```
 
 > 💡 También existe el **logon trigger** a nivel de instancia, que se dispara cuando un usuario inicia sesión. Se usa para restricciones de acceso como limitar conexiones simultáneas por usuario, pero es poco frecuente.
+
 ## Funciones de usuario
 
 Similar a un SP pero **retorna un valor** (escalar o tabla) y puede usarse dentro de una consulta.
@@ -756,22 +940,23 @@ Transpone filas en columnas para presentar datos de forma más legible (p. ej.: 
 
 ```sql
 -- Primero preparamos los datos con un CTE
-WITH VentasResumidas (Total, Ciudad, Mes) AS (
-    SELECT monto,
-           ciudad,
-           CAST(MONTH(fecha) AS varchar) + '-' + CAST(YEAR(fecha) AS varchar)
-    FROM ddbba.Venta
+WITH ventas_resumidas (total, ciudad, mes) AS (
+    SELECT
+        monto,
+        ciudad,
+        CAST(MONTH(fecha) AS VARCHAR(2)) + '-' + CAST(YEAR(fecha) AS VARCHAR(4))
+    FROM bbdda.venta
 )
 -- Luego aplicamos el PIVOT
 SELECT *
-FROM VentasResumidas
+FROM ventas_resumidas
 PIVOT (
-    SUM(Total)           -- función de agregado obligatoria
-    FOR Mes IN (         -- columna cuyos valores se convierten en encabezados
+    SUM(total)
+    FOR mes IN (
         [1-2024], [2-2024], [3-2024], [4-2024],
         [5-2024], [6-2024], [7-2024], [8-2024]
     )
-) AS Cruzado;
+) AS ventas_cruzadas;
 ```
 
 **Resultado visual:**
