@@ -553,15 +553,8 @@ WHERE t.total > 1000;
 
 ### Tipos de JOIN
 
-```
-A            B          Resultado
-●────────────●          INNER JOIN   → solo la intersección
-●────────────○          LEFT JOIN    → todo A + coincidencias de B
-○────────────●          RIGHT JOIN   → todo B + coincidencias de A
-●────────────●          FULL OUTER   → todo A y todo B
-             ○          LEFT excl.   → solo A sin B (WHERE B.key IS NULL)
-○                       RIGHT excl.  → solo B sin A (WHERE A.key IS NULL)
-```
+![join-types](../images/joins.png)
+
 
 ```sql
 -- INNER JOIN: solo filas que coinciden en ambas tablas
