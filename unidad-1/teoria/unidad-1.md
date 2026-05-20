@@ -159,15 +159,19 @@ Un **modelo de datos** es una colección de conceptos que describen la *estructu
 
 Los tipos básicos son estándar ANSI; cada RDBMS puede agregar los propios.
 
-| Categoría | Tipos comunes |
-|-----------|---------------|
-| **Enteros** | `tinyint` (1B) · `smallint` (2B) · `int` (4B) · `bigint` (8B) |
-| **Decimal exacto** | `decimal(p,s)` / `numeric(p,s)` — donde `p` = total de dígitos, `s` = decimales |
-| **Punto flotante** | `float` / `real` (precisión simple y doble) |
-| **Booleano** | `bit` |
-| **Fecha/Hora** | `date` · `time` · `datetime` · `smalldatetime` |
-| **Texto fijo** | `char(n)` · `nchar(n)` (con Unicode) |
-| **Texto variable** | `varchar(n)` · `nvarchar(n)` (con Unicode) |
+| Tipo de dato   |              Tamaño |                 Valor mínimo |                Valor máximo | Uso típico                                   |
+| -------------- | ------------------: | ---------------------------: | --------------------------: | -------------------------------------------- |
+| `BIT`          |        1 bit aprox. |                          `0` |                         `1` | Valores booleanos: activo/inactivo, sí/no    |
+| `TINYINT`      |              1 byte |                          `0` |                       `255` | Estados, edades, cantidades muy chicas       |
+| `SMALLINT`     |             2 bytes |                    `-32.768` |                    `32.767` | Cantidades chicas                            |
+| `INT`          |             4 bytes |             `-2.147.483.648` |             `2.147.483.647` | IDs, contadores, cantidades generales        |
+| `BIGINT`       |             8 bytes | `-9.223.372.036.854.775.808` | `9.223.372.036.854.775.807` | IDs enormes, tablas con muchísimos registros |
+| `DECIMAL(p,s)` |        5 a 17 bytes |               Depende de `p` |              Depende de `p` | Importes, porcentajes, valores exactos       |
+| `NUMERIC(p,s)` |        5 a 17 bytes |               Depende de `p` |              Depende de `p` | Igual que `DECIMAL`                          |
+| `SMALLMONEY`   |             4 bytes |              `-214.748,3648` |              `214.748,3647` | Dinero, aunque suele preferirse `DECIMAL`    |
+| `MONEY`        |             8 bytes |  `-922.337.203.685.477,5808` |  `922.337.203.685.477,5807` | Dinero, aunque suele preferirse `DECIMAL`    |
+| `REAL`         |             4 bytes |           aprox. `-3.40E+38` |           aprox. `3.40E+38` | Números aproximados                          |
+| `FLOAT`        | 8 bytes por defecto |          aprox. `-1.79E+308` |          aprox. `1.79E+308` | Cálculos científicos o aproximados           |
 
 > 💡 Preferir `varchar` sobre `char` cuando la longitud varía mucho. Usar `nvarchar` cuando el sistema debe manejar caracteres de múltiples idiomas.
 
