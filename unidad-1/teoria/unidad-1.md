@@ -271,13 +271,13 @@ COLLATE Modern_Spanish_CI_AS NOT NULL;
 Un **schema** sirve para agrupar objetos dentro de una base de datos.
 
 ```sql
-CREATE SCHEMA academico;
+CREATE SCHEMA bbdda;
 ```
 
 ## Crear tablas dentro del schema
 
 ```sql
-CREATE TABLE academico.alumno (
+CREATE TABLE bbdda.alumno (
     id_alumno INT IDENTITY(1,1) PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     apellido VARCHAR(100) NOT NULL,
@@ -286,7 +286,7 @@ CREATE TABLE academico.alumno (
 ```
 
 ```sql
-CREATE TABLE academico.materia (
+CREATE TABLE bbdda.materia (
     id_materia INT IDENTITY(1,1) PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
     codigo VARCHAR(20) NOT NULL
@@ -294,7 +294,7 @@ CREATE TABLE academico.materia (
 ```
 
 ```sql
-CREATE TABLE academico.inscripcion (
+CREATE TABLE bbdda.inscripcion (
     id_inscripcion INT IDENTITY(1,1) PRIMARY KEY,
     id_alumno INT NOT NULL,
     id_materia INT NOT NULL,
@@ -302,11 +302,11 @@ CREATE TABLE academico.inscripcion (
 
     CONSTRAINT FK_inscripcion_alumno
         FOREIGN KEY (id_alumno)
-        REFERENCES academico.alumno(id_alumno),
+        REFERENCES bbdda.alumno(id_alumno),
 
     CONSTRAINT FK_inscripcion_materia
         FOREIGN KEY (id_materia)
-        REFERENCES academico.materia(id_materia)
+        REFERENCES bbdda.materia(id_materia)
 );
 ```
 
@@ -690,7 +690,7 @@ GO
 
 `BEGIN` y `END` se utilizan para englobar los statements a ejecutar si la condicion dentro del `IF` o `ELSE` se cumple
 
-Referencia: https://learn.microsoft.com/en-us/sql/t-sql/language-elements/begin-end-transact-sql?view=sql-server-ver17
+Referencia: !(https://learn.microsoft.com/en-us/sql/t-sql/language-elements/begin-end-transact-sql?view=sql-server-ver17)[begin-end-transact-sql]
 
 ### Invocación
 

@@ -1,0 +1,177 @@
+[
+    {
+        "id": 1,
+        "personaje": "Luke Skywalker",
+        "actor": "Mark Hamill",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 2,
+        "personaje": "Princess Leia",
+        "actor": "Carrie Fisher",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 3,
+        "personaje": "Han Solo",
+        "actor": "Harrison Ford",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 4,
+        "personaje": "Darth Vader",
+        "actor": "David Prowse / James Earl Jones",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 5,
+        "personaje": "Obi-Wan Kenobi",
+        "actor": "Alec Guinness",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 6,
+        "personaje": "C-3PO",
+        "actor": "Anthony Daniels",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 7,
+        "personaje": "R2-D2",
+        "actor": "Kenny Baker",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 8,
+        "personaje": "Yoda",
+        "actor": "Frank Oz",
+        "pelicula": "Star Wars: Episode V - The Empire Strikes Back",
+        "anio_pelicula": 1980
+    },
+    {
+        "id": 9,
+        "personaje": "Lando Calrissian",
+        "actor": "Billy Dee Williams",
+        "pelicula": "Star Wars: Episode V - The Empire Strikes Back",
+        "anio_pelicula": 1980
+    },
+    {
+        "id": 10,
+        "personaje": "Emperor Palpatine",
+        "actor": "Ian McDiarmid",
+        "pelicula": "Star Wars: Episode VI - Return of the Jedi",
+        "anio_pelicula": 1983
+    },
+    {
+        "id": 11,
+        "personaje": "Chewbacca",
+        "actor": "Peter Mayhew",
+        "pelicula": "Star Wars: Episode IV - A New Hope",
+        "anio_pelicula": 1977
+    },
+    {
+        "id": 12,
+        "personaje": "Chewbacca",
+        "actor": "Peter Mayhew",
+        "pelicula": "Star Wars: Episode V - The Empire Strikes Back",
+        "anio_pelicula": 1980
+    },
+    {
+        "id": 13,
+        "personaje": "Chewbacca",
+        "actor": "Peter Mayhew",
+        "pelicula": "Star Wars: Episode VI - Return of the Jedi",
+        "anio_pelicula": 1983
+    },
+    {
+        "id": 14,
+        "personaje": "Anakin Skywalker",
+        "actor": "Hayden Christensen",
+        "pelicula": "Star Wars: Episode I - The Phantom Menace",
+        "anio_pelicula": 1999
+    },
+    {
+        "id": 15,
+        "personaje": "Qui-Gon Jinn",
+        "actor": "Liam Neeson",
+        "pelicula": "Star Wars: Episode I - The Phantom Menace",
+        "anio_pelicula": 1999
+    },
+    {
+        "id": 16,
+        "personaje": "Padmé Amidala",
+        "actor": "Natalie Portman",
+        "pelicula": "Star Wars: Episode I - The Phantom Menace",
+        "anio_pelicula": 1999
+    },
+    {
+        "id": 17,
+        "personaje": "Mace Windu",
+        "actor": "Samuel L. Jackson",
+        "pelicula": "Star Wars: Episode I - The Phantom Menace",
+        "anio_pelicula": 1999
+    },
+    {
+        "id": 18,
+        "personaje": "Jar Jar Binks",
+        "actor": "Ahmed Best",
+        "pelicula": "Star Wars: Episode I - The Phantom Menace",
+        "anio_pelicula": 1999
+    },
+    {
+        "id": 19,
+        "personaje": "Darth Maul",
+        "actor": "Ray Park",
+        "pelicula": "Star Wars: Episode I - The Phantom Menace",
+        "anio_pelicula": 1999
+    },
+    {
+        "id": 20,
+        "personaje": "Count Dooku",
+        "actor": "Christopher Lee",
+        "pelicula": "Star Wars: Episode II - Attack of the Clones",
+        "anio_pelicula": 2002
+    },
+    {
+        "id": 21,
+        "personaje": "Padmé Amidala",
+        "actor": "Natalie Portman",
+        "pelicula": "Star Wars: Episode II - Attack of the Clones",
+        "anio_pelicula": 2002
+    },
+    {
+        "id": 22,
+        "personaje": "General Grievous",
+        "actor": "Matthew Wood",
+        "pelicula": "Star Wars: Episode III - Revenge of the Sith",
+        "anio_pelicula": 2005
+    },
+    {
+        "id": 23,
+        "personaje": "Bail Organa",
+        "actor": "Jimmy Smits",
+        "pelicula": "Star Wars: Episode III - Revenge of the Sith",
+        "anio_pelicula": 2005
+    },
+    {
+        "id": 24,
+        "personaje": "Darth Sidious",
+        "actor": "Ian McDiarmid",
+        "pelicula": "Star Wars: Episode III - Revenge of the Sith",
+        "anio_pelicula": 2005
+    },
+    {
+        "id": 25,
+        "personaje": "Obi-Wan Kenobi",
+        "actor": "Ewan McGregor",
+        "pelicula": "Star Wars: Episode III - Revenge of the Sith",
+        "anio_pelicula": 2005
+    }
+]
