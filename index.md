@@ -10,7 +10,7 @@ Apuntes, guías de referencia y ejercicios prácticos de la cursada, organizados
 
 ---
 
-## 1er Parcial — Semana 7 · Unidades 1, 2 y 3
+## Contenido
 
 ### [Unidad 1 — Conceptos básicos. Repaso SQL](./unidad-1/)
 DDL, DML, constraints, NULL, JOINs, vistas, procedimientos almacenados, triggers, funciones de usuario, window functions, CTE, SQL dinámico, PIVOT.
@@ -21,10 +21,6 @@ Arquitectura de SQL Server, instalación, ODBC/JDBC, collation.
 ### [Unidad 3 — BD Transaccionales: aspectos avanzados](./unidad-3/)
 Transacciones, ACID, concurrencia, bloqueos, índices, optimización de consultas.
 
----
-
-## 2do Parcial — Semana 13 · Unidades 4, 5 y 6
-
 ### [Unidad 4 — BD No Transaccionales (NoSQL)](./unidad-4/)
 NoSQL, MongoDB, MongoDB Query Language, Data Lakes, KDD.
 
@@ -33,18 +29,6 @@ Seguridad, DCL, roles, backups, alta disponibilidad, réplicas.
 
 ### [Unidad 6 — Calidad en bases de datos](./unidad-6/)
 Calidad de datos, ISO/IEC 25012, GDPR, gobierno de datos.
-
----
-
-## Evaluación
-
-Los parciales combinan preguntas teóricas y prácticas (mínimo 50% práctico). Condición necesaria para rendir: TP grupal aprobado antes de cada instancia.
-
-| Instancia | Semana | Unidades |
-|-----------|:------:|:--------:|
-| 1er parcial | 7 | 1, 2 y 3 |
-| 2do parcial | 13 | 4, 5 y 6 |
-| Recuperatorio | 15 | — |
 
 ---
 
