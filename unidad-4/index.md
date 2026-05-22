@@ -7,4 +7,5 @@ has_children: true
 
 ## BD No Transaccionales (NoSQL) · 2do parcial
 
-NoSQL, MongoDB, MongoDB Query Language, Data Lakes, KDD.
+NoSQL, MongoDB, MongoDB Query Language (MQL), Aggregation Pipeline, Índices, Vistas, Data Lakes, KDD.
+

@@ -1,0 +1,1067 @@
+[
+  {
+    "id_venta": 1,
+    "fecha": {
+      "$date": "2024-12-16T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 179.5,
+    "cliente": {
+      "id": 12,
+      "nombre": "Martina",
+      "apellido": "Suárez",
+      "direccion": "Mitre 123",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 106,
+      "nombre": "Auriculares",
+      "marca": "Sony",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 2,
+    "fecha": {
+      "$date": "2024-03-31T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 1864.2,
+    "cliente": {
+      "id": 9,
+      "nombre": "Carlos",
+      "apellido": "Ramírez",
+      "direccion": "Rivadavia 222",
+      "localidad": "Morón"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 109,
+      "nombre": "Cámara",
+      "marca": "Canon"
+    }
+  },
+  {
+    "id_venta": 3,
+    "fecha": {
+      "$date": "2025-07-16T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 836.3,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 11,
+    "producto": {
+      "id": 102,
+      "nombre": "Monitor",
+      "marca": "LG"
+    }
+  },
+  {
+    "id_venta": 4,
+    "fecha": {
+      "$date": "2024-03-28T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 110.96,
+    "cliente": {
+      "id": 4,
+      "nombre": "María",
+      "apellido": "González",
+      "direccion": "Av. de Mayo 150",
+      "localidad": "Lomas del Mirador"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 106,
+      "nombre": "Auriculares",
+      "marca": "Sony"
+    }
+  },
+  {
+    "id_venta": 5,
+    "fecha": {
+      "$date": "2024-07-06T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 385.4,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 8,
+    "producto": {
+      "id": 106,
+      "nombre": "Auriculares",
+      "marca": "Sony"
+    }
+  },
+  {
+    "id_venta": 6,
+    "fecha": {
+      "$date": "2024-04-26T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 8371.8,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 4,
+    "producto": {
+      "id": 100,
+      "nombre": "Laptop",
+      "marca": "Dell",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 7,
+    "fecha": {
+      "$date": "2024-04-05T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 157.88,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 5,
+    "producto": {
+      "id": 107,
+      "nombre": "Teclado",
+      "marca": "Logitech"
+    }
+  },
+  {
+    "id_venta": 8,
+    "fecha": {
+      "$date": "2025-01-29T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 179.54,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 8,
+    "producto": {
+      "id": 105,
+      "nombre": "Impresora",
+      "marca": "HP"
+    }
+  },
+  {
+    "id_venta": 9,
+    "fecha": {
+      "$date": "2024-10-02T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 530.18,
+    "cliente": {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "García López",
+      "direccion": "Avenida 456",
+      "localidad": "Ramos Mejía"
+    },
+    "id_vendedor": 4,
+    "producto": {
+      "id": 102,
+      "nombre": "Monitor",
+      "marca": "LG"
+    }
+  },
+  {
+    "id_venta": 10,
+    "fecha": {
+      "$date": "2025-08-13T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 2029.86,
+    "cliente": {
+      "id": 10,
+      "nombre": "Sofía",
+      "apellido": "Herrera",
+      "direccion": "Directorio 910",
+      "localidad": "San Justo"
+    },
+    "id_vendedor": 5,
+    "producto": {
+      "id": 104,
+      "nombre": "Tablet",
+      "marca": "Apple",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 11,
+    "fecha": {
+      "$date": "2024-03-06T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 1229.37,
+    "cliente": {
+      "id": 6,
+      "nombre": "Camila",
+      "apellido": "Ortiz",
+      "direccion": "Pasaje 12",
+      "localidad": "Villa Luzuriaga"
+    },
+    "id_vendedor": 12,
+    "producto": {
+      "id": 109,
+      "nombre": "Cámara",
+      "marca": "Canon"
+    }
+  },
+  {
+    "id_venta": 12,
+    "fecha": {
+      "$date": "2024-08-06T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 1429.76,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 3,
+    "producto": {
+      "id": 101,
+      "nombre": "Smartphone",
+      "marca": "Samsung"
+    }
+  },
+  {
+    "id_venta": 13,
+    "fecha": {
+      "$date": "2024-02-13T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 118.91,
+    "cliente": {
+      "id": 10,
+      "nombre": "Sofía",
+      "apellido": "Herrera",
+      "direccion": "Directorio 910",
+      "localidad": "San Justo"
+    },
+    "id_vendedor": 5,
+    "producto": {
+      "id": 107,
+      "nombre": "Teclado",
+      "marca": "Logitech"
+    }
+  },
+  {
+    "id_venta": 14,
+    "fecha": {
+      "$date": "2025-04-27T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 161.65,
+    "cliente": {
+      "id": 12,
+      "nombre": "Martina",
+      "apellido": "Suárez",
+      "direccion": "Mitre 123",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 5,
+    "producto": {
+      "id": 108,
+      "nombre": "Mouse",
+      "marca": "Razer",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 15,
+    "fecha": {
+      "$date": "2024-01-08T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 44.45,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 106,
+      "nombre": "Auriculares",
+      "marca": "Sony"
+    }
+  },
+  {
+    "id_venta": 16,
+    "fecha": {
+      "$date": "2025-05-26T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 84.01,
+    "cliente": {
+      "id": 9,
+      "nombre": "Carlos",
+      "apellido": "Ramírez",
+      "direccion": "Rivadavia 222",
+      "localidad": "Morón"
+    },
+    "id_vendedor": 7,
+    "producto": {
+      "id": 106,
+      "nombre": "Auriculares",
+      "marca": "Sony",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 17,
+    "fecha": {
+      "$date": "2024-06-25T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 634.1,
+    "cliente": {
+      "id": 3,
+      "nombre": "Luis",
+      "apellido": "Fernández",
+      "direccion": "Boulevard 789",
+      "localidad": "Morón"
+    },
+    "id_vendedor": 8,
+    "producto": {
+      "id": 106,
+      "nombre": "Auriculares",
+      "marca": "Sony"
+    }
+  },
+  {
+    "id_venta": 18,
+    "fecha": {
+      "$date": "2025-04-19T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 1003.24,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 2,
+    "producto": {
+      "id": 102,
+      "nombre": "Monitor",
+      "marca": "LG"
+    }
+  },
+  {
+    "id_venta": 19,
+    "fecha": {
+      "$date": "2025-01-02T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 2876.56,
+    "cliente": {
+      "id": 6,
+      "nombre": "Camila",
+      "apellido": "Ortiz",
+      "direccion": "Pasaje 12",
+      "localidad": "Villa Luzuriaga"
+    },
+    "id_vendedor": 11,
+    "producto": {
+      "id": 109,
+      "nombre": "Cámara",
+      "marca": "Canon",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 20,
+    "fecha": {
+      "$date": "2024-04-03T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 5569.17,
+    "cliente": {
+      "id": 4,
+      "nombre": "María",
+      "apellido": "González",
+      "direccion": "Av. de Mayo 150",
+      "localidad": "Lomas del Mirador"
+    },
+    "id_vendedor": 12,
+    "producto": {
+      "id": 100,
+      "nombre": "Laptop",
+      "marca": "Dell",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 21,
+    "fecha": {
+      "$date": "2024-11-06T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 1564.98,
+    "cliente": {
+      "id": 10,
+      "nombre": "Sofía",
+      "apellido": "Herrera",
+      "direccion": "Directorio 910",
+      "localidad": "San Justo"
+    },
+    "id_vendedor": 1,
+    "producto": {
+      "id": 104,
+      "nombre": "Tablet",
+      "marca": "Apple"
+    }
+  },
+  {
+    "id_venta": 22,
+    "fecha": {
+      "$date": "2025-06-26T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 447.72,
+    "cliente": {
+      "id": 9,
+      "nombre": "Carlos",
+      "apellido": "Ramírez",
+      "direccion": "Rivadavia 222",
+      "localidad": "Morón"
+    },
+    "id_vendedor": 11,
+    "producto": {
+      "id": 107,
+      "nombre": "Teclado",
+      "marca": "Logitech"
+    }
+  },
+  {
+    "id_venta": 23,
+    "fecha": {
+      "$date": "2024-07-27T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 4368.68,
+    "cliente": {
+      "id": 9,
+      "nombre": "Carlos",
+      "apellido": "Ramírez",
+      "direccion": "Rivadavia 222",
+      "localidad": "Morón"
+    },
+    "id_vendedor": 2,
+    "producto": {
+      "id": 101,
+      "nombre": "Smartphone",
+      "marca": "Samsung"
+    }
+  },
+  {
+    "id_venta": 24,
+    "fecha": {
+      "$date": "2024-08-11T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 5304.84,
+    "cliente": {
+      "id": 11,
+      "nombre": "Nicolás",
+      "apellido": "Álvarez",
+      "direccion": "Mosconi 1444",
+      "localidad": "Ramos Mejía"
+    },
+    "id_vendedor": 4,
+    "producto": {
+      "id": 101,
+      "nombre": "Smartphone",
+      "marca": "Samsung"
+    }
+  },
+  {
+    "id_venta": 25,
+    "fecha": {
+      "$date": "2025-05-06T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 56.8,
+    "cliente": {
+      "id": 12,
+      "nombre": "Martina",
+      "apellido": "Suárez",
+      "direccion": "Mitre 123",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 108,
+      "nombre": "Mouse",
+      "marca": "Razer",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 26,
+    "fecha": {
+      "$date": "2025-07-04T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 83.25,
+    "cliente": {
+      "id": 6,
+      "nombre": "Camila",
+      "apellido": "Ortiz",
+      "direccion": "Pasaje 12",
+      "localidad": "Villa Luzuriaga"
+    },
+    "id_vendedor": 3,
+    "producto": {
+      "id": 108,
+      "nombre": "Mouse",
+      "marca": "Razer"
+    }
+  },
+  {
+    "id_venta": 27,
+    "fecha": {
+      "$date": "2025-06-02T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 72.82,
+    "cliente": {
+      "id": 11,
+      "nombre": "Nicolás",
+      "apellido": "Álvarez",
+      "direccion": "Mosconi 1444",
+      "localidad": "Ramos Mejía"
+    },
+    "id_vendedor": 12,
+    "producto": {
+      "id": 108,
+      "nombre": "Mouse",
+      "marca": "Razer"
+    }
+  },
+  {
+    "id_venta": 28,
+    "fecha": {
+      "$date": "2024-01-18T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 2208.45,
+    "cliente": {
+      "id": 3,
+      "nombre": "Luis",
+      "apellido": "Fernández",
+      "direccion": "Boulevard 789",
+      "localidad": "Morón"
+    },
+    "id_vendedor": 4,
+    "producto": {
+      "id": 104,
+      "nombre": "Tablet",
+      "marca": "Apple"
+    }
+  },
+  {
+    "id_venta": 29,
+    "fecha": {
+      "$date": "2024-07-24T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 264.25,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 2,
+    "producto": {
+      "id": 105,
+      "nombre": "Impresora",
+      "marca": "HP"
+    }
+  },
+  {
+    "id_venta": 30,
+    "fecha": {
+      "$date": "2024-02-19T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 3445.41,
+    "cliente": {
+      "id": 12,
+      "nombre": "Martina",
+      "apellido": "Suárez",
+      "direccion": "Mitre 123",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 2,
+    "producto": {
+      "id": 104,
+      "nombre": "Tablet",
+      "marca": "Apple",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 31,
+    "fecha": {
+      "$date": "2025-04-12T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 6600.96,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 100,
+      "nombre": "Laptop",
+      "marca": "Dell"
+    }
+  },
+  {
+    "id_venta": 32,
+    "fecha": {
+      "$date": "2025-01-16T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 105.7,
+    "cliente": {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "García López",
+      "direccion": "Avenida 456",
+      "localidad": "Ramos Mejía"
+    },
+    "id_vendedor": 3,
+    "producto": {
+      "id": 106,
+      "nombre": "Auriculares",
+      "marca": "Sony"
+    }
+  },
+  {
+    "id_venta": 33,
+    "fecha": {
+      "$date": "2025-04-16T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 1659.88,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 5,
+    "producto": {
+      "id": 102,
+      "nombre": "Monitor",
+      "marca": "LG"
+    }
+  },
+  {
+    "id_venta": 34,
+    "fecha": {
+      "$date": "2025-02-08T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 193.08,
+    "cliente": {
+      "id": 10,
+      "nombre": "Sofía",
+      "apellido": "Herrera",
+      "direccion": "Directorio 910",
+      "localidad": "San Justo"
+    },
+    "id_vendedor": 3,
+    "producto": {
+      "id": 107,
+      "nombre": "Teclado",
+      "marca": "Logitech"
+    }
+  },
+  {
+    "id_venta": 35,
+    "fecha": {
+      "$date": "2025-06-13T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 2703.36,
+    "cliente": {
+      "id": 6,
+      "nombre": "Camila",
+      "apellido": "Ortiz",
+      "direccion": "Pasaje 12",
+      "localidad": "Villa Luzuriaga"
+    },
+    "id_vendedor": 3,
+    "producto": {
+      "id": 109,
+      "nombre": "Cámara",
+      "marca": "Canon"
+    }
+  },
+  {
+    "id_venta": 36,
+    "fecha": {
+      "$date": "2025-03-31T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 7700.16,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 8,
+    "producto": {
+      "id": 100,
+      "nombre": "Laptop",
+      "marca": "Dell"
+    }
+  },
+  {
+    "id_venta": 37,
+    "fecha": {
+      "$date": "2025-04-02T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 7551.45,
+    "cliente": {
+      "id": 12,
+      "nombre": "Martina",
+      "apellido": "Suárez",
+      "direccion": "Mitre 123",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 3,
+    "producto": {
+      "id": 100,
+      "nombre": "Laptop",
+      "marca": "Dell",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 38,
+    "fecha": {
+      "$date": "2024-10-15T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 232.11,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 5,
+    "producto": {
+      "id": 108,
+      "nombre": "Mouse",
+      "marca": "Razer"
+    }
+  },
+  {
+    "id_venta": 39,
+    "fecha": {
+      "$date": "2025-08-21T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 2772.3,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 1,
+    "producto": {
+      "id": 110,
+      "nombre": "Consola",
+      "marca": "Nintendo"
+    }
+  },
+  {
+    "id_venta": 40,
+    "fecha": {
+      "$date": "2024-11-05T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 4456.8,
+    "cliente": {
+      "id": 11,
+      "nombre": "Nicolás",
+      "apellido": "Álvarez",
+      "direccion": "Mosconi 1444",
+      "localidad": "Ramos Mejía"
+    },
+    "id_vendedor": 4,
+    "producto": {
+      "id": 109,
+      "nombre": "Cámara",
+      "marca": "Canon",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 41,
+    "fecha": {
+      "$date": "2024-06-12T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 64.76,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 108,
+      "nombre": "Mouse",
+      "marca": "Razer",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 42,
+    "fecha": {
+      "$date": "2025-03-13T00:00:00Z"
+    },
+    "cantidad": 2,
+    "importe": 1529.2,
+    "cliente": {
+      "id": 6,
+      "nombre": "Camila",
+      "apellido": "Ortiz",
+      "direccion": "Pasaje 12",
+      "localidad": "Villa Luzuriaga"
+    },
+    "id_vendedor": 4,
+    "producto": {
+      "id": 101,
+      "nombre": "Smartphone",
+      "marca": "Samsung",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 43,
+    "fecha": {
+      "$date": "2024-03-01T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 158.76,
+    "cliente": {
+      "id": 3,
+      "nombre": "Luis",
+      "apellido": "Fernández",
+      "direccion": "Boulevard 789",
+      "localidad": "Morón"
+    },
+    "id_vendedor": 1,
+    "producto": {
+      "id": 108,
+      "nombre": "Mouse",
+      "marca": "Razer"
+    }
+  },
+  {
+    "id_venta": 44,
+    "fecha": {
+      "$date": "2024-02-23T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 1214.62,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 10,
+    "producto": {
+      "id": 101,
+      "nombre": "Smartphone",
+      "marca": "Samsung",
+      "dolar": true
+    }
+  },
+  {
+    "id_venta": 45,
+    "fecha": {
+      "$date": "2024-02-08T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 192.55,
+    "cliente": {
+      "id": 7,
+      "nombre": "Martín",
+      "apellido": "Pérez",
+      "direccion": "San Martín 555",
+      "localidad": "Isidro Casanova"
+    },
+    "id_vendedor": 3,
+    "producto": {
+      "id": 107,
+      "nombre": "Teclado",
+      "marca": "Logitech"
+    }
+  },
+  {
+    "id_venta": 46,
+    "fecha": {
+      "$date": "2025-04-10T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 419.67,
+    "cliente": {
+      "id": 4,
+      "nombre": "María",
+      "apellido": "González",
+      "direccion": "Av. de Mayo 150",
+      "localidad": "Lomas del Mirador"
+    },
+    "id_vendedor": 11,
+    "producto": {
+      "id": 105,
+      "nombre": "Impresora",
+      "marca": "HP"
+    }
+  },
+  {
+    "id_venta": 47,
+    "fecha": {
+      "$date": "2025-02-20T00:00:00Z"
+    },
+    "cantidad": 4,
+    "importe": 797.12,
+    "cliente": {
+      "id": 1,
+      "nombre": "Juan",
+      "apellido": "García López",
+      "direccion": "Avenida 456",
+      "localidad": "Ramos Mejía"
+    },
+    "id_vendedor": 4,
+    "producto": {
+      "id": 105,
+      "nombre": "Impresora",
+      "marca": "HP"
+    }
+  },
+  {
+    "id_venta": 48,
+    "fecha": {
+      "$date": "2024-11-17T00:00:00Z"
+    },
+    "cantidad": 5,
+    "importe": 447.6,
+    "cliente": {
+      "id": 12,
+      "nombre": "Martina",
+      "apellido": "Suárez",
+      "direccion": "Mitre 123",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 11,
+    "producto": {
+      "id": 107,
+      "nombre": "Teclado",
+      "marca": "Logitech"
+    }
+  },
+  {
+    "id_venta": 49,
+    "fecha": {
+      "$date": "2025-09-01T00:00:00Z"
+    },
+    "cantidad": 3,
+    "importe": 2487.6,
+    "cliente": {
+      "id": 8,
+      "nombre": "Valentina",
+      "apellido": "Romero",
+      "direccion": "Italia 876",
+      "localidad": "Haedo"
+    },
+    "id_vendedor": 1,
+    "producto": {
+      "id": 109,
+      "nombre": "Cámara",
+      "marca": "Canon"
+    }
+  },
+  {
+    "id_venta": 50,
+    "fecha": {
+      "$date": "2024-06-24T00:00:00Z"
+    },
+    "cantidad": 1,
+    "importe": 1282.18,
+    "cliente": {
+      "id": 6,
+      "nombre": "Camila",
+      "apellido": "Ortiz",
+      "direccion": "Pasaje 12",
+      "localidad": "Villa Luzuriaga"
+    },
+    "id_vendedor": 5,
+    "producto": {
+      "id": 100,
+      "nombre": "Laptop",
+      "marca": "Dell",
+      "dolar": true
+    }
+  }
+]

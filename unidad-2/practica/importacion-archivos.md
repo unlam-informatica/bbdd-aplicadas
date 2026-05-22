@@ -8,17 +8,13 @@ permalink: /unidad-2/practica/importacion-archivos/
 
 # Práctica — Importación de archivos
 
-> Todos los ejercicios requieren descargar el archivo indicado y guardarlo en `C:\Importar\` antes de ejecutar el script.
-
 > Ver guía de referencia: [Importación de archivos](../guias/importacion-de-archivos/)
 
 ---
 
 ## Ejercicio 1 — Reclamos de distribuidoras de gas (CSV)
 
-Descargar el dataset **"Reclamos de Distribuidoras resueltos en 2022"** desde el portal de datos abiertos de Argentina y guardarlo como `C:\Importar\reclamos.csv`.
-
-**Fuente**: [www.datos.gob.ar](https://www.datos.gob.ar/)
+> **Archivo:** descargar el dataset **"Reclamos de Distribuidoras resueltos en 2022"** desde [www.datos.gob.ar](https://www.datos.gob.ar/) y guardarlo como `C:\Importar\reclamos.csv`.
 
 **Resultado esperado**: tabla con columnas `reclamo_ano`, `reclamo_mes_nro`, `reclamo_mes_nombre`, `reclamo_prestadora`, `reclamo_provincia`, `reclamo_grupo`, `reclamo_via_ingreso`, `reclamo_resolucion`, `reclamo_cantidad`.
 
@@ -60,9 +56,7 @@ SELECT * FROM reclamos;
 
 ## Ejercicio 2 — Volumen de viajeros por franja horaria (CSV)
 
-Descargar el archivo con el volumen de viajeros por franja horaria y guardarlo como `C:\Importar\viajeros.csv`.
-
-**Fuente**: [datos.gob.es](https://datos.gob.es/es)
+> **Archivo:** `archivos/viajerosgalicia.csv` — copiar a `C:\Importar\viajerosgalicia.csv`
 
 **Resultado esperado**: tabla con columnas `ID`, `CODIGO_ESTACION`, `NOMBRE_ESTACION`, `NUCLEO_CERCANIAS`, `TRAMO_HORARIO`, `VIAJEROS_SUBIDOS`, `VIAJEROS_BAJADOS`.
 
@@ -85,7 +79,7 @@ CREATE TABLE viajeros (
 GO
 
 BULK INSERT viajeros
-FROM 'C:\Importar\viajeros.csv'
+FROM 'C:\Importar\viajerosgalicia.csv'
 WITH
 (
     FIELDTERMINATOR = ',',
@@ -102,9 +96,7 @@ SELECT * FROM viajeros;
 
 ## Ejercicio 3 — Salario mensual medio — empleo joven (CSV)
 
-Descargar el archivo con el salario mensual medio desde 2007 perteneciente al empleo joven en el sector privado y guardarlo como `C:\Importar\salarios.csv`.
-
-**Fuente**: [www.datos.gob.ar](https://www.datos.gob.ar/)
+> **Archivo:** `archivos/SalarioMensualMedio.csv` — copiar a `C:\Importar\SalarioMensualMedio.csv`
 
 **Resultado esperado**: tabla con columnas `fecha`, `clae`, `w_median`.
 
@@ -123,7 +115,7 @@ CREATE TABLE salarios_empleo_joven (
 GO
 
 BULK INSERT salarios_empleo_joven
-FROM 'C:\Importar\salarios.csv'
+FROM 'C:\Importar\SalarioMensualMedio.csv'
 WITH
 (
     FIELDTERMINATOR = ',',
@@ -140,7 +132,7 @@ SELECT * FROM salarios_empleo_joven;
 
 ## Ejercicio 4 — Personajes de Star Wars (JSON)
 
-Descargar el archivo JSON con datos de los personajes de Star Wars y guardarlo como `C:\Importar\starwars.json`.
+> **Archivo:** `archivos/starwars.json` — copiar a `C:\Importar\starwars.json`
 
 **Resultado esperado**: tabla con columnas `id`, `personaje`, `actor`, `pelicula`, `anio_pelicula`.
 
