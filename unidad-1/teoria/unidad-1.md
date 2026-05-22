@@ -390,7 +390,7 @@ CREATE TABLE ddbba.alumno (
 );
 ```
 
-> :warning: Solo puede haber **un único índice clustered por tabla**, porque define el orden físico de almacenamiento de los datos y una tabla solo puede estar ordenada de una manera a la vez.
+> ⚠️ Solo puede haber **un único índice clustered por tabla**, porque define el orden físico de almacenamiento de los datos y una tabla solo puede estar ordenada de una manera a la vez.
 
 La distinción es:
 

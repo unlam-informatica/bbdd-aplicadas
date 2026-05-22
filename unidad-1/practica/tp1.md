@@ -64,25 +64,23 @@ Cree un stored procedure llamado `insertarLog` que reciba los parámetros `@modu
 > A partir de este ejercicio, todo INSERT/UPDATE/DELETE debe invocar este SP. No se permiten INSERTs directos a la bitácora.
 
 ```sql
-CREATE PROCEDURE ddbba.insertarLog
-    @texto  VARCHAR(50),
-    @modulo VARCHAR(10)
+CREATE OR ALTER PROCEDURE ddbba.insertarLog
+    @modulo VARCHAR(10),
+    @texto  VARCHAR(50)
 AS
 BEGIN
-    DECLARE @mod VARCHAR(10) = NULL
-    SET @mod = COALESCE(@modulo, 'N/A')
--- Una sola sentencia: no necesita BEGIN/END
-    IF @modulo IS NULL OR @modulo = ''
-        SET @modulo = 'N/A'
+    --coalesce no valida si viene vacío, por eso validamos con NULLIF y TRIM
+    SET @modulo = COALESCE(NULLIF(TRIM(@modulo), ''), 'N/A');
 
     INSERT INTO ddbba.registro (
         texto,
         modulo
-    ) VALUES(
-        @texto,
-        @mod
     )
-END 
+    VALUES (
+        @texto,
+        @modulo
+    );
+END;
 ```
 
 ---
@@ -106,7 +104,65 @@ Modele la relación entre Persona, Curso y Materia:
 - g. Documentar con comentarios las decisiones de diseño.
 
 ```sql
+-- en estos ejemplos no usamos CONSTRAINT, delegamos un nombre autogenerado por el motor
+CREATE TABLE ddbba.persona (
+    persona_id       INT IDENTITY(1,1) PRIMARY KEY,
+    dni              VARCHAR(15) NOT NULL UNIQUE,
+    telefono         VARCHAR(20) NOT NULL,
+    localidad        VARCHAR(50) NOT NULL,
+    fecha_nacimiento DATE NOT NULL,
+    nombre           VARCHAR(50) NOT NULL,
+    apellido         VARCHAR(50) NOT NULL,
+    patente          VARCHAR(7) NULL,
 
+    -- Patente opcional. Si existe, debe tener 6 o 7 caracteres alfanuméricos.
+    CHECK (
+        patente IS NULL
+        OR (
+            LEN(patente) IN (6, 7)
+            AND patente NOT LIKE '%[^A-Z0-9]%'
+        )
+    )
+);
+GO
+
+CREATE TABLE ddbba.materia (
+    materia_id INT IDENTITY(1,1) PRIMARY KEY,
+    nombre     VARCHAR(100) NOT NULL UNIQUE
+);
+GO
+
+CREATE TABLE ddbba.curso (
+    curso_id        INT IDENTITY(1,1) PRIMARY KEY,
+    materia_id      INT NOT NULL REFERENCES ddbba.materia(materia_id),
+    numero_comision CHAR(4) NOT NULL,
+
+    -- Comisión de exactamente 4 dígitos.
+    CHECK (numero_comision LIKE '[0-9][0-9][0-9][0-9]'),
+
+    -- No puede repetirse una comisión dentro de la misma materia.
+    UNIQUE (materia_id, numero_comision)
+);
+GO
+
+CREATE TABLE ddbba.persona_materia (
+    persona_id INT NOT NULL REFERENCES ddbba.persona(persona_id),
+    materia_id INT NOT NULL REFERENCES ddbba.materia(materia_id),
+    rol        VARCHAR(10) NOT NULL CHECK (rol IN ('ALUMNO', 'DOCENTE')),
+
+    -- Una persona solo puede tener un rol por materia.
+    PRIMARY KEY (persona_id, materia_id)
+);
+GO
+
+CREATE TABLE ddbba.curso_persona (
+    curso_id   INT NOT NULL REFERENCES ddbba.curso(curso_id),
+    persona_id INT NOT NULL REFERENCES ddbba.persona(persona_id),
+
+    -- Una persona no debería repetirse dentro del mismo curso/comisión.
+    PRIMARY KEY (curso_id, persona_id)
+);
+GO
 ```
 
 ---
@@ -131,7 +187,86 @@ Cree un stored procedure para generar registros aleatorios de alumnos:
 - El SP debe recibir un parámetro con la cantidad a generar.
 
 ```sql
+CREATE OR ALTER PROCEDURE ddbba.generar_alumnos_aleatorios @cantidad INT
+AS
+BEGIN
+    SET NOCOUNT ON;
 
+    DECLARE @i INT = 1;
+
+    DECLARE @nombres TABLE
+    (
+        nombre VARCHAR(50)
+    );
+
+    DECLARE @apellidos TABLE
+    (
+        apellido VARCHAR(50)
+    );
+
+    DECLARE @localidades TABLE
+    (
+        localidad VARCHAR(50)
+    );
+
+    INSERT INTO @nombres (nombre)
+    VALUES ('Juan'),
+           ('Pedro'),
+           ('Lucas'),
+           ('Mateo'),
+           ('Sofia'),
+           ('Camila'),
+           ('Martina'),
+           ('Valentina'),
+           ('Lucia'),
+           ('Agustina');
+
+    INSERT INTO @apellidos (apellido)
+    VALUES ('Gomez'),
+           ('Perez'),
+           ('Rodriguez'),
+           ('Fernandez'),
+           ('Lopez'),
+           ('Martinez'),
+           ('Garcia'),
+           ('Sanchez'),
+           ('Romero'),
+           ('Torres');
+
+    INSERT INTO @localidades (localidad)
+    VALUES ('San Justo'),
+           ('Ramos Mejia'),
+           ('Moron'),
+           ('Haedo'),
+           ('Castelar'),
+           ('Lomas del Mirador'),
+           ('Villa Luzuriaga');
+
+    WHILE @i <= @cantidad
+        BEGIN
+            INSERT INTO ddbba.persona (dni,
+                                       telefono,
+                                       localidad,
+                                       fecha_nacimiento,
+                                       nombre,
+                                       apellido,
+                                       patente)
+            VALUES 
+            (
+                CAST(10000000 + ABS(CHECKSUM(NEWID())) % 30000000 AS VARCHAR(15)),
+                CAST(1100000000 + ABS(CHECKSUM(NEWID())) % 899999999 AS VARCHAR(20)),
+                (SELECT TOP 1 localidad FROM @localidades ORDER BY NEWID()),
+                DATEADD(DAY, -1 * (6570 + ABS(CHECKSUM(NEWID())) % 8000), GETDATE()),
+                (SELECT TOP 1 nombre FROM @nombres ORDER BY NEWID()) + ' ' +
+                (SELECT TOP 1 nombre FROM @nombres ORDER BY NEWID()),
+                (SELECT TOP 1 apellido FROM @apellidos ORDER BY NEWID()),
+                NULL
+            );
+
+            SET @i = @i + 1;
+        END;
+END;
+GO
 ```
 
 ---
