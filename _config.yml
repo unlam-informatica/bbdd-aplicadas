@@ -16,6 +16,9 @@ aux_links:
   "GitHub":
     - "https://github.com/unlam-informatica/bbdd-aplicadas"
 
+exclude:
+  - CLAUDE.md
+
 plugins:
   - jekyll-remote-theme
   - jekyll-seo-tag
