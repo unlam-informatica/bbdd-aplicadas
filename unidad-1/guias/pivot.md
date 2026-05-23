@@ -1,6 +1,6 @@
 ---
 layout: default
-title: PIVOT
+title: Pivot
 parent: Unidad 1
 nav_order: 3
 permalink: /unidad-1/guias/pivot/
@@ -16,34 +16,32 @@ permalink: /unidad-1/guias/pivot/
 
 Supongamos esta tabla de ventas:
 
-```
-Departamento | Trimestre | Monto
-─────────────────────────────────
-IT           | Q1        |   120
-IT           | Q2        |   150
-IT           | Q3        |   130
-IT           | Q4        |   200
-Ventas       | Q1        |   300
-Ventas       | Q2        |   280
-Ventas       | Q3        |   320
-Ventas       | Q4        |   410
-```
+| Departamento | Trimestre | Monto
+---------------|-----------|------
+| IT           | Q1        |   120
+| IT           | Q2        |   150
+| IT           | Q3        |   130
+| IT           | Q4        |   200
+| Ventas       | Q1        |   300
+| Ventas       | Q2        |   280
+| Ventas       | Q3        |   320
+| Ventas       | Q4        |   410
+
 
 **Sin PIVOT** — los trimestres están apilados verticalmente, difícil de comparar de un vistazo.
 
 **Con PIVOT** — cada trimestre se convierte en una columna propia:
 
-```
-Departamento | Q1  | Q2  | Q3  | Q4
-──────────────────────────────────────
-IT           | 120 | 150 | 130 | 200
-Ventas       | 300 | 280 | 320 | 410
+| Departamento | Q1  | Q2  | Q3  | Q4
+---------------|-----|------|----|----
+| IT           | 120 | 150 | 130 | 200
+| Ventas       | 300 | 280 | 320 | 410
 
-    ↑               ↑
-columna fija    columnas pivoteadas
+```
+      ↑                    ↑
+columna fija        columnas pivoteadas
 (se mantiene)   (generadas desde los valores de "Trimestre")
 ```
-
 > PIVOT no cambia los datos — solo cambia cómo se presentan.
 
 ![alt text](../images/pivot.png)

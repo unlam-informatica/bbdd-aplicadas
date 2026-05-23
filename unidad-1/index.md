@@ -15,3 +15,4 @@ DDL, DML, constraints, NULL, JOINs, vistas, procedimientos almacenados, triggers
 |---------|------|
 | [tp1.sql](./practica/tp1.sql) | TP 1 — Repaso de SQL (20 ejercicios) |
 | [window-functions.sql](./practica/window-functions.sql) | Ejercicios de window functions |
+| [pivot.md](./practica/pivot/) | Ejercicios de PIVOT, UNPIVOT y PIVOT dinámico |
