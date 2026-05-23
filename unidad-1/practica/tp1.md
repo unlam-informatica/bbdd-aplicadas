@@ -5,7 +5,7 @@ parent: Unidad 1
 nav_order: 7
 permalink: /unidad-1/practica/tp1/
 ---
-
+t4
 # Trabajo Práctico 1 — Repaso de SQL
 
 > Todos los ejercicios se resuelven con DML/DDL en SQL Server (recomendado 2019 o 2022).  
@@ -276,7 +276,7 @@ GO
 Utilizando el SP del ejercicio anterior, genere 1000 registros de alumnos.
 
 ```sql
-
+EXEC ddbba.generar_alumnos_aleatorios 1000;
 ```
 
 ---
@@ -286,7 +286,39 @@ Utilizando el SP del ejercicio anterior, genere 1000 registros de alumnos.
 Elimine los registros duplicados utilizando Common Table Expressions (CTE).
 
 ```sql
+-- Un "duplicado" es una combinación nombre+apellido que aparece más de una vez.
+-- Se conserva el registro con menor persona_id (el insertado primero).
 
+-- Paso 1 (opcional): ver cuántos duplicados hay antes de borrar.
+WITH CTE_Duplicados AS (
+    SELECT
+        persona_id,
+        ROW_NUMBER() OVER (
+            PARTITION BY nombre, apellido
+            ORDER BY persona_id
+        ) AS rn
+    FROM ddbba.persona
+)
+SELECT COUNT(*) AS duplicados_a_eliminar
+FROM CTE_Duplicados
+WHERE rn > 1;
+
+-- Paso 2: eliminar duplicados.
+WITH CTE_Duplicados AS (
+    SELECT
+        persona_id,
+        ROW_NUMBER() OVER (
+            PARTITION BY nombre, apellido
+            ORDER BY persona_id
+        ) AS rn
+    FROM ddbba.persona
+)
+DELETE FROM CTE_Duplicados
+WHERE rn > 1;
+
+EXEC ddbba.insertarLog
+    @modulo = 'EJ9',
+    @texto  = 'Duplicados eliminados de persona';
 ```
 
 ---
