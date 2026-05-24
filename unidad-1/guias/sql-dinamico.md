@@ -2,7 +2,7 @@
 layout: default
 title: SQL Dinámico
 parent: Unidad 1
-nav_order: 5
+nav_order: 6
 permalink: /unidad-1/guias/sql-dinamico/
 ---
 

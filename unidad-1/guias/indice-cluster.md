@@ -2,7 +2,7 @@
 layout: default
 title: Índice Clustered
 parent: Unidad 1
-nav_order: 6
+nav_order: 7
 permalink: /unidad-1/guias/indice-cluster/
 ---
 

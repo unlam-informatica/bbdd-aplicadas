@@ -2,7 +2,7 @@
 layout: default
 title: Práctica - Repaso de SQL
 parent: Unidad 1
-nav_order: 7
+nav_order: 8
 permalink: /unidad-1/practica/tp1/
 ---
 t4

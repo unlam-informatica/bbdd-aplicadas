@@ -2,7 +2,7 @@
 layout: default
 title: Pivot
 parent: Unidad 1
-nav_order: 3
+nav_order: 4
 permalink: /unidad-1/guias/pivot/
 ---
 

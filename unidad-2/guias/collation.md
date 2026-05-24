@@ -2,7 +2,7 @@
 layout: default
 title: Collation / Intercalación
 parent: Unidad 2
-nav_order: 2
+nav_order: 3
 permalink: /unidad-2/guias/collation/
 ---
 

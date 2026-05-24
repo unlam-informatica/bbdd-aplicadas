@@ -2,7 +2,7 @@
 layout: default
 title: Práctica - Pivot
 parent: Unidad 1
-nav_order: 9
+nav_order: 10
 permalink: /unidad-1/practica/pivot/
 ---
 

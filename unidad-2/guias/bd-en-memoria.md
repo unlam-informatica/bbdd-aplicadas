@@ -2,7 +2,7 @@
 layout: default
 title: BD en memoria (In-Memory OLTP)
 parent: Unidad 2
-nav_order: 3
+nav_order: 4
 permalink: /unidad-2/guias/bd-en-memoria/
 ---
 
