@@ -161,8 +161,8 @@ GO
 | vendedor | Enero  | Febrero | Marzo  | Abril  | Mayo   | Junio  |
 |----------|-------:|--------:|-------:|-------:|-------:|-------:|
 | Ana      | 1800.00| 2000.00 | 1800.00| 2200.00| 1600.00| 2500.00|
-| Carlos   | NULL   | NULL    | 500.00 | 700.00 | 600.00 | NULL   |
-| Luis     | 900.00 | 1100.00 | 800.00 | NULL   | 1200.00| 1400.00|
+| Carlos   | `NULL`   | `NULL`    | 500.00 | 700.00 | 600.00 | `NULL`   |
+| Luis     | 900.00 | 1100.00 | 800.00 | `NULL`   | 1200.00| 1400.00|
 | Marta    | 2100.00| 1700.00 | 2300.00| 1900.00| 2100.00| 2800.00|
 
 > Nota: Ana tenía dos ventas en Enero (1500 + 300) → `SUM` las acumula automáticamente.

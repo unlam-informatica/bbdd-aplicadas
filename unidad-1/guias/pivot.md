@@ -38,9 +38,9 @@ Supongamos esta tabla de ventas:
 | Ventas       | 300 | 280 | 320 | 410
 
 ```
-      ↑                    ↑
-columna fija        columnas pivoteadas
-(se mantiene)   (generadas desde los valores de "Trimestre")
+      ↑                                 ↑
+columna fija                    columnas pivoteadas
+(se mantiene)           (generadas desde los valores de "Trimestre")
 ```
 > PIVOT no cambia los datos — solo cambia cómo se presentan.
 
@@ -70,6 +70,67 @@ Los tres componentes obligatorios dentro de `PIVOT`:
 | `FUNCION_AGREG(columna)` | Qué hacer con los valores que se "apilan" en la misma celda: `SUM`, `COUNT`, `AVG`, etc. |
 | `FOR columna` | Cuál es la columna cuyos _valores_ se van a convertir en nombres de columna |
 | `IN ([v1], [v2], ...)` | Los valores concretos que se convierten en columnas |
+
+## Qué ocurre si la tabla tiene más columnas
+Supongamos que ahora la tabla `Ventas` también tiene:
+
+```text
+Departamento | Trimestre | Monto | Año | Vendedor
+````
+
+y hacemos:
+
+```sql
+SELECT Departamento, [Q1], [Q2], [Q3], [Q4]
+FROM Ventas
+PIVOT (
+    SUM(Monto)
+    FOR Trimestre IN ([Q1], [Q2], [Q3], [Q4])
+) AS pv;
+```
+
+El problema es que `PIVOT` agrupa automáticamente por todas las columnas que no forman parte de:
+
+* la agregación (`Monto`);
+* la columna pivotada (`Trimestre`).
+
+Entonces SQL Server también agrupará por:
+
+```text
+Departamento, Año, Vendedor
+```
+
+Esto puede generar múltiples filas para un mismo departamento.
+
+Ejemplo conceptual:
+
+| Departamento | Año  | Vendedor | Q1  |
+| ------------ | ---- | -------- | --- |
+| IT           | 2025 | Juan     | 120 |
+| IT           | 2025 | Ana      | 90  |
+
+En lugar de:
+
+| Departamento | Q1  |
+| ------------ | --- |
+| IT           | 210 |
+
+Por eso suele utilizarse una subquery:
+
+```sql
+FROM (
+    SELECT Departamento, Trimestre, Monto
+    FROM Ventas
+) AS origen
+```
+
+La subquery permite controlar exactamente qué columnas participan en el `PIVOT`, evitando que columnas adicionales afecten la agrupación interna.
+
+## Regla práctica
+
+> 📌 El `SELECT` externo decide qué columnas se muestran.
+> La subquery decide qué columnas participan realmente en el `PIVOT`.
+
 
 ---
 
