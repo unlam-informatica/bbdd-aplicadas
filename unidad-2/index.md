@@ -20,6 +20,7 @@ Bases de datos transaccionales (OLTP), propiedades ACID, commit/rollback, OLTP v
 | [json-en-sql.md](./guias/json-en-sql/) | OPENJSON, FOR JSON, JSON_VALUE/QUERY/MODIFY: parseo y generación de JSON |
 | [xml-en-sql.md](./guias/xml-en-sql/) | Importar XML con OPENROWSET + .nodes(), OPENXML y exportar con FOR XML |
 | [apis-desde-sql.md](./guias/apis-desde-sql/) | Llamadas HTTP desde T-SQL con Ole Automation Procedures: GET y POST |
+| [transacciones.md](./guias/transacciones/) | BEGIN/COMMIT/ROLLBACK, TRY/CATCH, XACT_ABORT, niveles de aislamiento, deadlocks |
 
 ## Práctica
 

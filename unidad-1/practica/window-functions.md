@@ -8,7 +8,7 @@ permalink: /unidad-1/practica/window-functions/
 
 # Práctica — Window Functions
 
-> Ejercicios de la cátedra. Base de datos `PracticaWF`, esquema `tablaswf`.
+> Ejercicios de la cátedra. Base de datos `PracticaWF`, esquema `wf`.
 
 ---
 
@@ -28,17 +28,17 @@ GO
 USE PracticaWF
 GO
 
-IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'tablasWF')
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = 'wf')
 BEGIN
-    EXEC('CREATE SCHEMA tablasWF')
+    EXEC('CREATE SCHEMA wf')
 END
 GO
 
 -- Tabla Empleados
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
-               WHERE TABLE_SCHEMA = 'tablasWF' AND TABLE_NAME = 'Empleados')
+               WHERE TABLE_SCHEMA = 'wf' AND TABLE_NAME = 'Empleados')
 BEGIN
-    CREATE TABLE tablaswf.Empleados (
+    CREATE TABLE wf.Empleados (
         EmpleadoID   INT          IDENTITY(1,1) PRIMARY KEY,
         Nombre       VARCHAR(50),
         Departamento VARCHAR(50),
@@ -47,7 +47,7 @@ BEGIN
 END
 GO
 
-INSERT INTO tablaswf.Empleados (Nombre, Departamento, Salario)
+INSERT INTO wf.Empleados (Nombre, Departamento, Salario)
 VALUES
     ('Juan',   'Ventas',    3000.00),
     ('María',  'Ventas',    2800.00),
@@ -58,9 +58,9 @@ GO
 
 -- Tabla Clientes
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
-               WHERE TABLE_SCHEMA = 'tablasWF' AND TABLE_NAME = 'Clientes')
+               WHERE TABLE_SCHEMA = 'wf' AND TABLE_NAME = 'Clientes')
 BEGIN
-    CREATE TABLE tablaswf.Clientes (
+    CREATE TABLE wf.Clientes (
         id_cliente INT         IDENTITY(1,1) PRIMARY KEY,
         nombre     VARCHAR(50),
         pais       VARCHAR(50)
@@ -68,7 +68,7 @@ BEGIN
 END
 GO
 
-INSERT INTO tablaswf.Clientes (nombre, pais)
+INSERT INTO wf.Clientes (nombre, pais)
 VALUES
     ('John Doe',          'Argentina'),
     ('Jane Smith',        'Australia'),
@@ -94,14 +94,14 @@ GO
 
 -- Tabla Pedidos
 IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
-               WHERE TABLE_SCHEMA = 'tablasWF' AND TABLE_NAME = 'Pedidos')
+               WHERE TABLE_SCHEMA = 'wf' AND TABLE_NAME = 'Pedidos')
 BEGIN
-    CREATE TABLE tablaswf.Pedidos (
+    CREATE TABLE wf.Pedidos (
         id_pedido    INT PRIMARY KEY,
         id_cliente   INT,
         fecha_pedido DATE,
         monto        DECIMAL(10, 2),
-        FOREIGN KEY (id_cliente) REFERENCES tablaswf.Clientes(id_cliente)
+        FOREIGN KEY (id_cliente) REFERENCES wf.Clientes(id_cliente)
     )
 END
 GO
@@ -114,7 +114,7 @@ DECLARE @orderId   INT  = 1
 
 WHILE @orderId <= 100
 BEGIN
-    INSERT INTO tablaswf.Pedidos (id_pedido, id_cliente, fecha_pedido, monto)
+    INSERT INTO wf.Pedidos (id_pedido, id_cliente, fecha_pedido, monto)
     VALUES (
         @orderId,
         ((@orderId - 1) % 20) + 1,
@@ -135,7 +135,7 @@ Enumerar, de mayor a menor, los empleados según el salario que poseen.
 ```sql
 SELECT EmpleadoID, Nombre, Departamento, Salario,
     ROW_NUMBER() OVER (ORDER BY Salario DESC) AS OrdenEmpleadosSalario
-FROM tablaswf.Empleados
+FROM wf.Empleados
 GO
 ```
 
@@ -148,7 +148,7 @@ Clasifica a los empleados según sus salarios agrupado por departamento.
 Antes de resolver, se agregan más registros a la tabla:
 
 ```sql
-INSERT INTO tablaswf.Empleados (Nombre, Departamento, Salario)
+INSERT INTO wf.Empleados (Nombre, Departamento, Salario)
 VALUES
     ('Ramiro',   'Ventas',      1800.00),
     ('Tomas',    'Ventas',      3200.00),
@@ -171,7 +171,7 @@ GO
 ```sql
 SELECT EmpleadoID, Nombre, Departamento, Salario,
     RANK() OVER (PARTITION BY Departamento ORDER BY Salario DESC) AS Ranking
-FROM tablaswf.Empleados
+FROM wf.Empleados
 GO
 ```
 
@@ -184,7 +184,7 @@ Dividir a los empleados en 4 grupos basados en su salario. El grupo 1 contendrá
 ```sql
 SELECT EmpleadoID, Nombre, Departamento, Salario,
     NTILE(4) OVER (ORDER BY Salario DESC) AS GrupoSalario
-FROM tablaswf.Empleados
+FROM wf.Empleados
 GO
 ```
 
@@ -198,7 +198,7 @@ Realizar una comparación de salarios entre empleados para analizar la diferenci
 SELECT EmpleadoID, Nombre, Departamento, Salario,
     LAG(Salario, 1, 0)  OVER (PARTITION BY Departamento ORDER BY Salario) AS SalarioAnterior,
     LEAD(Salario, 1, 0) OVER (PARTITION BY Departamento ORDER BY Salario) AS SiguienteSalario
-FROM tablaswf.Empleados
+FROM wf.Empleados
 GO
 ```
 
@@ -214,7 +214,7 @@ Calcular el promedio de los montos de pedidos por cliente, mostrando también el
 SELECT id_pedido, id_cliente, monto,
     AVG(monto) OVER (PARTITION BY id_cliente) AS promedio_monto_cliente,
     ROW_NUMBER() OVER (PARTITION BY id_cliente ORDER BY monto) AS posicion_rel_monto_cliente
-FROM tablaswf.Pedidos
+FROM wf.Pedidos
 GO
 ```
 
@@ -234,8 +234,8 @@ FROM (
         c.pais,
         SUM(p.monto) AS monto_total_pedidos,
         RANK() OVER (PARTITION BY c.pais ORDER BY SUM(p.monto) DESC) AS ranking_por_pais
-    FROM tablaswf.Clientes c
-    INNER JOIN tablaswf.Pedidos p ON c.id_cliente = p.id_cliente
+    FROM wf.Clientes c
+    INNER JOIN wf.Pedidos p ON c.id_cliente = p.id_cliente
     GROUP BY c.nombre, c.pais
 ) ranked_clients
 WHERE ranking_por_pais <= 3
@@ -253,7 +253,7 @@ Calcular la diferencia de monto entre un pedido y el siguiente pedido realizado 
 ```sql
 SELECT id_pedido, id_cliente, fecha_pedido, monto,
     LEAD(monto) OVER (PARTITION BY id_cliente ORDER BY fecha_pedido) - monto AS diferencia_monto
-FROM tablaswf.Pedidos
+FROM wf.Pedidos
 ORDER BY id_cliente, fecha_pedido
 GO
 ```
@@ -269,8 +269,8 @@ Determinar el percentil de monto de cada pedido en relación con todos los pedid
 ```sql
 SELECT p.id_pedido, p.id_cliente, c.pais, p.monto,
     PERCENT_RANK() OVER (PARTITION BY c.pais ORDER BY p.monto) AS percentil_monto
-FROM tablaswf.Pedidos p
-INNER JOIN tablaswf.Clientes c ON p.id_cliente = c.id_cliente
+FROM wf.Pedidos p
+INNER JOIN wf.Clientes c ON p.id_cliente = c.id_cliente
 ORDER BY c.pais, p.monto
 GO
 ```
@@ -287,8 +287,8 @@ Para cada cliente, mostrar el ID del pedido, el número total de pedidos realiza
 SELECT p.id_pedido, p.id_cliente, c.nombre AS nombre_cliente,
     COUNT(*) OVER (PARTITION BY p.id_cliente) AS total_pedidos_cliente,
     ROW_NUMBER() OVER (PARTITION BY p.id_cliente ORDER BY p.fecha_pedido) AS posicion_rel_pedidos_cliente
-FROM tablaswf.Pedidos p
-JOIN tablaswf.Clientes c ON p.id_cliente = c.id_cliente
+FROM wf.Pedidos p
+JOIN wf.Clientes c ON p.id_cliente = c.id_cliente
 ORDER BY p.id_cliente, p.fecha_pedido
 GO
 ```

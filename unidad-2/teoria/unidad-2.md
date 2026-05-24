@@ -8,40 +8,58 @@ permalink: /unidad-2/teoria/
 
 [← Unidad 2](../)
 
-- [Bases de datos transaccionales (OLTP)](#bases-de-datos-transaccionales-oltp)
-  - [Propiedades ACID](#propiedades-acid)
-  - [Commit y Rollback](#commit-y-rollback)
-  - [Ventajas y desventajas](#ventajas-y-desventajas)
-  - [OLTP vs OLAP](#oltp-vs-olap)
-- [BD, Data Warehouse y Data Lake](#bd-data-warehouse-y-data-lake)
-- [Arquitectura distribuida y clústeres](#arquitectura-distribuida-y-clústeres)
-- [Motor de base de datos SQL Server](#motor-de-base-de-datos-sql-server)
-  - [Instalación y componentes](#instalación-y-componentes)
-  - [SQL Server Configuration Manager](#sql-server-configuration-manager)
-  - [Conexión local y remota](#conexión-local-y-remota)
-  - [Autenticación](#autenticación)
-- [Collation / Intercalación](#collation--intercalación)
-  - [Sensibilidades](#sensibilidades)
-  - [Niveles de collation](#niveles-de-collation)
-  - [Consultar y cambiar el collation](#consultar-y-cambiar-el-collation)
-  - [Cláusula COLLATE en queries](#cláusula-collate-en-queries)
-- [Bases de datos en memoria](#bases-de-datos-en-memoria)
-  - [Durabilidad](#durabilidad)
-  - [Implementación en SQL Server](#implementación-en-sql-server)
-  - [Comparativa de tipos de tabla](#comparativa-de-tipos-de-tabla)
-- [ODBC y JDBC](#odbc-y-jdbc)
-  - [ODBC](#odbc)
-  - [JDBC](#jdbc)
-- [Formatos de intercambio de datos](#formatos-de-intercambio-de-datos)
-  - [EDI — Electronic Data Interchange](#edi--electronic-data-interchange)
-  - [CSV / TSV](#csv--tsv)
-  - [Ancho fijo](#ancho-fijo)
-  - [XML — eXtended Markup Language](#xml--extended-markup-language)
-  - [JSON — JavaScript Object Notation](#json--javascript-object-notation)
-  - [YAML — YAML Ain't a Markup Language](#yaml--yaml-aint-a-markup-language)
-- [APIs — Application Programming Interface](#apis--application-programming-interface)
-  - [Tipos de API](#tipos-de-api)
-  - [Protocolos de comunicación](#protocolos-de-comunicación)
+- [Unidad 2 — BD Transaccionales: aspectos básicos](#unidad-2--bd-transaccionales-aspectos-básicos)
+  - [Bases de datos transaccionales (OLTP)](#bases-de-datos-transaccionales-oltp)
+    - [Propiedades ACID](#propiedades-acid)
+      - [Atomicidad](#atomicidad)
+      - [Consistencia](#consistencia)
+      - [Isolation](#isolation)
+  - [El problema sin aislamiento](#el-problema-sin-aislamiento)
+  - [Los tres problemas clásicos](#los-tres-problemas-clásicos)
+  - [Niveles de aislamiento](#niveles-de-aislamiento)
+  - [El balance en la práctica](#el-balance-en-la-práctica)
+      - [Commit y Rollback](#commit-y-rollback)
+    - [Ventajas y desventajas](#ventajas-y-desventajas)
+    - [OLTP vs OLAP](#oltp-vs-olap)
+  - [BD, Data Warehouse y Data Lake](#bd-data-warehouse-y-data-lake)
+  - [Arquitectura distribuida y clústeres](#arquitectura-distribuida-y-clústeres)
+    - [Modalidades de despliegue](#modalidades-de-despliegue)
+    - [Always On (SQL Server)](#always-on-sql-server)
+  - [Motor de base de datos SQL Server](#motor-de-base-de-datos-sql-server)
+    - [Instalación y componentes](#instalación-y-componentes)
+      - [Ediciones](#ediciones)
+      - [Tipos de instancia](#tipos-de-instancia)
+    - [SQL Server Configuration Manager](#sql-server-configuration-manager)
+    - [Conexión local y remota](#conexión-local-y-remota)
+      - [Conexión local](#conexión-local)
+      - [Conexión remota](#conexión-remota)
+      - [String de conexión típica](#string-de-conexión-típica)
+    - [Autenticación](#autenticación)
+  - [Collation / Intercalación](#collation--intercalación)
+    - [Sensibilidades](#sensibilidades)
+    - [Niveles de collation](#niveles-de-collation)
+    - [Consultar y cambiar el collation](#consultar-y-cambiar-el-collation)
+      - [Cambiar el collation de la instancia](#cambiar-el-collation-de-la-instancia)
+    - [Cláusula COLLATE en queries](#cláusula-collate-en-queries)
+  - [Bases de datos en memoria](#bases-de-datos-en-memoria)
+    - [Durabilidad](#durabilidad)
+    - [Implementación en SQL Server](#implementación-en-sql-server)
+    - [Comparativa de tipos de tabla](#comparativa-de-tipos-de-tabla)
+  - [ODBC y JDBC](#odbc-y-jdbc)
+    - [ODBC](#odbc)
+    - [JDBC](#jdbc)
+  - [Formatos de intercambio de datos](#formatos-de-intercambio-de-datos)
+    - [EDI — Electronic Data Interchange](#edi--electronic-data-interchange)
+    - [CSV / TSV](#csv--tsv)
+    - [Ancho fijo](#ancho-fijo)
+    - [XML — eXtended Markup Language](#xml--extended-markup-language)
+    - [JSON — JavaScript Object Notation](#json--javascript-object-notation)
+    - [YAML — YAML Ain't a Markup Language](#yaml--yaml-aint-a-markup-language)
+  - [APIs — Application Programming Interface](#apis--application-programming-interface)
+    - [Tipos de API](#tipos-de-api)
+    - [Protocolos de comunicación](#protocolos-de-comunicación)
+      - [Ejemplo de interacción REST](#ejemplo-de-interacción-rest)
+      - [Postman](#postman)
 
 ---
 
@@ -57,6 +75,8 @@ Ejemplos de sistemas OLTP: banca en línea, e-commerce, sistemas de reservas de 
 
 ### Propiedades ACID
 
+![alt text](../images/acid-props.png)
+
 | Propiedad | Significado |
 |-----------|-------------|
 | **Atomicidad** | La transacción se ejecuta completa o no se ejecuta. No hay estados intermedios visibles. |
@@ -64,7 +84,190 @@ Ejemplos de sistemas OLTP: banca en línea, e-commerce, sistemas de reservas de 
 | **Isolation (Aislamiento)** | Las transacciones concurrentes se comportan como si se ejecutasen secuencialmente. Los cambios de una transacción no son visibles para otras hasta que se confirman. |
 | **Durabilidad** | Una vez confirmada (commit), la transacción persiste aunque ocurra una falla del sistema. |
 
-### Commit y Rollback
+#### Atomicidad
+
+La **atomicidad** garantiza que una transacción se ejecuta como una unidad indivisible: o todas sus operaciones tienen éxito, o ninguna se aplica. No existe un estado intermedio visible para la base de datos.
+
+El ejemplo clásico es una transferencia bancaria. Supongamos que Lucía le transfiere $500 a Marcos:
+
+```sql
+BEGIN TRANSACTION;
+
+  UPDATE cuentas SET saldo = saldo - 500 WHERE titular = 'Lucía';
+  UPDATE cuentas SET saldo = saldo + 500 WHERE titular = 'Marcos';
+
+COMMIT;
+```
+
+Hay dos operaciones. Si el sistema se cae después del primer `UPDATE` pero antes del segundo, ¿qué pasa? Sin atomicidad, Lucía perdería $500 y Marcos no recibiría nada. Con atomicidad, la base de datos detecta que la transacción no se completó y hace un `ROLLBACK` automático, dejando ambas cuentas como estaban.
+
+```
+Estado inicial:   Lucía $1000  |  Marcos $200
+
+Caso exitoso (COMMIT):
+  1. Lucía  → $500  ✓
+  2. Marcos → $700  ✓
+  → ambos cambios se confirman juntos
+
+Caso con fallo (ROLLBACK):
+  1. Lucía  → $500  ✓
+  2. [falla del sistema]
+  → se deshace el paso 1, Lucía vuelve a $1000
+```
+
+En la práctica, los motores de base de datos implementan esto con un **write-ahead log (WAL)**: antes de modificar los datos reales, escriben en un log qué se va a cambiar. Si algo falla, el motor lee el log al reiniciar y revierte las operaciones incompletas.
+
+#### Consistencia
+
+La **consistencia** garantiza que una transacción lleva la base de datos de un estado válido a otro estado válido, respetando todas las reglas definidas (restricciones, claves foráneas, tipos de datos, etc.). Una transacción no puede dejar los datos en un estado que viole esas reglas.
+
+La diferencia clave con atomicidad: la atomicidad habla de *si* los cambios se aplican; la consistencia habla de *qué* cambios son válidos.
+
+El ejemplo: un sistema de stock con una restricción que dice que el saldo de unidades nunca puede ser negativo.
+
+```sql
+-- Restricción definida en la tabla
+CREATE TABLE stock (
+    producto   VARCHAR(50),
+    unidades   INT CHECK (unidades >= 0)  -- nunca puede ser negativo
+);
+
+-- Intento de venta de 10 unidades cuando solo hay 3
+BEGIN TRANSACTION;
+  UPDATE stock SET unidades = unidades - 10 WHERE producto = 'Auriculares';
+COMMIT;
+```
+
+```
+Estado inicial:   Auriculares → 3 unidades
+
+Sin consistencia:
+  3 - 10 = -3 unidades  ← estado inválido, viola la restricción
+  → la base de datos queda rota
+
+Con consistencia:
+  La BD detecta que -3 viola CHECK (unidades >= 0)
+  → rechaza la transacción completa
+  → Auriculares sigue en 3 unidades (estado válido)
+```
+
+Otro ejemplo común son las claves foráneas:
+
+```sql
+-- No podés agregar un pedido de un cliente que no existe
+INSERT INTO pedidos (id_pedido, id_cliente, total)
+VALUES (101, 9999, 500);
+-- Error: id_cliente = 9999 no existe en la tabla clientes
+-- La BD rechaza el INSERT para mantener consistencia referencial
+```
+
+Las reglas que protege la consistencia tienen dos orígenes:
+
+Las que define el motor (restricciones `CHECK`, `NOT NULL`, `UNIQUE`, claves foráneas) se verifican automáticamente. Las que define la aplicación (por ejemplo, "el total de un pedido debe coincidir con la suma de sus ítems") son responsabilidad del desarrollador — el motor no las conoce y no las puede validar solo.
+
+#### Isolation
+
+El **aislamiento** garantiza que las transacciones concurrentes no se interfieren entre sí. Cada transacción debe ejecutarse como si fuera la única en el sistema, aunque haya cientos corriendo al mismo tiempo.
+
+Es la propiedad más compleja de ACID porque implica un balance: más aislamiento = más consistencia, pero menos rendimiento.
+
+---
+
+## El problema sin aislamiento
+
+Dos cajeros atienden a la misma cuenta simultáneamente:
+
+```
+Saldo inicial de cuenta: $1000
+
+Cajero A (retiro $700)        Cajero B (retiro $600)
+────────────────────────      ────────────────────────
+1. Lee saldo → $1000
+                              2. Lee saldo → $1000
+3. Calcula: 1000 - 700 = 300
+                              4. Calcula: 1000 - 600 = 400
+5. Escribe saldo → $300
+                              6. Escribe saldo → $400  ← pisa el paso 5
+
+Resultado final: $400
+Debería ser:     -$300 (o rechazado por saldo insuficiente)
+El banco perdió $700.
+```
+
+Esto se llama **lost update** (actualización perdida) — uno de los tres problemas clásicos de concurrencia.
+
+---
+
+## Los tres problemas clásicos
+
+**1. Dirty read** — leer datos que todavía no se confirmaron:
+
+```
+Transacción A                 Transacción B
+─────────────────────         ─────────────────────
+UPDATE saldo = 1500           
+                              SELECT saldo → 1500  ← lee el cambio no confirmado
+ROLLBACK (falla)              
+                              usa 1500 para calcular algo
+                              → decisión basada en un dato que nunca existió
+```
+
+**2. Non-repeatable read** — la misma consulta devuelve resultados distintos dentro de la misma transacción:
+
+```
+Transacción A                 Transacción B
+─────────────────────         ─────────────────────
+SELECT saldo → 1000           
+                              UPDATE saldo = 500
+                              COMMIT
+SELECT saldo → 500  ← el mismo SELECT devuelve otro valor
+```
+
+**3. Phantom read** — aparecen o desaparecen filas entre dos lecturas:
+
+```
+Transacción A                 Transacción B
+─────────────────────         ─────────────────────
+SELECT COUNT(*) → 10 pedidos
+                              INSERT nuevo pedido
+                              COMMIT
+SELECT COUNT(*) → 11 pedidos  ← apareció una fila "fantasma"
+```
+
+---
+
+## Niveles de aislamiento
+
+SQL define cuatro niveles, cada uno bloqueando más problemas a cambio de más costo de rendimiento:
+
+| Nivel | Dirty read | Non-repeatable read | Phantom read |
+|---|:---:|:---:|:---:|
+| `READ UNCOMMITTED` | posible | posible | posible |
+| `READ COMMITTED` | bloqueado | posible | posible |
+| `REPEATABLE READ` | bloqueado | bloqueado | posible |
+| `SERIALIZABLE` | bloqueado | bloqueado | bloqueado |
+
+```sql
+-- Configurar el nivel para una transacción
+SET TRANSACTION ISOLATION LEVEL REPEATABLE READ;
+
+BEGIN TRANSACTION;
+  SELECT saldo FROM cuentas WHERE id = 42;
+  -- ninguna otra transacción puede modificar esta fila hasta el COMMIT
+  SELECT saldo FROM cuentas WHERE id = 42;
+  -- garantizado: devuelve el mismo valor
+COMMIT;
+```
+
+---
+
+## El balance en la práctica
+
+La mayoría de los sistemas usan `READ COMMITTED` (el default en PostgreSQL y SQL Server) porque es el punto medio más razonable: evita el problema más grave (leer basura no confirmada) sin el costo de bloquear todo.
+
+`SERIALIZABLE` es el único nivel que garantiza aislamiento total, pero puede reducir el rendimiento significativamente en sistemas con mucha concurrencia, porque las transacciones se bloquean entre sí con más frecuencia.
+
+#### Commit y Rollback
 
 ```sql
 BEGIN TRANSACTION;
