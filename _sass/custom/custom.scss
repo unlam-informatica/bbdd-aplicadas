@@ -1,235 +1,157 @@
-// ── just-the-docs custom overrides ───────────────────────────────────────────
-// Este archivo se importa AL FINAL del tema; las reglas aquí tienen precedencia
-// sobre las del tema si la especificidad es igual o mayor.
+// ── Mejoras de UX para lectura y estudio ────────────────────────────────────
+// Se respeta la paleta del tema just-the-docs dark.
+// Solo se ajustan tipografía, espaciado, estructura y legibilidad.
 
-// ── Tipografía base ───────────────────────────────────────────────────────────
+// ── Ancho de contenido óptimo para lectura ────────────────────────────────────
+// 65-75 caracteres por línea es el rango recomendado para lectura cómoda.
+// just-the-docs centra el contenido automáticamente; solo limitamos el ancho.
 
-body {
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  font-size: 15px;
-  line-height: 1.7;
-  color: #c9d1d9;
-  background-color: #0d1117;
+.main-content {
+  max-width: 800px;
+  font-size: 15.5px;
+  line-height: 1.8;
 }
 
-// ── Encabezados ───────────────────────────────────────────────────────────────
+// ── Jerarquía de encabezados ──────────────────────────────────────────────────
+// Separación visual clara entre secciones, clave para material de estudio.
 
-h1, h2, h3, h4, h5, h6 {
-  color: #e6edf3;
+.main-content h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.main-content h2 {
+  font-size: 1.35rem;
   font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--border-color);
 }
 
-h1 { font-size: 1.85rem; }
-h2 { font-size: 1.45rem; border-bottom: 1px solid #30363d; padding-bottom: 0.4rem; }
-h3 { font-size: 1.15rem; }
-
-// ── Links ─────────────────────────────────────────────────────────────────────
-
-a {
-  color: #a78bfa;
-
-  &:hover  { color: #c4b5fd; text-decoration: underline; }
-  &:visited { color: #a78bfa; }
+.main-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
 }
 
-// ── Sidebar ───────────────────────────────────────────────────────────────────
-
-.side-bar {
-  background-color: #161b22;
-  border-right: 1px solid #30363d;
-}
-
-.site-header {
-  background-color: #161b22;
-  border-bottom: 1px solid #30363d;
-}
-
-.site-title {
-  color: #e6edf3 !important;
+.main-content h4 {
   font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-// ── Navegación lateral ────────────────────────────────────────────────────────
-
-.nav-list .nav-list-item > .nav-list-link {
-  color: #c9d1d9;
-  border-radius: 4px;
-  font-size: 0.875rem;
-  padding: 0.3rem 0.75rem;
-
-  &:hover {
-    background-color: rgba(167, 139, 250, 0.1);
-    color: #e6edf3;
-    text-decoration: none;
-  }
-
-  &.active {
-    background-color: rgba(124, 58, 237, 0.18);
-    color: #a78bfa;
-    font-weight: 600;
-  }
-}
-
-// Íconos de expansión
-.nav-list .nav-list-expander svg { color: #6e7681; }
-
-// Etiquetas de categoría (nav_category)
-.nav-category {
-  text-transform: uppercase;
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  color: #6e7681;
+  font-weight: 600;
   margin-top: 1.25rem;
-  padding: 0.25rem 0.75rem;
-  border-bottom: 1px solid #30363d;
 }
 
-// ── Main content ──────────────────────────────────────────────────────────────
+// ── Párrafos ──────────────────────────────────────────────────────────────────
 
-.main-content-wrap {
-  background-color: #0d1117;
+.main-content p {
+  margin-bottom: 1rem;
 }
 
-.main-header {
-  background-color: #0d1117;
-  border-bottom: 1px solid #30363d;
-  color: #8b949e;
-}
+// ── Bloques de código ─────────────────────────────────────────────────────────
+// Borde y radio para distinguirlos visualmente del texto.
+// El color de fondo lo define el tema; solo ajustamos la forma.
 
-// ── Código ────────────────────────────────────────────────────────────────────
-
-// Inline code
-code.language-plaintext,
-:not(pre) > code {
-  background-color: rgba(110, 118, 129, 0.15);
-  border: 1px solid #30363d;
-  border-radius: 4px;
-  color: #e6edf3;
-  font-size: 0.88em;
-  padding: 0.1em 0.4em;
-}
-
-// Bloques de código
 div.highlighter-rouge,
-figure.highlight,
-pre.highlight {
-  background-color: #161b22;
-  border: 1px solid #30363d;
+figure.highlight {
   border-radius: 6px;
-  margin: 1rem 0;
+  border: 1px solid var(--border-color);
+  margin: 1.25rem 0;
+  overflow: hidden;
 }
 
-pre.highlight code { background: transparent; border: none; padding: 0; color: #c9d1d9; }
+pre.highlight {
+  margin: 0;
+  padding: 1rem 1.2rem;
+  overflow-x: auto;
+  line-height: 1.55;
+  font-size: 0.875rem;
+}
 
-// ── Blockquotes (notas, advertencias) ────────────────────────────────────────
-
-blockquote {
-  background-color: rgba(124, 58, 237, 0.07);
-  border-left: 3px solid #7c3aed;
-  border-radius: 0 6px 6px 0;
-  color: #8b949e;
-  padding: 0.75rem 1rem;
-  margin: 1rem 0;
-
-  p { color: #8b949e; margin-bottom: 0; }
-  a { color: #a78bfa; }
+// Código inline: distinguir del texto sin ser agresivo
+:not(pre) > code.language-plaintext {
+  border-radius: 4px;
+  padding: 0.15em 0.45em;
+  font-size: 0.88em;
+  border: 1px solid var(--border-color);
 }
 
 // ── Tablas ────────────────────────────────────────────────────────────────────
+// Lectura columnar clara: filas alternas y padding generoso.
 
-table {
-  border-collapse: collapse;
-  width: 100%;
+.main-content table {
   font-size: 0.9rem;
-
-  th {
-    background-color: #161b22;
-    color: #e6edf3;
-    border: 1px solid #30363d;
-    padding: 0.6rem 1rem;
-    font-weight: 600;
-  }
-
-  td {
-    border: 1px solid #30363d;
-    padding: 0.55rem 1rem;
-    color: #c9d1d9;
-  }
-
-  tr { background-color: #0d1117; }
-  tr:nth-child(even) { background-color: rgba(22, 27, 34, 0.6); }
-}
-
-// ── Search ────────────────────────────────────────────────────────────────────
-
-.search-input {
-  background-color: #21262d;
-  border: 1px solid #30363d;
-  color: #c9d1d9;
-  border-radius: 6px;
-
-  &::placeholder { color: #6e7681; }
-
-  &:focus {
-    border-color: #7c3aed;
-    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
-    outline: none;
-  }
-}
-
-.search-result {
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 6px;
-}
-
-.search-result-title { color: #a78bfa; }
-.search-result-doc   { color: #8b949e; }
-
-// ── TOC (On This Page) ───────────────────────────────────────────────────────
-
-.toc-list-item > .toc-link {
-  color: #8b949e;
-  font-size: 0.82rem;
-
-  &:hover { color: #a78bfa; text-decoration: none; }
-}
-
-.toc-list-item.active > .toc-link {
-  color: #a78bfa;
-  border-left: 2px solid #7c3aed;
-}
-
-// ── Separadores y footer ─────────────────────────────────────────────────────
-
-hr {
-  border: 0;
-  border-top: 1px solid #30363d;
+  width: 100%;
+  border-collapse: collapse;
   margin: 1.5rem 0;
 }
 
-.site-footer {
-  background-color: #161b22;
-  border-top: 1px solid #30363d;
-  color: #6e7681;
-  font-size: 0.8rem;
-
-  a { color: #8b949e; }
+.main-content th {
+  font-weight: 600;
+  padding: 0.6rem 1rem;
+  text-align: left;
 }
 
-// ── Aux links (header GitHub link) ───────────────────────────────────────────
+.main-content td {
+  padding: 0.5rem 1rem;
+  vertical-align: top;
+}
 
-.aux-nav-list-item > .site-button {
-  color: #8b949e;
-  border: 1px solid #30363d;
-  border-radius: 6px;
+// ── Blockquotes (notas y advertencias) ───────────────────────────────────────
+// Visualmente separados del flujo principal para no confundirlos con el texto.
 
-  &:hover {
-    color: #e6edf3;
-    border-color: #6e7681;
-    background-color: rgba(255, 255, 255, 0.05);
-  }
+.main-content blockquote {
+  border-left: 3px solid var(--link-color);
+  border-radius: 0 4px 4px 0;
+  padding: 0.65rem 1rem;
+  margin: 1.25rem 0;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+
+.main-content blockquote p {
+  margin-bottom: 0;
+}
+
+// ── Separadores ───────────────────────────────────────────────────────────────
+
+.main-content hr {
+  margin: 2.25rem 0;
+  border: 0;
+  border-top: 1px solid var(--border-color);
+}
+
+// ── Listas ────────────────────────────────────────────────────────────────────
+
+.main-content ul,
+.main-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.main-content li {
+  margin-bottom: 0.3rem;
+  line-height: 1.7;
+}
+
+// ── Navegación lateral ────────────────────────────────────────────────────────
+// Fuente levemente más pequeña y bordes redondeados en los ítems.
+
+.nav-list .nav-list-item > .nav-list-link {
+  font-size: 0.875rem;
+  border-radius: 4px;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+// ── TOC derecho ("On This Page") ─────────────────────────────────────────────
+// Fuente más pequeña para no competir con el contenido principal.
+
+.toc-list-item > .toc-link {
+  font-size: 0.82rem;
+  line-height: 1.5;
 }
