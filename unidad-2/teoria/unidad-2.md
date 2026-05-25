@@ -1,25 +1,33 @@
 ---
 layout: default
-title: BD Transaccionales
+title: Introducción
 parent: Unidad 2
 nav_order: 1
 permalink: /unidad-2/teoria/bd-transaccionales/
 ---
 
-- [Bases de datos transaccionales (OLTP)](#bases-de-datos-transaccionales-oltp)
-  - [Propiedades ACID](#propiedades-acid)
+- [BD Transaccionales: aspectos básicos](#bd-transaccionales-aspectos-básicos)
+  - [Bases de datos transaccionales (OLTP)](#bases-de-datos-transaccionales-oltp)
+    - [Propiedades ACID](#propiedades-acid)
+      - [Atomicidad](#atomicidad)
+      - [Consistencia](#consistencia)
+      - [Isolation (Aislamiento)](#isolation-aislamiento)
   - [El problema sin aislamiento](#el-problema-sin-aislamiento)
   - [Los tres problemas clásicos](#los-tres-problemas-clásicos)
   - [Niveles de aislamiento](#niveles-de-aislamiento)
-  - [OLTP vs OLAP](#oltp-vs-olap)
-- [BD, Data Warehouse y Data Lake](#bd-data-warehouse-y-data-lake)
-- [Arquitectura distribuida y clústeres](#arquitectura-distribuida-y-clústeres)
-- [Motor de base de datos SQL Server](#motor-de-base-de-datos-sql-server)
-  - [Instalación y componentes](#instalación-y-componentes)
-  - [Conexión local y remota](#conexión-local-y-remota)
-  - [Autenticación](#autenticación)
-- [Collation / Intercalación](#collation--intercalación)
-- [Bases de datos en memoria](#bases-de-datos-en-memoria)
+    - [OLTP vs OLAP](#oltp-vs-olap)
+  - [BD, Data Warehouse y Data Lake](#bd-data-warehouse-y-data-lake)
+  - [Arquitectura distribuida y clústeres](#arquitectura-distribuida-y-clústeres)
+    - [Modalidades de despliegue](#modalidades-de-despliegue)
+    - [Always On (SQL Server)](#always-on-sql-server)
+  - [Motor de base de datos SQL Server](#motor-de-base-de-datos-sql-server)
+    - [Instalación y componentes](#instalación-y-componentes)
+      - [Ediciones](#ediciones)
+      - [Tipos de instancia](#tipos-de-instancia)
+    - [Conexión local y remota](#conexión-local-y-remota)
+    - [Autenticación](#autenticación)
+  - [Collation / Intercalación](#collation--intercalación)
+  - [Bases de datos en memoria](#bases-de-datos-en-memoria)
 
 # BD Transaccionales: aspectos básicos
 
@@ -105,7 +113,7 @@ VALUES (101, 9999, 500);
 
 Las reglas que protege la consistencia tienen dos orígenes: las que define el motor (`CHECK`, `NOT NULL`, `UNIQUE`, FK) se verifican automáticamente. Las que define la aplicación (ej: "el total debe coincidir con la suma de ítems") son responsabilidad del desarrollador.
 
-#### Isolation
+#### Isolation (Aislamiento)
 
 El **aislamiento** garantiza que las transacciones concurrentes no se interfieren entre sí. Cada transacción debe ejecutarse como si fuera la única en el sistema, aunque haya cientos corriendo al mismo tiempo.
 
@@ -140,7 +148,9 @@ Esto se llama **lost update** (actualización perdida) — uno de los tres probl
 
 ## Los tres problemas clásicos
 
-**1. Dirty read** — leer datos que todavía no se confirmaron:
+**1. Dirty read**
+
+Leer un dato que otra transacción modificó pero todavía NO confirmó (no hizo commit). Si esa otra transacción después hace rollback, vos leíste algo que nunca existió realmente.
 
 ```
 Transacción A                 Transacción B
@@ -152,7 +162,9 @@ ROLLBACK (falla)
                               → decisión basada en un dato que nunca existió
 ```
 
-**2. Non-repeatable read** — la misma consulta devuelve resultados distintos dentro de la misma transacción:
+**2. Non-repeatable read**
+
+Lees un dato, otra transacción lo modifica y SÍ confirma (commit), y cuando volvés a leer el mismo registro dentro de tu transacción, obtenés un valor distinto.
 
 ```
 Transacción A                 Transacción B
@@ -165,6 +177,8 @@ SELECT saldo → 500  ← el mismo SELECT devuelve otro valor
 
 **3. Phantom read** — aparecen o desaparecen filas entre dos lecturas:
 
+Un phantom read ocurre cuando una transacción ejecuta dos veces la misma consulta y, entre ambas lecturas, otra transacción inserta o elimina filas que cumplen esa condición.
+
 ```
 Transacción A                 Transacción B
 ─────────────────────         ─────────────────────
@@ -173,6 +187,13 @@ SELECT COUNT(*) → 10 pedidos
                               COMMIT
 SELECT COUNT(*) → 11 pedidos  ← apareció una fila "fantasma"
 ```
+
+
+| Problema                | Qué cambia                                         |
+| ----------------------- | -------------------------------------------------- |
+| **Dirty read**          | Leés datos no confirmados                          |
+| **Non-repeatable read** | La misma fila cambia                               |
+| **Phantom read**        | Aparecen o desaparecen filas nuevas en el conjunto |
 
 ---
 

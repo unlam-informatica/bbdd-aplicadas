@@ -2,7 +2,7 @@
 layout: default
 title: Práctica — Importación de archivos
 parent: Unidad 2
-nav_order: 10
+nav_order: 12
 permalink: /unidad-2/practica/importacion-archivos/
 ---
 

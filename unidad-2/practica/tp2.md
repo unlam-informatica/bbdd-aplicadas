@@ -1,6 +1,6 @@
 ---
 layout: default
-title: TP2 — Conceptos básicos de SQL
+title: Práctica — Conceptos básicos de SQL
 parent: Unidad 2
 nav_order: 11
 permalink: /unidad-2/practica/tp2/

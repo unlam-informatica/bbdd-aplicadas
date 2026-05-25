@@ -83,7 +83,7 @@ Agregar una fila intencionalmente inválida y repetir la consulta:
 
 ```sql
 INSERT INTO js.Producto (nombre, categoria, precio, stock, atributos)
-VALUES ('Producto roto', 'Test', 0, 0, 'esto no es json {{{');
+VALUES ('Producto roto', 'Test', 0, 0, 'campo: sin apertura, estructura invalida');
 
 SELECT producto_id, nombre, ISJSON(atributos) AS es_json_valido
 FROM js.Producto;
@@ -120,6 +120,7 @@ WHERE JSON_VALUE(atributos, '$.marca') = 'Logitech';
 
 `JSON_VALUE` solo funciona para valores escalares. Para extraer un sub-objeto o array completo se usa `JSON_QUERY`.
 
+{% raw %}
 ```sql
 DECLARE @json NVARCHAR(MAX) = N'{
     "cliente": "Valentina Torres",
@@ -144,6 +145,7 @@ SELECT JSON_QUERY(@json, '$.tags')              AS tags_json;
 -- JSON_VALUE sobre un elemento del array (por índice):
 SELECT JSON_VALUE(@json, '$.tags[0]')           AS primer_tag;
 ```
+{% endraw %}
 
 ---
 
