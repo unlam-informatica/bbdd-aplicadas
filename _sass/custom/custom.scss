@@ -1,0 +1,235 @@
+// ── just-the-docs custom overrides ───────────────────────────────────────────
+// Este archivo se importa AL FINAL del tema; las reglas aquí tienen precedencia
+// sobre las del tema si la especificidad es igual o mayor.
+
+// ── Tipografía base ───────────────────────────────────────────────────────────
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #c9d1d9;
+  background-color: #0d1117;
+}
+
+// ── Encabezados ───────────────────────────────────────────────────────────────
+
+h1, h2, h3, h4, h5, h6 {
+  color: #e6edf3;
+  font-weight: 600;
+}
+
+h1 { font-size: 1.85rem; }
+h2 { font-size: 1.45rem; border-bottom: 1px solid #30363d; padding-bottom: 0.4rem; }
+h3 { font-size: 1.15rem; }
+
+// ── Links ─────────────────────────────────────────────────────────────────────
+
+a {
+  color: #a78bfa;
+
+  &:hover  { color: #c4b5fd; text-decoration: underline; }
+  &:visited { color: #a78bfa; }
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────────
+
+.side-bar {
+  background-color: #161b22;
+  border-right: 1px solid #30363d;
+}
+
+.site-header {
+  background-color: #161b22;
+  border-bottom: 1px solid #30363d;
+}
+
+.site-title {
+  color: #e6edf3 !important;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+// ── Navegación lateral ────────────────────────────────────────────────────────
+
+.nav-list .nav-list-item > .nav-list-link {
+  color: #c9d1d9;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  padding: 0.3rem 0.75rem;
+
+  &:hover {
+    background-color: rgba(167, 139, 250, 0.1);
+    color: #e6edf3;
+    text-decoration: none;
+  }
+
+  &.active {
+    background-color: rgba(124, 58, 237, 0.18);
+    color: #a78bfa;
+    font-weight: 600;
+  }
+}
+
+// Íconos de expansión
+.nav-list .nav-list-expander svg { color: #6e7681; }
+
+// Etiquetas de categoría (nav_category)
+.nav-category {
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #6e7681;
+  margin-top: 1.25rem;
+  padding: 0.25rem 0.75rem;
+  border-bottom: 1px solid #30363d;
+}
+
+// ── Main content ──────────────────────────────────────────────────────────────
+
+.main-content-wrap {
+  background-color: #0d1117;
+}
+
+.main-header {
+  background-color: #0d1117;
+  border-bottom: 1px solid #30363d;
+  color: #8b949e;
+}
+
+// ── Código ────────────────────────────────────────────────────────────────────
+
+// Inline code
+code.language-plaintext,
+:not(pre) > code {
+  background-color: rgba(110, 118, 129, 0.15);
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  color: #e6edf3;
+  font-size: 0.88em;
+  padding: 0.1em 0.4em;
+}
+
+// Bloques de código
+div.highlighter-rouge,
+figure.highlight,
+pre.highlight {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  margin: 1rem 0;
+}
+
+pre.highlight code { background: transparent; border: none; padding: 0; color: #c9d1d9; }
+
+// ── Blockquotes (notas, advertencias) ────────────────────────────────────────
+
+blockquote {
+  background-color: rgba(124, 58, 237, 0.07);
+  border-left: 3px solid #7c3aed;
+  border-radius: 0 6px 6px 0;
+  color: #8b949e;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+
+  p { color: #8b949e; margin-bottom: 0; }
+  a { color: #a78bfa; }
+}
+
+// ── Tablas ────────────────────────────────────────────────────────────────────
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 0.9rem;
+
+  th {
+    background-color: #161b22;
+    color: #e6edf3;
+    border: 1px solid #30363d;
+    padding: 0.6rem 1rem;
+    font-weight: 600;
+  }
+
+  td {
+    border: 1px solid #30363d;
+    padding: 0.55rem 1rem;
+    color: #c9d1d9;
+  }
+
+  tr { background-color: #0d1117; }
+  tr:nth-child(even) { background-color: rgba(22, 27, 34, 0.6); }
+}
+
+// ── Search ────────────────────────────────────────────────────────────────────
+
+.search-input {
+  background-color: #21262d;
+  border: 1px solid #30363d;
+  color: #c9d1d9;
+  border-radius: 6px;
+
+  &::placeholder { color: #6e7681; }
+
+  &:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2);
+    outline: none;
+  }
+}
+
+.search-result {
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+}
+
+.search-result-title { color: #a78bfa; }
+.search-result-doc   { color: #8b949e; }
+
+// ── TOC (On This Page) ───────────────────────────────────────────────────────
+
+.toc-list-item > .toc-link {
+  color: #8b949e;
+  font-size: 0.82rem;
+
+  &:hover { color: #a78bfa; text-decoration: none; }
+}
+
+.toc-list-item.active > .toc-link {
+  color: #a78bfa;
+  border-left: 2px solid #7c3aed;
+}
+
+// ── Separadores y footer ─────────────────────────────────────────────────────
+
+hr {
+  border: 0;
+  border-top: 1px solid #30363d;
+  margin: 1.5rem 0;
+}
+
+.site-footer {
+  background-color: #161b22;
+  border-top: 1px solid #30363d;
+  color: #6e7681;
+  font-size: 0.8rem;
+
+  a { color: #8b949e; }
+}
+
+// ── Aux links (header GitHub link) ───────────────────────────────────────────
+
+.aux-nav-list-item > .site-button {
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+
+  &:hover {
+    color: #e6edf3;
+    border-color: #6e7681;
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
