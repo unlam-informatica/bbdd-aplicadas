@@ -346,3 +346,120 @@ GO
 ```
 
 > El filtro se aplica sobre la tabla pivoteada, igual que un `WHERE` normal. Se pueden filtrar las columnas generadas por PIVOT como si fueran columnas comunes.
+
+---
+
+## Ejercicios integradores
+
+Ejercicios que combinan múltiples conceptos. Cada uno incluye su propio setup de datos.
+
+---
+
+### Integrador 1 — Venta máxima por vendedor y ciudad
+
+**Enunciado**
+
+A partir de la tabla de ventas con las columnas `cantidad`, `precio`, `city` y `vendedor`:
+
+| cantidad | precio | city | vendedor |
+|---:|---:|---|---|
+| 1 | 920.00 | San Diego | Online |
+| 1 | 22.50 | Seattle | Valentina |
+| 2 | 18.75 | San Francisco | Sofia |
+| 1 | 215.00 | Los Angeles | Online |
+| 1 | 18.75 | Austin | Sofia |
+| 1 | 5.99 | San Francisco | Marcelo |
+| 1 | 512.00 | Los Angeles | Marcelo |
+
+La tabla tiene más filas que las mostradas arriba (el dataset completo está en el setup).
+
+Indicar cuál es la consulta para obtener el siguiente resultado. **Debe usar `PIVOT` para que se considere correcto.**
+
+Restricciones:
+- Mostrar solo las ciudades: **Los Angeles, Seattle, Austin, Phoenix, Dallas**.
+- Mostrar la **venta de mayor monto** lograda por vendedor en cada ciudad.
+- El monto debe calcularse como `cantidad * precio`.
+- No es necesario filtrar nulos.
+
+| vendedor | Los Angeles | Seattle | Austin | Phoenix | Dallas |
+|---|---:|---:|---:|---:|---:|
+| Marcelo | 512.00 | NULL | 90.00 | 155.00 | 220.00 |
+| Online | 215.00 | 760.00 | NULL | 145.00 | 230.00 |
+| Roberto | 275.00 | 150.00 | 95.00 | 140.00 | 110.00 |
+| Sofia | NULL | 190.00 | 18.75 | 175.00 | 88.00 |
+| Valentina | 130.00 | 22.50 | 50.00 | 95.00 | 105.00 |
+
+**Setup**
+
+```sql
+USE PracticaPivot
+GO
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES
+               WHERE TABLE_SCHEMA = 'pv' AND TABLE_NAME = 'VentasCiudad')
+BEGIN
+    CREATE TABLE pv.VentasCiudad (
+        venta_id INT            IDENTITY(1,1) PRIMARY KEY,
+        cantidad INT            NOT NULL,
+        precio   DECIMAL(10,2) NOT NULL,
+        city     VARCHAR(50)   NOT NULL,
+        vendedor VARCHAR(50)   NOT NULL
+    )
+END
+GO
+
+INSERT INTO pv.VentasCiudad (cantidad, precio, city, vendedor)
+VALUES
+    (1,  920.00, 'San Diego',     'Online'),
+    (1,   22.50, 'Seattle',       'Valentina'),
+    (2,   18.75, 'San Francisco', 'Sofia'),
+    (1,  215.00, 'Los Angeles',   'Online'),
+    (1,   18.75, 'Austin',        'Sofia'),
+    (1,    5.99, 'San Francisco', 'Marcelo'),
+    (1,  512.00, 'Los Angeles',   'Marcelo'),
+    (1,  275.00, 'Los Angeles',   'Roberto'),
+    (2,   95.00, 'Seattle',       'Sofia'),
+    (1,  140.00, 'Phoenix',       'Roberto'),
+    (1,  155.00, 'Phoenix',       'Marcelo'),
+    (1,   88.00, 'Dallas',        'Sofia'),
+    (1,  110.00, 'Dallas',        'Roberto'),
+    (1,  220.00, 'Dallas',        'Marcelo'),
+    (2,  380.00, 'Seattle',       'Online'),
+    (2,   65.00, 'Los Angeles',   'Valentina'),
+    (1,   95.00, 'Phoenix',       'Valentina'),
+    (3,   35.00, 'Dallas',        'Valentina'),
+    (1,  175.00, 'Phoenix',       'Sofia'),
+    (1,   95.00, 'Austin',        'Roberto'),
+    (2,   45.00, 'Austin',        'Marcelo'),
+    (1,   50.00, 'Austin',        'Valentina'),
+    (1,  230.00, 'Dallas',        'Online'),
+    (1,  145.00, 'Phoenix',       'Online'),
+    (2,   75.00, 'Seattle',       'Roberto')
+GO
+```
+
+**Solución**
+
+```sql
+SELECT vendedor,
+    [Los Angeles], [Seattle], [Austin], [Phoenix], [Dallas]
+FROM (
+    SELECT vendedor,
+           city,
+           cantidad * precio AS monto
+    FROM pv.VentasCiudad
+    WHERE city IN ('Los Angeles', 'Seattle', 'Austin', 'Phoenix', 'Dallas')
+) AS origen
+PIVOT (
+    MAX(monto)
+    FOR city IN ([Los Angeles], [Seattle], [Austin], [Phoenix], [Dallas])
+) AS pv
+ORDER BY vendedor
+GO
+```
+
+Puntos clave:
+- El `monto` se calcula en la subconsulta (`cantidad * precio`) antes del PIVOT — no se puede calcular dentro de la función de agregación de PIVOT.
+- El filtro `WHERE city IN (...)` se aplica en la subconsulta para excluir las ciudades que no deben aparecer como columnas.
+- `MAX(monto)` selecciona la venta de mayor monto cuando un vendedor tiene múltiples registros en la misma ciudad.
+- Las ciudades sin ventas para un vendedor quedan como `NULL` automáticamente.

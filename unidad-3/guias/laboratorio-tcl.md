@@ -2,7 +2,7 @@
 layout: default
 title: Laboratorio TCL — Tarjeta de crédito
 parent: Unidad 3
-nav_order: 5
+nav_order: 6
 permalink: /unidad-3/guias/laboratorio-tcl/
 ---
 

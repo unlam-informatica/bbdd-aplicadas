@@ -35,3 +35,8 @@ Bases de datos transaccionales (OLTP), propiedades ACID, commit/rollback, OLTP v
 |---------|------|
 | [importacion-archivos](./practica/importacion-archivos/) | 4 ejercicios de importación: 3 CSV (datos abiertos) + 1 JSON |
 | [tp2](./practica/tp2/) | TP2: collation, importación de CSVs, percentiles, tablas temporales globales |
+| [transacciones](./practica/transacciones/) | BEGIN/COMMIT/ROLLBACK, TRY/CATCH, SAVEPOINT, XACT_ABORT, aislamiento |
+| [json](./practica/json/) | OPENJSON, JSON_VALUE/QUERY/MODIFY, FOR JSON PATH/AUTO |
+| [xml](./practica/xml/) | FOR XML RAW/AUTO, .nodes()/.value(), OPENXML, subconsultas anidadas |
+| [bd-en-memoria](./practica/bd-en-memoria/) | Crear filegroup, tablas MEMORY_OPTIMIZED, comparativa disco vs. memoria |
+| [apis](./practica/apis/) | GET/POST con sp_OACreate, parseo de respuestas JSON, persistir resultados |
