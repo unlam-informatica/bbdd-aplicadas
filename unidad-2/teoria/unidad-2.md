@@ -7,29 +7,6 @@ nav_order: 1
 permalink: /unidad-2/teoria/bd-transaccionales/
 ---
 
-- [Bases de datos transaccionales (OLTP)](#bases-de-datos-transaccionales-oltp)
-  - [Propiedades ACID](#propiedades-acid)
-    - [Atomicidad](#atomicidad)
-    - [Consistencia](#consistencia)
-    - [Isolation (Aislamiento)](#isolation-aislamiento)
-    - [Durabilidad](#durabilidad)
-  - [El problema sin aislamiento](#el-problema-sin-aislamiento)
-  - [Los tres problemas clásicos](#los-tres-problemas-clásicos)
-  - [Niveles de aislamiento](#niveles-de-aislamiento)
-    - [OLTP vs OLAP](#oltp-vs-olap)
-- [BD, Data Warehouse y Data Lake](#bd-data-warehouse-y-data-lake)
-- [Arquitectura distribuida y clústeres](#arquitectura-distribuida-y-clústeres)
-  - [Modalidades de despliegue](#modalidades-de-despliegue)
-  - [Always On (SQL Server)](#always-on-sql-server)
-- [Motor de base de datos SQL Server](#motor-de-base-de-datos-sql-server)
-  - [Instalación y componentes](#instalación-y-componentes)
-    - [Ediciones](#ediciones)
-    - [Tipos de instancia](#tipos-de-instancia)
-  - [Conexión local y remota](#conexión-local-y-remota)
-  - [Autenticación](#autenticación)
-- [Collation / Intercalación](#collation--intercalación)
-- [Bases de datos en memoria](#bases-de-datos-en-memoria)
-
 # Bases de datos transaccionales (OLTP)
 
 Una **base de datos transaccional** (OLTP, _Online Transaction Processing_) es aquella diseñada para procesar un gran volumen de transacciones pequeñas de forma concurrente: inserciones, actualizaciones, eliminaciones y consultas puntuales.

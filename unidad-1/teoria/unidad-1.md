@@ -7,13 +7,6 @@ nav_order: 1
 permalink: /unidad-1/teoria/conceptos-basicos/
 ---
 
-- [Qué es una base de datos](#qué-es-una-base-de-datos)
-- [Qué es un DBMS](#qué-es-un-dbms)
-- [¿Siempre conviene usar un DBMS?](#siempre-conviene-usar-un-dbms)
-- [DBMS más utilizados](#dbms-más-utilizados)
-- [Cómo elegir un DBMS](#cómo-elegir-un-dbms)
-- [DBA vs programador de base de datos](#dba-vs-programador-de-base-de-datos)
-
 # Conceptos básicos
 
 ## Qué es una base de datos

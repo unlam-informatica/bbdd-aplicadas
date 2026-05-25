@@ -7,22 +7,6 @@ nav_order: 2
 permalink: /unidad-3/teoria/indices-optimizacion/
 ---
 
-- [Índices](#índices)
-  - [Índice clustered](#índice-clustered)
-  - [Índice nonclustered](#índice-nonclustered)
-  - [Índice de cobertura (INCLUDE)](#índice-de-cobertura-include)
-  - [Fill factor y page splits](#fill-factor-y-page-splits)
-  - [Rebuild vs Reorganize](#rebuild-vs-reorganize)
-  - [Rowstore vs Columnstore](#rowstore-vs-columnstore)
-- [Planes de ejecución](#planes-de-ejecución)
-  - [TABLE SCAN](#table-scan)
-  - [INDEX SEEK vs INDEX SCAN](#index-seek-vs-index-scan)
-  - [KEY LOOKUP](#key-lookup)
-- [Estadísticas](#estadísticas)
-- [Métricas de rendimiento](#métricas-de-rendimiento)
-  - [Baseline](#baseline)
-  - [Modelo de recuperación](#modelo-de-recuperación)
-
 # Índices y Optimización
 
 ## Índices

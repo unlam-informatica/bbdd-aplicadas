@@ -9,13 +9,6 @@ permalink: /unidad-2/guias/importacion-de-archivos/
 
 [← Unidad 2](../)
 
-- [Importar CSV — BULK INSERT](#importar-csv--bulk-insert)
-  - [Opciones de BULK INSERT](#opciones-de-bulk-insert)
-  - [Consideraciones sobre la tabla destino](#consideraciones-sobre-la-tabla-destino)
-- [Importar JSON — OPENROWSET + OPENJSON](#importar-json--openrowset--openjson)
-  - [Piezas clave del patrón](#piezas-clave-del-patrón)
-- [Importar XML — OPENROWSET + XQuery](#importar-xml--openrowset--xquery)
-
 ---
 
 ## Importar CSV — BULK INSERT

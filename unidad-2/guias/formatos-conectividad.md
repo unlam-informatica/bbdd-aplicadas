@@ -7,16 +7,6 @@ nav_order: 5
 permalink: /unidad-2/teoria/formatos-conectividad/
 ---
 
-- [ODBC y JDBC](#odbc-y-jdbc)
-- [Formatos de intercambio de datos](#formatos-de-intercambio-de-datos)
-  - [EDI](#edi--electronic-data-interchange)
-  - [CSV / TSV](#csv--tsv)
-  - [Ancho fijo](#ancho-fijo)
-  - [XML](#xml--extended-markup-language)
-  - [JSON](#json--javascript-object-notation)
-  - [YAML](#yaml--yaml-aint-a-markup-language)
-- [APIs](#apis--application-programming-interface)
-
 # Formatos y Conectividad
 
 ## ODBC y JDBC

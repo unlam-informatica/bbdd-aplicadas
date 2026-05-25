@@ -9,13 +9,6 @@ permalink: /unidad-2/guias/apis-desde-sql/
 
 [← Unidad 2](../)
 
-- [Habilitación de Ole Automation Procedures](#habilitación-de-ole-automation-procedures)
-- [Patrón base de llamada HTTP](#patrón-base-de-llamada-http)
-- [Ejemplo 1 — GET simple](#ejemplo-1--get-simple)
-- [Ejemplo 2 — GET con parseo de respuesta JSON](#ejemplo-2--get-con-parseo-de-respuesta-json)
-- [Ejemplo 3 — GET con parámetros en la URL](#ejemplo-3--get-con-parámetros-en-la-url)
-- [Ejemplo 4 — POST con body JSON](#ejemplo-4--post-con-body-json)
-
 ---
 
 > **Nota de contexto**: No se recomienda usar SQL Server para acceder a APIs web en producción. Existen alternativas mucho más adecuadas en otros lenguajes. Esta guía tiene como objetivo dar un primer contacto práctico con las APIs usando T-SQL, el lenguaje que se trabaja en la materia.

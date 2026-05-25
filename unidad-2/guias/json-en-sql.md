@@ -9,15 +9,6 @@ permalink: /unidad-2/guias/json-en-sql/
 
 [← Unidad 2](../)
 
-- [OPENJSON sin esquema](#openjson-sin-esquema)
-- [OPENJSON con esquema explícito (WITH)](#openjson-con-esquema-explícito-with)
-- [Campos AS JSON — objetos y arrays anidados](#campos-as-json--objetos-y-arrays-anidados)
-- [CROSS APPLY para desplegar arrays anidados](#cross-apply-para-desplegar-arrays-anidados)
-- [Ruta directa como segundo argumento](#ruta-directa-como-segundo-argumento)
-- [Modo LAX vs STRICT](#modo-lax-vs-strict)
-- [Leer JSON desde archivo](#leer-json-desde-archivo)
-- [Generar JSON desde una consulta](#generar-json-desde-una-consulta)
-
 ---
 
 > La función `OPENJSON` requiere nivel de compatibilidad ≥ 130 (SQL Server 2016+).  

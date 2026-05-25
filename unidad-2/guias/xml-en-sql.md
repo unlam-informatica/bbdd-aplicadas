@@ -9,14 +9,6 @@ permalink: /unidad-2/guias/xml-en-sql/
 
 [← Unidad 2](../)
 
-- [Importar XML — método directo](#importar-xml--método-directo)
-- [Importar XML — vía tabla intermedia y OPENXML](#importar-xml--vía-tabla-intermedia-y-openxml)
-- [Exportar XML con FOR XML](#exportar-xml-con-for-xml)
-  - [FOR XML RAW](#for-xml-raw)
-  - [FOR XML AUTO](#for-xml-auto)
-  - [Valores nulos y ELEMENTS XSINIL](#valores-nulos-y-elements-xsinil)
-  - [Relaciones entre tablas](#relaciones-entre-tablas)
-
 ---
 
 Dado el siguiente archivo XML de ejemplo (`C:\pruebas\Clientes.xml`):

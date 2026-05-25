@@ -9,17 +9,6 @@ permalink: /unidad-2/guias/formatos-de-intercambio/
 
 [← Unidad 2](../)
 
-- [EDI — Electronic Data Interchange](#edi--electronic-data-interchange)
-- [CSV / TSV](#csv--tsv)
-  - [Importar CSV en SQL Server](#importar-csv-en-sql-server)
-- [Ancho fijo](#ancho-fijo)
-- [XML — eXtended Markup Language](#xml--extended-markup-language)
-  - [XML en SQL Server](#xml-en-sql-server)
-- [JSON — JavaScript Object Notation](#json--javascript-object-notation)
-  - [JSON en SQL Server](#json-en-sql-server)
-- [YAML — YAML Ain't a Markup Language](#yaml--yaml-aint-a-markup-language)
-- [Comparativa rápida](#comparativa-rápida)
-
 ---
 
 Los formatos de intercambio son estándares de texto para almacenar y compartir datos entre sistemas distintos. Al adherirse a un estándar, cualquier sistema que lo implemente puede consumir o producir los datos sin necesidad de acuerdos ad-hoc.

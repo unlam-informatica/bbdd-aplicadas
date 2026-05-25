@@ -7,22 +7,6 @@ nav_order: 2
 permalink: /unidad-1/teoria/repaso-sql/
 ---
 
-- [Modelo de datos y abstracción](#modelo-de-datos-y-abstracción)
-- [Tipos de datos](#tipos-de-datos)
-- [Catálogos y schemas](#catálogos-y-schemas)
-- [DDL y DML](#ddl-y-dml)
-- [Integridad referencial, PK y FK](#integridad-referencial-pk-y-fk)
-- [Restricciones (constraints)](#restricciones-constraints)
-- [NULL](#null)
-- [Consultas básicas](#consultas-básicas)
-- [JOINs y UNIONs](#joins-y-unions)
-- [Funciones de agregado](#funciones-de-agregado)
-- [Vistas](#vistas)
-- [Procedimientos almacenados](#procedimientos-almacenados)
-- [Triggers](#triggers)
-- [Funciones de usuario](#funciones-de-usuario)
-- [Resumen de objetos de una BD](#resumen-de-objetos-de-una-bd)
-
 # Repaso de SQL
 
 ## Modelo de datos y abstracción

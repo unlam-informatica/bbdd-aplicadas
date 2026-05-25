@@ -7,24 +7,6 @@ nav_order: 1
 permalink: /unidad-3/teoria/transacciones-concurrencia/
 ---
 
-- [Transacciones](#transacciones)
-  - [Propiedades ACID](#propiedades-acid)
-  - [Modos de transacción en SQL Server](#modos-de-transacción-en-sql-server)
-  - [Control explícito: BEGIN / COMMIT / ROLLBACK](#control-explícito-begin--commit--rollback)
-  - [Puntos de guardado (SAVEPOINT)](#puntos-de-guardado-savepoint)
-  - [Transacciones anidadas y @@TRANCOUNT](#transacciones-anidadas-y-trancount)
-  - [Patrón TRY/CATCH](#patrón-trycatch)
-- [Concurrencia](#concurrencia)
-  - [Fenómenos de concurrencia](#fenómenos-de-concurrencia)
-  - [Niveles de aislamiento](#niveles-de-aislamiento)
-  - [Guía de selección](#guía-de-selección)
-- [Bloqueos](#bloqueos)
-  - [Tipos de bloqueo](#tipos-de-bloqueo)
-  - [Bloqueos vs. versionado de filas](#bloqueos-vs-versionado-de-filas)
-  - [Deadlocks](#deadlocks)
-- [Transacciones distribuidas](#transacciones-distribuidas)
-- [Las 10 reglas que no debés olvidar](#las-10-reglas-que-no-debés-olvidar)
-
 # Transacciones y Concurrencia
 
 ## Transacciones
