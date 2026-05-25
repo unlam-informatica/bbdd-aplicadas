@@ -6,32 +6,29 @@ nav_order: 1
 permalink: /unidad-2/teoria/bd-transaccionales/
 ---
 
-- [BD Transaccionales: aspectos básicos](#bd-transaccionales-aspectos-básicos)
-  - [Bases de datos transaccionales (OLTP)](#bases-de-datos-transaccionales-oltp)
-    - [Propiedades ACID](#propiedades-acid)
-      - [Atomicidad](#atomicidad)
-      - [Consistencia](#consistencia)
-      - [Isolation (Aislamiento)](#isolation-aislamiento)
+- [Bases de datos transaccionales (OLTP)](#bases-de-datos-transaccionales-oltp)
+  - [Propiedades ACID](#propiedades-acid)
+    - [Atomicidad](#atomicidad)
+    - [Consistencia](#consistencia)
+    - [Isolation (Aislamiento)](#isolation-aislamiento)
   - [El problema sin aislamiento](#el-problema-sin-aislamiento)
   - [Los tres problemas clásicos](#los-tres-problemas-clásicos)
   - [Niveles de aislamiento](#niveles-de-aislamiento)
     - [OLTP vs OLAP](#oltp-vs-olap)
-  - [BD, Data Warehouse y Data Lake](#bd-data-warehouse-y-data-lake)
-  - [Arquitectura distribuida y clústeres](#arquitectura-distribuida-y-clústeres)
-    - [Modalidades de despliegue](#modalidades-de-despliegue)
-    - [Always On (SQL Server)](#always-on-sql-server)
-  - [Motor de base de datos SQL Server](#motor-de-base-de-datos-sql-server)
-    - [Instalación y componentes](#instalación-y-componentes)
-      - [Ediciones](#ediciones)
-      - [Tipos de instancia](#tipos-de-instancia)
-    - [Conexión local y remota](#conexión-local-y-remota)
-    - [Autenticación](#autenticación)
-  - [Collation / Intercalación](#collation--intercalación)
-  - [Bases de datos en memoria](#bases-de-datos-en-memoria)
+- [BD, Data Warehouse y Data Lake](#bd-data-warehouse-y-data-lake)
+- [Arquitectura distribuida y clústeres](#arquitectura-distribuida-y-clústeres)
+  - [Modalidades de despliegue](#modalidades-de-despliegue)
+  - [Always On (SQL Server)](#always-on-sql-server)
+- [Motor de base de datos SQL Server](#motor-de-base-de-datos-sql-server)
+  - [Instalación y componentes](#instalación-y-componentes)
+    - [Ediciones](#ediciones)
+    - [Tipos de instancia](#tipos-de-instancia)
+  - [Conexión local y remota](#conexión-local-y-remota)
+  - [Autenticación](#autenticación)
+- [Collation / Intercalación](#collation--intercalación)
+- [Bases de datos en memoria](#bases-de-datos-en-memoria)
 
-# BD Transaccionales: aspectos básicos
-
-## Bases de datos transaccionales (OLTP)
+# Bases de datos transaccionales (OLTP)
 
 Una **base de datos transaccional** (OLTP, _Online Transaction Processing_) es aquella diseñada para procesar un gran volumen de transacciones pequeñas de forma concurrente: inserciones, actualizaciones, eliminaciones y consultas puntuales.
 
@@ -39,7 +36,7 @@ Una **transacción** es una unidad lógica de trabajo formada por una o más ope
 
 Ejemplos de sistemas OLTP: banca en línea, e-commerce, sistemas de reservas de vuelos, terminales punto de venta (POS).
 
-### Propiedades ACID
+## Propiedades ACID
 
 ![ACID properties](../images/acid-props.png)
 
@@ -50,7 +47,7 @@ Ejemplos de sistemas OLTP: banca en línea, e-commerce, sistemas de reservas de 
 | **Isolation (Aislamiento)** | Las transacciones concurrentes se comportan como si se ejecutasen secuencialmente. Los cambios de una transacción no son visibles para otras hasta que se confirman. |
 | **Durabilidad** | Una vez confirmada (commit), la transacción persiste aunque ocurra una falla del sistema. |
 
-#### Atomicidad
+### Atomicidad
 
 La **atomicidad** garantiza que una transacción se ejecuta como una unidad indivisible: o todas sus operaciones tienen éxito, o ninguna se aplica. No existe un estado intermedio visible para la base de datos.
 
@@ -81,7 +78,7 @@ Caso con fallo (ROLLBACK):
 
 En la práctica los motores implementan esto con un **write-ahead log (WAL)**: antes de modificar los datos reales, escriben en un log qué se va a cambiar. Si algo falla, el motor lee el log al reiniciar y revierte las operaciones incompletas.
 
-#### Consistencia
+### Consistencia
 
 La **consistencia** garantiza que una transacción lleva la base de datos de un estado válido a otro estado válido, respetando todas las reglas definidas (restricciones, claves foráneas, tipos de datos, etc.).
 
@@ -113,7 +110,7 @@ VALUES (101, 9999, 500);
 
 Las reglas que protege la consistencia tienen dos orígenes: las que define el motor (`CHECK`, `NOT NULL`, `UNIQUE`, FK) se verifican automáticamente. Las que define la aplicación (ej: "el total debe coincidir con la suma de ítems") son responsabilidad del desarrollador.
 
-#### Isolation (Aislamiento)
+### Isolation (Aislamiento)
 
 El **aislamiento** garantiza que las transacciones concurrentes no se interfieren entre sí. Cada transacción debe ejecutarse como si fuera la única en el sistema, aunque haya cientos corriendo al mismo tiempo.
 
@@ -232,7 +229,7 @@ SQL Server agrega además `SNAPSHOT ISOLATION`, que usa versiones de fila en lug
 
 ---
 
-## BD, Data Warehouse y Data Lake
+# BD, Data Warehouse y Data Lake
 
 | | Base de datos (OLTP) | Data Warehouse | Data Lake |
 |---|---|---|---|
@@ -250,7 +247,7 @@ SQL Server agrega además `SNAPSHOT ISOLATION`, que usa versiones de fila en lug
 
 ---
 
-## Arquitectura distribuida y clústeres
+# Arquitectura distribuida y clústeres
 
 Una **base de datos distribuida** almacena datos en múltiples nodos (servidores) que cooperan como si fuesen un sistema único.
 
@@ -260,13 +257,13 @@ Un **clúster** es un conjunto de servidores que trabajan juntos para proporcion
 - **Escalabilidad horizontal**: agregar nodos para manejar más carga.
 - **Balanceo de carga**: distribuir consultas entre nodos.
 
-### Modalidades de despliegue
+## Modalidades de despliegue
 
 **En la nube**: escalado automático según demanda, pago por uso, alta disponibilidad gestionada (ej: Azure SQL Managed Instance, Amazon RDS).
 
 **Servidores dedicados (on-premise)**: control total sobre hardware y configuración, mayor inversión inicial, requiere administración propia.
 
-### Always On (SQL Server)
+## Always On (SQL Server)
 
 SQL Server implementa alta disponibilidad mediante **Always On Availability Groups**:
 - Un nodo primario recibe lecturas y escrituras.
@@ -275,11 +272,11 @@ SQL Server implementa alta disponibilidad mediante **Always On Availability Grou
 
 ---
 
-## Motor de base de datos SQL Server
+# Motor de base de datos SQL Server
 
 SQL Server es el RDBMS de Microsoft. Implementa el estándar SQL con extensiones propias (T-SQL).
 
-### Instalación y componentes
+## Instalación y componentes
 
 | Componente | Descripción |
 |-----------|-------------|
@@ -289,7 +286,7 @@ SQL Server es el RDBMS de Microsoft. Implementa el estándar SQL con extensiones
 | **SQL Server Agent** | Automatización de tareas: jobs, alertas, mantenimiento programado |
 | **SQL Server Browser** | Resuelve nombres de instancias nombradas para conexiones remotas |
 
-#### Ediciones
+### Ediciones
 
 | Edición | Uso |
 |---------|-----|
@@ -298,7 +295,7 @@ SQL Server es el RDBMS de Microsoft. Implementa el estándar SQL con extensiones
 | Standard | Licenciada, funcionalidades parciales |
 | Enterprise | Licenciada, funcionalidades completas (Always On, columnstore, etc.) |
 
-#### Tipos de instancia
+### Tipos de instancia
 
 - **Instancia default**: identificada solo con el nombre del servidor (`MI_SERVIDOR`). Servicio: `MSSQLSERVER`.
 - **Instancia nombrada**: identificada con `SERVIDOR\NOMBRE_INSTANCIA`. Servicio: `MSSQL$NOMBRE_INSTANCIA`. Un servidor puede tener múltiples instancias nombradas.
@@ -309,7 +306,7 @@ SQL Server es el RDBMS de Microsoft. Implementa el estándar SQL con extensiones
 - Configurar el puerto TCP (por defecto **1433** para la instancia default).
 - Gestionar alias de servidores y certificados SSL.
 
-### Conexión local y remota
+## Conexión local y remota
 
 **Conexión local** — no requiere configuración adicional. Se puede usar `.`, `localhost`, nombre del equipo o `(local)`.
 
@@ -329,7 +326,7 @@ Server=mi_servidor,1433;Database=mi_bd;User Id=usuario;Password=contraseña;
 Server=mi_servidor\INSTANCIA;Database=mi_bd;Integrated Security=True;
 ```
 
-### Autenticación
+## Autenticación
 
 | Modo | Descripción |
 |------|-------------|
@@ -340,7 +337,7 @@ Para usar ambas, el servidor debe estar en modo **SQL Server and Windows Authent
 
 ---
 
-## Collation / Intercalación
+# Collation / Intercalación
 
 El **collation** define las reglas de comparación y ordenación de texto: si `'a'` y `'A'` son iguales, si `'a'` y `'á'` son iguales, y el orden en `ORDER BY` sobre columnas de texto.
 
@@ -355,7 +352,7 @@ El collation se puede definir a nivel de instancia, base de datos o columna, y h
 
 ---
 
-## Bases de datos en memoria
+# Bases de datos en memoria
 
 Las bases de datos **en memoria** (_in-memory_) almacenan los datos directamente en RAM. Eliminan la latencia de I/O de disco y permiten estructuras de datos optimizadas para acceso en memoria.
 
