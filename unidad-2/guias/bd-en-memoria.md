@@ -8,6 +8,81 @@ permalink: /unidad-2/guias/bd-en-memoria/
 
 [← Unidad 2](../)
 
+## ¿Qué es una base de datos en memoria?
+
+Una **base de datos en memoria** almacena todos los datos en la memoria principal (RAM) del servidor, en lugar de en dispositivos de almacenamiento secundario (disco duro, SSD). La CPU tiene acceso directo a los datos en RAM —sin latencia de E/S— lo que hace que las operaciones de lectura y escritura sean órdenes de magnitud más rápidas que en una base de datos basada en disco.
+
+**Ejemplo de uso**: subastas de anuncios en tiempo real (_real-time bidding_). Mientras una página web carga, la plataforma recopila ofertas de múltiples postores, elige la ganadora y muestra el anuncio — todo en milisegundos. Solo una BD en memoria puede cumplir ese requisito de latencia.
+
+---
+
+## ¿Por qué las organizaciones la necesitan?
+
+Con la llegada del **IoT** (Internet de las Cosas) y el crecimiento de las soluciones en la nube, las organizaciones deben procesar datos en tiempo real. Millones de dispositivos —monitores de salud, sensores industriales, terminales de seguridad— generan datos cada segundo que deben analizarse de inmediato.
+
+Una organización debería considerar una BD en memoria si:
+
+- Necesita aprovechar ventajas en tiempo real de Big Data.
+- Recopila datos periódicamente y requiere acceso de baja latencia.
+- La persistencia inmediata no es un requerimiento crítico (o puede manejarse con técnicas adicionales).
+
+---
+
+## BD en memoria vs. BD basada en disco
+
+| Aspecto | BD basada en disco | BD en memoria |
+|---------|--------------------|---------------|
+| **Velocidad** | Cada operación requiere E/S al disco | Acceso directo en RAM; sin latencia de E/S |
+| **Persistencia** | Persistente por defecto | Volátil — requiere técnicas adicionales |
+| **Estructuras de datos** | Complejas (árboles B, páginas de 8 kB) | Simples — el acceso aleatorio en RAM ya es eficiente |
+| **Sistemas embebidos** | Requiere almacenamiento secundario | Puede ejecutarse sin disco (IoT, smart TV, consolas) |
+| **Límite de tamaño** | Terabytes | Limitado a la RAM disponible (típicamente GBs) |
+| **Fragmentación** | Las páginas se fragmentan → requiere mantenimiento | Sin fragmentación; compactación vía proceso MERGE |
+
+---
+
+## Durabilidad: cómo resolver la volatilidad
+
+La RAM es **volátil**: si el sistema falla, los datos se pierden. Para cumplir la propiedad ACID de Durabilidad, las BDs en memoria combinan tres técnicas:
+
+### Instantáneas (snapshots)
+
+Copias periódicas del estado completo de la BD, guardadas en almacenamiento no volátil (disco). Son una "foto" del momento en que se tomaron.
+
+**Limitación**: si el sistema falla después de la última instantánea, se pierden los cambios posteriores. Las instantáneas solas no garantizan durabilidad completa.
+
+### Registros de transacciones
+
+La BD mantiene un log de cada modificación (INSERT, UPDATE, DELETE) en un archivo no volátil. En caso de falla, el log permite reconstruir el estado exacto hasta el último commit.
+
+**Costo**: en sistemas con miles de operaciones por minuto, el log agrega sobrecarga de E/S y almacenamiento. La mayoría de las BDs en memoria combinan ambas técnicas: conservan el log hasta la próxima instantánea y luego lo descartan.
+
+### NVRAM
+
+RAM con respaldo de batería o EEPROM que retiene datos aunque se corte la energía. Permite confirmar transacciones a velocidad de RAM con garantía de persistencia sin recurrir al disco.
+
+| Técnica | Velocidad | Garantía | Costo |
+|---------|-----------|----------|-------|
+| Instantáneas | Alta | Parcial (datos entre snapshots pueden perderse) | Bajo |
+| Registros | Media (E/S al log) | Alta | Medio |
+| NVRAM | Muy alta (velocidad de RAM) | Alta | Alto (hardware especializado) |
+
+---
+
+## Ventajas y desventajas
+
+| | Aspecto | Detalle |
+|-|---------|---------|
+| ✅ | **Rendimiento** | Sin E/S de disco: lecturas/escrituras órdenes de magnitud más rápidas |
+| ✅ | **Estructuras simples** | El acceso aleatorio en RAM es eficiente; no se necesitan árboles B ni bloques contiguos |
+| ✅ | **Sistemas embebidos** | No requiere almacenamiento secundario — apto para dispositivos IoT sin disco |
+| ✅ | **ACID completo** | Con snapshots + logs o NVRAM, garantiza las cuatro propiedades ACID |
+| ✅ | **Lista para la nube** | Se ofrece como DBaaS (Database as a Service), escalando bajo demanda |
+| ❌ | **Volatilidad** | Los datos se pierden ante una falla (mitigado con las técnicas de durabilidad) |
+| ❌ | **Tamaño limitado** | La RAM disponible limita la capacidad — solución: clústeres que suman RAM de varios nodos |
+
+---
+
 ## ¿Qué es In-Memory OLTP?
 
 **In-Memory OLTP** (anteriormente "Hekaton") es la tecnología de SQL Server para tablas optimizadas para memoria. Los datos viven en RAM en lugar de en disco, eliminando la latencia de I/O y permitiendo concurrencia altísima sin bloqueos (_lock-free_).
@@ -247,6 +322,23 @@ UPDATE inventario_cache SET stock = stock - 1 WHERE producto_id = 1;
 -- SELECT normal
 SELECT * FROM inventario_cache WHERE stock > 0;
 ```
+
+---
+
+## Almacenamiento interno: disco vs. memoria optimizada
+
+La siguiente tabla resume cómo difiere el almacenamiento a nivel interno entre una tabla basada en disco y una tabla con optimización para memoria en SQL Server:
+
+| Categoría | Tabla basada en disco | Tabla optimizada para memoria |
+|-----------|----------------------|-------------------------------|
+| **DDL** | Metadatos en tablas del sistema del grupo de archivos principal | Igual — metadatos accesibles vía vistas de catálogo |
+| **Estructura** | Filas en páginas de 8 kB; una página almacena solo filas de la misma tabla | Filas individuales sin estructura de página; dos filas consecutivas de un archivo pueden ser de tablas distintas |
+| **Índices** | Almacenados en páginas junto a los datos | Solo se conserva la definición; los índices se mantienen en RAM y se regeneran al reiniciar la BD — sin registro de cambios de índice |
+| **Operaciones DML** | Primero se carga la página al buffer pool (E/S), luego se modifica | Los datos ya están en RAM — operaciones directas; un hilo de fondo escribe en los archivos de datos y delta para persistir |
+| **UPDATE** | Modificación en contexto (o insert+delete para columnas de clave) | Se registra como DELETE + INSERT → genera una nueva versión de fila |
+| **Fragmentación** | Las páginas se fragmentan con el tiempo → requiere `REBUILD`/`REORGANIZE` | Sin páginas → sin fragmentación; compactación mediante proceso `MERGE` en segundo plano |
+
+> **Clave de rendimiento**: las tablas en memoria eliminan el _buffer pool_ (carga de páginas a caché) que es el principal cuello de botella de las tablas en disco bajo alta concurrencia.
 
 ---
 

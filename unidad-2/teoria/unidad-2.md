@@ -11,6 +11,7 @@ permalink: /unidad-2/teoria/bd-transaccionales/
     - [Atomicidad](#atomicidad)
     - [Consistencia](#consistencia)
     - [Isolation (Aislamiento)](#isolation-aislamiento)
+    - [Durabilidad](#durabilidad)
   - [El problema sin aislamiento](#el-problema-sin-aislamiento)
   - [Los tres problemas clásicos](#los-tres-problemas-clásicos)
   - [Niveles de aislamiento](#niveles-de-aislamiento)
@@ -115,6 +116,42 @@ Las reglas que protege la consistencia tienen dos orígenes: las que define el m
 El **aislamiento** garantiza que las transacciones concurrentes no se interfieren entre sí. Cada transacción debe ejecutarse como si fuera la única en el sistema, aunque haya cientos corriendo al mismo tiempo.
 
 Es la propiedad más compleja de ACID porque implica un balance: más aislamiento = más consistencia, pero menos rendimiento.
+
+**¿Cómo lo implementa el motor?** Los motores usan dos mecanismos principales:
+
+- **Bloqueos (locking)**: cuando una transacción lee o escribe una fila, pone un "candado" sobre ella. Otras transacciones que necesitan la misma fila esperan hasta que el candado se libera. Es predecible pero puede generar esperas largas o **deadlocks** (dos transacciones esperándose mutuamente).
+- **Versionado de filas (MVCC)**: en lugar de bloquear, el motor mantiene versiones anteriores de cada fila. Cada transacción ve una "foto" del momento en que comenzó, sin bloquear a otras. SQL Server lo implementa mediante `SNAPSHOT ISOLATION`, usando `tempdb` para almacenar las versiones anteriores.
+
+> Los problemas concretos que puede causar la falta de aislamiento y los niveles que los resuelven se desarrollan en [El problema sin aislamiento](#el-problema-sin-aislamiento) y [Niveles de aislamiento](#niveles-de-aislamiento) más abajo.
+
+### Durabilidad
+
+La **durabilidad** garantiza que una transacción confirmada (commit) persiste de forma permanente, incluso ante una falla del sistema: corte de luz, crash del servidor, error de hardware.
+
+Los motores implementan la durabilidad con tres técnicas principales:
+
+| Técnica | Descripción |
+|---------|-------------|
+| **Write-Ahead Log (WAL)** | Antes de modificar los datos en disco, el motor escribe en un log qué va a cambiar. Al reiniciar tras un fallo, lee el log y **rehace** (_redo_) las operaciones confirmadas que no llegaron al archivo de datos, o **revierte** (_undo_) las incompletas. |
+| **Instantáneas (snapshots)** | Copias periódicas del estado completo de la base de datos a almacenamiento no volátil. En caso de falla grave, se restaura la última instantánea y se aplican los logs posteriores para llegar al estado más reciente. |
+| **NVRAM** | Memoria RAM con respaldo de batería o EEPROM que sobrevive a cortes de luz. Permite confirmar transacciones a velocidad de RAM y garantizar que lleguen a disco cuando la energía se restaure. |
+
+En SQL Server, la durabilidad se gestiona mediante el **transaction log** (archivo `.ldf`). Cada operación se registra en el log antes de aplicarse a los archivos de datos (`.mdf`). El proceso **checkpoint** sincroniza periódicamente el log con los datos en disco.
+
+```
+Flujo de una transacción confirmada:
+  1. BEGIN TRANSACTION
+  2. Operaciones → escritas primero en el transaction log
+  3. COMMIT → el log marca la transacción como confirmada
+  4. Checkpoint → motor vuelca los datos modificados a los archivos .mdf
+
+Recuperación ante fallo (si el sistema cae entre los pasos 3 y 4):
+  Al reiniciar → el motor lee el transaction log
+  → rehace las operaciones confirmadas que no llegaron a .mdf
+  → revierte las transacciones que nunca hicieron COMMIT
+```
+
+> **Relación con atomicidad**: el mismo WAL que garantiza durabilidad también permite implementar atomicidad. La diferencia conceptual: atomicidad habla de *si* los cambios se aplican como una unidad; durabilidad habla de *que esos cambios sobrevivan* a una falla una vez confirmados.
 
 ---
 
