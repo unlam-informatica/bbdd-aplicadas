@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Práctica — XML en SQL Server
-parent: Unidad 2
-nav_order: 14
+parent: Práctica
+grand_parent: Unidad 2
+nav_order: 5
 permalink: /unidad-2/practica/xml/
 ---
 

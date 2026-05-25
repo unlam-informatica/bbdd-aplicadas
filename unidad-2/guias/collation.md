@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Collation / Intercalación
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 4
 permalink: /unidad-2/guias/collation/
 ---

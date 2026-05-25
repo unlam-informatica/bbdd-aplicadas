@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Índices, planes de ejecución y estadísticas
-parent: Unidad 3
+parent: Teoría
+grand_parent: Unidad 3
 nav_order: 4
 permalink: /unidad-3/guias/indices-y-planes/
 ---

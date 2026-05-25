@@ -1,7 +1,8 @@
 ---
 layout: default
 title: BD en memoria
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 3
 permalink: /unidad-2/guias/bd-en-memoria/
 ---

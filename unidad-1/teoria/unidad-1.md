@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Conceptos básicos
-parent: Unidad 1
+parent: Teoría
+grand_parent: Unidad 1
 nav_order: 1
 permalink: /unidad-1/teoria/conceptos-basicos/
 ---

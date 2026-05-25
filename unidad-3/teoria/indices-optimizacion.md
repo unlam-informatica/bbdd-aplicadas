@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Índices y Optimización
-parent: Unidad 3
+parent: Teoría
+grand_parent: Unidad 3
 nav_order: 2
 permalink: /unidad-3/teoria/indices-optimizacion/
 ---

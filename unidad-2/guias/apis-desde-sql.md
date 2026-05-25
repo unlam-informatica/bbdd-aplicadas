@@ -1,7 +1,8 @@
 ---
 layout: default
 title: APIs desde SQL Server
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 10
 permalink: /unidad-2/guias/apis-desde-sql/
 ---

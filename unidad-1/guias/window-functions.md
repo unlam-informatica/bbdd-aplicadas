@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Window Functions
-parent: Unidad 1
+parent: Teoría
+grand_parent: Unidad 1
 nav_order: 3
 permalink: /unidad-1/guias/window-functions/
 ---

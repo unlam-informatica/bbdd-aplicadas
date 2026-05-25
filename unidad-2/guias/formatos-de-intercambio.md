@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Formatos de intercambio
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 6
 permalink: /unidad-2/guias/formatos-de-intercambio/
 ---

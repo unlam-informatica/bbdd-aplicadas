@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Práctica — Transacciones
-parent: Unidad 2
-nav_order: 13
+parent: Práctica
+grand_parent: Unidad 2
+nav_order: 3
 permalink: /unidad-2/practica/transacciones/
 ---
 

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Importación de archivos
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 9
 permalink: /unidad-2/guias/importacion-de-archivos/
 ---

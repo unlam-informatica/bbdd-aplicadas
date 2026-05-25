@@ -1,7 +1,8 @@
 ---
 layout: default
 title: XML en SQL Server
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 8
 permalink: /unidad-2/guias/xml-en-sql/
 ---

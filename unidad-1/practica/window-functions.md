@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Práctica - Window Functions
-parent: Unidad 1
-nav_order: 9
+parent: Práctica
+grand_parent: Unidad 1
+nav_order: 2
 permalink: /unidad-1/practica/window-functions/
 ---
 

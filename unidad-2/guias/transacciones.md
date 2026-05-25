@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Transacciones
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 2
 permalink: /unidad-2/guias/transacciones/
 ---

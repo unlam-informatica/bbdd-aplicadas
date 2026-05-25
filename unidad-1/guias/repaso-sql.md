@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Repaso de SQL
-parent: Unidad 1
+parent: Teoría
+grand_parent: Unidad 1
 nav_order: 2
 permalink: /unidad-1/teoria/repaso-sql/
 ---

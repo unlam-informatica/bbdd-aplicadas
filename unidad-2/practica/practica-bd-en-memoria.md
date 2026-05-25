@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Práctica — BD en memoria (In-Memory OLTP)
-parent: Unidad 2
-nav_order: 15
+parent: Práctica
+grand_parent: Unidad 2
+nav_order: 6
 permalink: /unidad-2/practica/bd-en-memoria/
 ---
 

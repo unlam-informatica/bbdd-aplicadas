@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Transacciones y Concurrencia
-parent: Unidad 3
+parent: Teoría
+grand_parent: Unidad 3
 nav_order: 1
 permalink: /unidad-3/teoria/transacciones-concurrencia/
 ---

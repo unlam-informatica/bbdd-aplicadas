@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Introducción
-parent: Unidad 2
+parent: Teoría
+grand_parent: Unidad 2
 nav_order: 1
 permalink: /unidad-2/teoria/bd-transaccionales/
 ---

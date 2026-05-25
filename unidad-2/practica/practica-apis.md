@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Práctica — APIs desde SQL Server
-parent: Unidad 2
-nav_order: 16
+parent: Práctica
+grand_parent: Unidad 2
+nav_order: 7
 permalink: /unidad-2/practica/apis/
 ---
 
