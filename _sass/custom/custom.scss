@@ -3,7 +3,7 @@
 // ─── Contenido principal ─────────────────────────────────────────────────────
 
 .main-content {
-  max-width: 800px;
+  max-width: 900px;
   font-size: 15.5px;
   line-height: 1.8;
 
@@ -55,9 +55,10 @@
 // ─── Layout de 3 columnas: sidebar | contenido | TOC ─────────────────────────
 //
 // En pantallas >= 1100 px se activa el flex wrapper que rodea .main-content y
-// .page-toc. El grupo (contenido + TOC) queda centrado dentro del área
-// principal (a la derecha del sidebar). En pantallas menores el TOC se oculta
-// y el contenido ocupa el ancho completo como siempre.
+// .page-toc. El sidebar (gestionado por el tema) queda pegado a la izquierda.
+// El bloque contenido+TOC se centra en el espacio disponible y ocupa ≈ 2/3 del
+// viewport (1280 px en 1920 px). El TOC está incluido dentro de ese ancho.
+// En pantallas menores el TOC se oculta y el contenido ocupa el ancho completo.
 
 @media (min-width: 1100px) {
 
@@ -66,17 +67,17 @@
     display: flex;
     align-items: flex-start;
     gap: 2rem;
-    // Ancho exacto = 800 (contenido) + 32 (gap) + 200 (TOC) = 1032 px
-    max-width: 1032px;
+    // ≈ 2/3 de 1920 px; el TOC (200 px + gap 32 px) está incluido en este ancho
+    max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  // Contenido ocupa todo el espacio libre hasta su max-width
+  // Contenido ocupa todo el espacio libre que deja el TOC dentro del wrapper
   .main-content {
     flex: 1;
     min-width: 0;      // evita overflow en flex
-    max-width: 800px;
+    max-width: none;   // el wrapper controla el ancho total; sin límite propio aquí
     margin-left: 0;    // anula el margin: 0 auto del tema en este contexto
     margin-right: 0;
   }

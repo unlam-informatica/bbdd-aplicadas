@@ -3,7 +3,7 @@ layout: default
 title: Formatos y Conectividad
 parent: Teoría
 grand_parent: Unidad 2
-nav_order: 5
+nav_order: 4
 permalink: /unidad-2/teoria/formatos-conectividad/
 ---
 
