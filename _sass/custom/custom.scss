@@ -74,11 +74,11 @@
 
 @media (min-width: 66.5rem) {     // breakpoint lg — anular layout expansivo
   .side-bar {
-    width: 16.5rem;               // fijo en $nav-width, no se expande
+    width: 19rem;                 // 304px — evita wrap en items con texto largo
   }
 
   .side-bar + .main {
-    margin-left: 16.5rem;         // margen fijo = ancho del sidebar
+    margin-left: 19rem;           // margen fijo = ancho del sidebar
   }
 
   .main {

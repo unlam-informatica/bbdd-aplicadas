@@ -172,7 +172,7 @@ Comportamiento clave:
 | Simultáneas con mismo nombre | Sí (sufijo distingue) | No (colisión) |
 | Duración | Cierre de sesión | Cierre de sesión creadora + sin referencias |
 
-> La collation de las tablas temporales (locales y globales) es la de **TempDB**, que hereda la collation de la instancia. Puede diferir de la BD de trabajo y generar conflictos de collation en comparaciones cruzadas.
+> ⚠️ La collation de las tablas temporales (locales y globales) es la de **TempDB**, que hereda la collation de la instancia. Puede diferir de la BD de trabajo y generar conflictos de collation en comparaciones cruzadas.
 
 ---
 
