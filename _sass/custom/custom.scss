@@ -77,6 +77,14 @@
     width: 25rem;                 // 400px — espacio suficiente para items anidados largos
   }
 
+  // El tema fija site-header/site-nav/site-footer a $nav-width (16.5rem) en lg.
+  // Los expandimos al 100% del sidebar redimensionado.
+  .site-header,
+  .site-nav,
+  .site-footer {
+    width: 100%;
+  }
+
   .side-bar + .main {
     margin-left: 25rem;           // margen fijo = ancho del sidebar
   }

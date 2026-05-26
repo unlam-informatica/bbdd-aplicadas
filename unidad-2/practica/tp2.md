@@ -100,9 +100,26 @@ Utilice la tabla y el procedimiento almacenado `registro` creados en el TP1 para
 
 ## Ejercicio 5 — Descargar CSVs
 
-Descargue todos los archivos CSV disponibles del dataset **"Otros nombres - personas físicas"** del portal de datos abiertos del gobierno argentino.
+Descargue de la web **[https://datos.gob.ar/dataset/otros-nombres-personas-fisicas/archivo/otros_2.1](https://datos.gob.ar/dataset/otros-nombres-personas-fisicas/archivo/otros_2.1)** todos los archivos CSV de distintos períodos disponibles en el dataset **"Otros nombres - personas físicas"** del portal de datos abiertos del gobierno argentino.
 
 Cada archivo corresponde a un período distinto y contiene nombres de personas físicas con su frecuencia de uso.
+
+**Resolución:**
+
+1. Ingresar a la URL indicada.
+2. En la página del recurso, buscar la sección de **archivos/recursos descargables**. El dataset suele listar múltiples archivos CSV, uno por período (e.g. `nombres_2010.csv`, `nombres_2011.csv`, …).
+3. Descargar todos los archivos disponibles y guardarlos en una carpeta local accesible desde SQL Server (e.g. `C:\datos\nombres\`).
+
+**Estructura esperada de cada CSV:**
+
+| Columna | Tipo | Descripción |
+|---------|------|-------------|
+| `nombre` | texto | Nombre de pila tal como fue registrado |
+| `cantidad` | entero | Cantidad de personas registradas con ese nombre en el período |
+
+> Algunos archivos pueden incluir una columna adicional con el año/período. Verificar la primera fila (encabezado) antes de crear la tabla en el ejercicio 6.
+
+> Los archivos vienen en codificación **UTF-8**. Tener esto en cuenta para el `BULK INSERT` del ejercicio 7 (`CODEPAGE = '65001'`).
 
 ---
 
