@@ -95,6 +95,29 @@ El **aislamiento** garantiza que las transacciones concurrentes no se interfiere
 
 Es la propiedad más compleja de ACID porque implica un balance: más aislamiento = más consistencia, pero menos rendimiento.
 
+**El problema sin aislamiento**
+
+Dos cajeros atienden a la misma cuenta simultáneamente:
+
+```
+Saldo inicial de cuenta: $1000
+
+Cajero A (retiro $700)        Cajero B (retiro $600)
+────────────────────────      ────────────────────────
+1. Lee saldo → $1000
+                              2. Lee saldo → $1000
+3. Calcula: 1000 - 700 = 300
+                              4. Calcula: 1000 - 600 = 400
+5. Escribe saldo → $300
+                              6. Escribe saldo → $400  ← pisa el paso 5
+
+Resultado final: $400
+Debería ser:     -$300 (o rechazado por saldo insuficiente)
+El banco perdió $700.
+```
+
+Esto se llama **lost update** (actualización perdida) — uno de los tres problemas clásicos de concurrencia.
+
 **¿Cómo lo implementa el motor?** Los motores usan dos mecanismos principales:
 
 - **Bloqueos (locking)**: cuando una transacción lee o escribe una fila, pone un "candado" sobre ella. Otras transacciones que necesitan la misma fila esperan hasta que el candado se libera. Es predecible pero puede generar esperas largas o **deadlocks** (dos transacciones esperándose mutuamente).
@@ -130,31 +153,6 @@ Recuperación ante fallo (si el sistema cae entre los pasos 3 y 4):
 ```
 
 > **Relación con atomicidad**: el mismo WAL que garantiza durabilidad también permite implementar atomicidad. La diferencia conceptual: atomicidad habla de *si* los cambios se aplican como una unidad; durabilidad habla de *que esos cambios sobrevivan* a una falla una vez confirmados.
-
----
-
-## El problema sin aislamiento
-
-Dos cajeros atienden a la misma cuenta simultáneamente:
-
-```
-Saldo inicial de cuenta: $1000
-
-Cajero A (retiro $700)        Cajero B (retiro $600)
-────────────────────────      ────────────────────────
-1. Lee saldo → $1000
-                              2. Lee saldo → $1000
-3. Calcula: 1000 - 700 = 300
-                              4. Calcula: 1000 - 600 = 400
-5. Escribe saldo → $300
-                              6. Escribe saldo → $400  ← pisa el paso 5
-
-Resultado final: $400
-Debería ser:     -$300 (o rechazado por saldo insuficiente)
-El banco perdió $700.
-```
-
-Esto se llama **lost update** (actualización perdida) — uno de los tres problemas clásicos de concurrencia.
 
 ---
 
