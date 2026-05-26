@@ -190,12 +190,6 @@ SELECT COUNT(*) → 11 pedidos  ← apareció una fila "fantasma"
 | **Phantom read**        | Aparecen o desaparecen filas nuevas en el conjunto |
 
 
-**01 Dirty Read (Lectura Sucia)**: la sesión B lee datos modificados por A que aún NO fueron confirmados. Si A hace ROLLBACK, B leyó datos que nunca existieron. Solo ocurre en READ UNCOMMITTED.
-
-**02 Non-Repeatable Read (Lectura No Repetible)**: B lee la misma fila dos veces dentro de una TX y obtiene valores distintos, porque A modificó y confirmó los datos entre ambas lecturas. Ocurre en READ UNCOMMITTED y READ COMMITTED.
-
-**03 Phantom Read (Lectura Fantasma)**: B ejecuta la misma consulta dos veces y obtiene filas distintas (nuevas o faltantes), porque A insertó o eliminó filas entre ambas ejecuciones. Ocurre en READ UNCOMMITTED, READ COMMITTED y REPEATABLE READ.
-
 ### Niveles de aislamiento
 
 | Nivel | Dirty Read | Non-Repeatable | Phantom | Bloqueo lectura |

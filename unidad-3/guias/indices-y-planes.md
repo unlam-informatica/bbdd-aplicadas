@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Índices, planes de ejecución y estadísticas
+title: Planes de ejecución y estadísticas
 parent: Teoría
 grand_parent: Unidad 3
 nav_order: 4
