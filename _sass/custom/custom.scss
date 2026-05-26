@@ -4,27 +4,27 @@
 
 .main-content {
   max-width: 900px;
-  font-size: 15.5px;
-  line-height: 1.8;
+  // font-size: 15.5px;
+  // line-height: 1.8;
 
-  h1 {
-    font-size: 1.75rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 0;
-    padding-bottom: 0.4rem;
-  }
+  // h1 {
+  //   font-size: 1.75rem;
+  //   border-bottom: 1px solid var(--border-color);
+  //   margin-top: 0;
+  //   padding-bottom: 0.4rem;
+  // }
 
-  h2 {
-    font-size: 1.35rem;
-    border-bottom: 1px solid var(--border-color);
-    margin-top: 2.5rem;
-    padding-bottom: 0.3rem;
-  }
+  // h2 {
+  //   font-size: 1.35rem;
+  //   border-bottom: 1px solid var(--border-color);
+  //   margin-top: 2.5rem;
+  //   padding-bottom: 0.3rem;
+  // }
 
-  h3 {
-    font-size: 1.1rem;
-    margin-top: 1.75rem;
-  }
+  // h3 {
+  //   font-size: 1.1rem;
+  //   margin-top: 1.75rem;
+  // }
 
   pre.highlight,
   div.highlighter-rouge {
@@ -40,9 +40,9 @@
     td { padding: 0.5rem 1rem; }
   }
 
-  blockquote {
-    border-left: 3px solid var(--link-color);
-  }
+  // blockquote {
+  //   border-left: 3px solid var(--link-color);
+  // }
 }
 
 // ─── Sidebar nav ─────────────────────────────────────────────────────────────
@@ -74,11 +74,11 @@
 
 @media (min-width: 66.5rem) {     // breakpoint lg — anular layout expansivo
   .side-bar {
-    width: 19rem;                 // 304px — evita wrap en items con texto largo
+    width: 25rem;                 // 400px — espacio suficiente para items anidados largos
   }
 
   .side-bar + .main {
-    margin-left: 19rem;           // margen fijo = ancho del sidebar
+    margin-left: 25rem;           // margen fijo = ancho del sidebar
   }
 
   .main {
@@ -92,7 +92,7 @@
   }
 
   .search-input-wrap {
-    width: auto;                  // quita el ancho fijo de $search-results-width (536px)
+    max-width: none;              // quita el cap de $search-results-width (536px); width:100% del tema se conserva
   }
 }
 

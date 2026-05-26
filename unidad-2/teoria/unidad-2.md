@@ -156,57 +156,6 @@ Recuperación ante fallo (si el sistema cae entre los pasos 3 y 4):
 
 ---
 
-## Los tres problemas clásicos
-
-**1. Dirty read**
-
-Leer un dato que otra transacción modificó pero todavía NO confirmó (no hizo commit). Si esa otra transacción después hace rollback, vos leíste algo que nunca existió realmente.
-
-```
-Transacción A                 Transacción B
-─────────────────────         ─────────────────────
-UPDATE saldo = 1500
-                              SELECT saldo → 1500  ← lee el cambio no confirmado
-ROLLBACK (falla)
-                              usa 1500 para calcular algo
-                              → decisión basada en un dato que nunca existió
-```
-
-**2. Non-repeatable read**
-
-Lees un dato, otra transacción lo modifica y SÍ confirma (commit), y cuando volvés a leer el mismo registro dentro de tu transacción, obtenés un valor distinto.
-
-```
-Transacción A                 Transacción B
-─────────────────────         ─────────────────────
-SELECT saldo → 1000
-                              UPDATE saldo = 500
-                              COMMIT
-SELECT saldo → 500  ← el mismo SELECT devuelve otro valor
-```
-
-**3. Phantom read** — aparecen o desaparecen filas entre dos lecturas:
-
-Un phantom read ocurre cuando una transacción ejecuta dos veces la misma consulta y, entre ambas lecturas, otra transacción inserta o elimina filas que cumplen esa condición.
-
-```
-Transacción A                 Transacción B
-─────────────────────         ─────────────────────
-SELECT COUNT(*) → 10 pedidos
-                              INSERT nuevo pedido
-                              COMMIT
-SELECT COUNT(*) → 11 pedidos  ← apareció una fila "fantasma"
-```
-
-
-| Problema                | Qué cambia                                         |
-| ----------------------- | -------------------------------------------------- |
-| **Dirty read**          | Leés datos no confirmados                          |
-| **Non-repeatable read** | La misma fila cambia                               |
-| **Phantom read**        | Aparecen o desaparecen filas nuevas en el conjunto |
-
----
-
 ## Niveles de aislamiento
 
 SQL define cuatro niveles, cada uno bloqueando más problemas a cambio de mayor costo en rendimiento:
