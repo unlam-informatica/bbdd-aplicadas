@@ -52,6 +52,46 @@
   border-radius: 4px;
 }
 
+// ─── Override del layout expansivo de just-the-docs en pantallas anchas ──────
+//
+// Por defecto, a partir del breakpoint "lg" (≥ 66.5rem / ≈ 1064px) el tema:
+//  • Expande el sidebar para rellenar el espacio a la izquierda del contenido
+//    centrado: en 1920px el sidebar mide ≈ 692px y sus links quedan alineados
+//    al borde derecho del panel (flex-end), apareciendo "centrados" en pantalla.
+//  • Limita .main y .main-content-wrap a 50rem (800px) con margin: auto.
+//
+// Lo reemplazamos por:
+//  • Sidebar fijo en 16.5rem (264px), pegado al borde izquierdo del viewport.
+//  • Links del sidebar alineados al borde izquierdo del panel (flex-start).
+//  • .main y .main-content-wrap sin restricción de ancho → el centrado lo
+//    gestiona nuestro .main-content-toc-wrap (max-width: 1280px, margin: auto).
+
+@media (min-width: 50rem) {       // breakpoint md — anular align-items: flex-end
+  .side-bar {
+    align-items: flex-start;      // links pegados a la izquierda del panel
+  }
+}
+
+@media (min-width: 66.5rem) {     // breakpoint lg — anular layout expansivo
+  .side-bar {
+    width: 16.5rem;               // fijo en $nav-width, no se expande
+  }
+
+  .side-bar + .main {
+    margin-left: 16.5rem;         // margen fijo = ancho del sidebar
+  }
+
+  .main {
+    max-width: none;              // elimina el límite de 50rem (800px)
+    margin: 0;                    // elimina el auto-centrado de .main
+  }
+
+  .main-content-wrap {
+    max-width: none;              // elimina el límite interno de 50rem
+    // el padding lateral del tema se conserva
+  }
+}
+
 // ─── Layout de 3 columnas: sidebar | contenido | TOC ─────────────────────────
 //
 // En pantallas >= 1100 px se activa el flex wrapper que rodea .main-content y
