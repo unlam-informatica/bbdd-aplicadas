@@ -1,4 +1,3 @@
-<script>
 (function () {
   'use strict';
 
@@ -28,10 +27,13 @@
       li.className = 'toc-' + h.tagName.toLowerCase();
       var a = document.createElement('a');
       a.href = '#' + h.id;
-      // heading_anchors injects an SVG anchor — grab only the first text node
-      a.textContent = h.childNodes[0]
-        ? h.childNodes[0].textContent.trim()
-        : h.textContent.trim();
+      // heading_anchors inyecta un <a> de ancla dentro del heading:
+      // tomamos solo el primer text node para evitar capturar el símbolo #
+      var text = '';
+      h.childNodes.forEach(function (node) {
+        if (node.nodeType === Node.TEXT_NODE) text += node.textContent;
+      });
+      a.textContent = text.trim() || h.textContent.trim();
       li.appendChild(a);
       ul.appendChild(li);
       hasItems = true;
@@ -40,14 +42,14 @@
     if (!hasItems) return;
     nav.appendChild(ul);
 
-    // Wrap .main-content + TOC in a flex row container
+    // Envolver .main-content y el TOC en un flex row
     var wrapper = document.createElement('div');
     wrapper.className = 'main-content-toc-wrap';
     content.parentNode.insertBefore(wrapper, content);
     wrapper.appendChild(content);
     wrapper.appendChild(nav);
 
-    // Highlight active heading while scrolling
+    // Resaltar la sección activa mientras se scrollea
     if ('IntersectionObserver' in window) {
       var links = ul.querySelectorAll('a');
 
@@ -73,4 +75,3 @@
     buildToc();
   }
 })();
-</script>
