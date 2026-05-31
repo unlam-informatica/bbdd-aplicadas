@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Laboratorio — tienda_online
-parent: Unidad 4
+parent: Teoría
+grand_parent: Unidad 4
 nav_order: 7
 permalink: /unidad-4/guias/laboratorio-tienda-online/
 ---

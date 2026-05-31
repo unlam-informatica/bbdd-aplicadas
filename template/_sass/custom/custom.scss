@@ -1,0 +1,199 @@
+// custom.scss — se importa después del tema (reglas CSS adicionales).
+
+// ─── Contenido principal ─────────────────────────────────────────────────────
+
+.main-content {
+  max-width: 900px;
+  // font-size: 15.5px;
+  line-height: 1.7;
+
+  // h1 {
+  //   font-size: 1.75rem;
+  //   border-bottom: 1px solid var(--border-color);
+  //   margin-top: 0;
+  //   padding-bottom: 0.4rem;
+  // }
+
+  // h2 {
+  //   font-size: 1.35rem;
+  //   border-bottom: 1px solid var(--border-color);
+  //   margin-top: 2.5rem;
+  //   padding-bottom: 0.3rem;
+  // }
+
+  // h3 {
+  //   font-size: 1.1rem;
+  //   margin-top: 1.75rem;
+  // }
+
+  pre.highlight,
+  div.highlighter-rouge {
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 0.875rem;
+  }
+
+  table {
+    font-size: 0.9rem;
+
+    th { padding: 0.6rem 1rem; }
+    td { padding: 0.5rem 1rem; }
+  }
+
+  // blockquote {
+  //   border-left: 3px solid var(--link-color);
+  // }
+}
+
+// ─── Sidebar nav ─────────────────────────────────────────────────────────────
+
+.nav-list .nav-list-item .nav-list-link {
+  font-size: 0.875rem;
+  border-radius: 4px;
+}
+
+// ─── Override del layout expansivo de just-the-docs en pantallas anchas ──────
+//
+// Por defecto, a partir del breakpoint "lg" (≥ 66.5rem / ≈ 1064px) el tema:
+//  • Expande el sidebar para rellenar el espacio a la izquierda del contenido
+//    centrado: en 1920px el sidebar mide ≈ 692px y sus links quedan alineados
+//    al borde derecho del panel (flex-end), apareciendo "centrados" en pantalla.
+//  • Limita .main y .main-content-wrap a 50rem (800px) con margin: auto.
+//
+// Lo reemplazamos por:
+//  • Sidebar fijo en 16.5rem (264px), pegado al borde izquierdo del viewport.
+//  • Links del sidebar alineados al borde izquierdo del panel (flex-start).
+//  • .main y .main-content-wrap sin restricción de ancho → el centrado lo
+//    gestiona nuestro .main-content-toc-wrap (max-width: 1280px, margin: auto).
+
+@media (min-width: 50rem) {       // breakpoint md — anular align-items: flex-end
+  .side-bar {
+    align-items: flex-start;      // links pegados a la izquierda del panel
+  }
+}
+
+@media (min-width: 66.5rem) {     // breakpoint lg — anular layout expansivo
+  .side-bar {
+    width: 25rem;                 // 400px — espacio suficiente para items anidados largos
+  }
+
+  // El tema fija site-header/site-nav/site-footer a $nav-width (16.5rem) en lg.
+  // Los expandimos al 100% del sidebar redimensionado.
+  .site-header,
+  .site-nav,
+  .site-footer {
+    width: 100%;
+  }
+
+  .side-bar + .main {
+    margin-left: 25rem;           // margen fijo = ancho del sidebar
+  }
+
+  .main {
+    max-width: none;              // elimina el límite de 50rem (800px)
+    margin: 0;                    // elimina el auto-centrado de .main
+  }
+
+  .main-content-wrap {
+    max-width: none;              // elimina el límite interno de 50rem
+    // el padding lateral del tema se conserva
+  }
+
+  .search-input-wrap {
+    max-width: none;              // quita el cap de $search-results-width (536px); width:100% del tema se conserva
+  }
+}
+
+// ─── Layout de 3 columnas: sidebar | contenido | TOC ─────────────────────────
+//
+// En pantallas >= 1100 px se activa el flex wrapper que rodea .main-content y
+// .page-toc. El sidebar (gestionado por el tema) queda pegado a la izquierda.
+// El bloque contenido+TOC se centra en el espacio disponible y ocupa ≈ 2/3 del
+// viewport (1280 px en 1920 px). El TOC está incluido dentro de ese ancho.
+// En pantallas menores el TOC se oculta y el contenido ocupa el ancho completo.
+
+@media (min-width: 1100px) {
+
+  // Wrapper inyectado por JS alrededor de .main-content y .page-toc
+  .main-content-toc-wrap {
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+    // ≈ 2/3 de 1920 px; el TOC (200 px + gap 32 px) está incluido en este ancho
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  // Contenido ocupa todo el espacio libre que deja el TOC dentro del wrapper
+  .main-content {
+    flex: 1;
+    min-width: 0;      // evita overflow en flex
+    max-width: none;   // el wrapper controla el ancho total; sin límite propio aquí
+    margin-left: 0;    // anula el margin: 0 auto del tema en este contexto
+    margin-right: 0;
+  }
+}
+
+// ─── TOC de página (columna derecha) ─────────────────────────────────────────
+
+// Oculto en pantallas pequeñas
+.page-toc { display: none; }
+
+@media (min-width: 1100px) {
+  .page-toc {
+    display: block;
+    position: sticky;
+    top: 4rem;
+    width: 200px;
+    flex-shrink: 0;
+    max-height: calc(100vh - 5rem);
+    overflow-y: auto;
+    font-size: 0.8rem;
+    padding-left: 0.875rem;
+    border-left: 2px solid var(--border-color);
+
+    &::-webkit-scrollbar { width: 3px; }
+    &::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
+    }
+
+    .page-toc-title {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      margin: 0 0 0.75rem;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    li { margin: 0.3rem 0; }
+
+    a {
+      display: block;
+      color: var(--body-text-color);
+      text-decoration: none;
+      line-height: 1.35;
+      opacity: 0.65;
+      transition: opacity 0.15s, color 0.15s;
+
+      &:hover,
+      &.is-active {
+        opacity: 1;
+        color: var(--link-color);
+      }
+    }
+
+    li.toc-h3 {
+      padding-left: 0.75rem;
+      font-size: 0.76rem;
+    }
+  }
+}

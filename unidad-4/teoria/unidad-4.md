@@ -1,7 +1,8 @@
 ---
 layout: default
 title: Apunte completo
-parent: Unidad 4
+parent: Teoría
+grand_parent: Unidad 4
 nav_order: 1
 permalink: /unidad-4/teoria/
 ---

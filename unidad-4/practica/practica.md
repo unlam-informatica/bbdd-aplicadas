@@ -1,8 +1,9 @@
 ---
 layout: default
 title: Práctica
-parent: Unidad 4
-nav_order: 8
+parent: Práctica
+grand_parent: Unidad 4
+nav_order: 1
 permalink: /unidad-4/practica/
 ---
 

@@ -1,7 +1,8 @@
 ---
 layout: default
 title: MongoDB Compass
-parent: Unidad 4
+parent: Teoría
+grand_parent: Unidad 4
 nav_order: 6
 permalink: /unidad-4/guias/mongodb-compass/
 ---

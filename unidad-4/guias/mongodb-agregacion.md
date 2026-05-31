@@ -1,7 +1,8 @@
 ---
 layout: default
 title: MongoDB — Aggregation, Índices y Vistas
-parent: Unidad 4
+parent: Teoría
+grand_parent: Unidad 4
 nav_order: 5
 permalink: /unidad-4/guias/mongodb-agregacion/
 ---
