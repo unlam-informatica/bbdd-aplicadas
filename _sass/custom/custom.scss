@@ -1,5 +1,22 @@
 // custom.scss — se importa después del tema (reglas CSS adicionales).
 
+:root {
+  --site-accent: #006b3f;
+  --site-accent-dark: #004f30;
+  --site-highlight: #f3c300;
+  --site-ink: #17231d;
+  --site-muted: #5d6b64;
+  --site-surface: #ffffff;
+  --site-border: #d8e0dc;
+}
+
+body {
+  color: var(--site-ink);
+  // Fondo casi blanco para lectura prolongada: reduce el tinte verde global y
+  // deja el color institucional como acento, no como superficie dominante.
+  background: #fdfdfb;
+}
+
 // ─── Contenido principal ─────────────────────────────────────────────────────
 
 .main-content {
@@ -33,11 +50,59 @@
     font-size: 0.875rem;
   }
 
-  table {
-    font-size: 0.9rem;
+  // ─── Tablas ─────────────────────────────────────────────────────────────
+  // Estilo simple y aireado: sin caja exterior ni cebra. Solo un encabezado
+  // claro con línea de acento, separadores horizontales finos entre filas y un
+  // hover sutil. Menos ruido visual = más fácil de leer.
+  .table-wrapper {
+    margin: 1.25rem 0;
+    padding: 0;
+    background: transparent;
+    border: 1px solid rgba(0, 107, 63, 0.10);
+    border-radius: 0;
+    box-shadow: none;
+  }
 
-    th { padding: 0.6rem 1rem; }
-    td { padding: 0.5rem 1rem; }
+  table {
+    display: table;            // anula el `display: block` del tema (que rompe el ancho)
+    width: 100%;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+    background: transparent;
+    border-collapse: collapse;
+    border: 1px solid rgba(0, 107, 63, 0.10);
+    border-radius: 0;
+    box-shadow: none;
+
+    th,
+    td {
+      padding: 0.65rem 0.9rem;
+      text-align: left;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: top;
+    }
+
+    thead th {
+      font-weight: 600;
+      color: var(--site-accent-dark);
+      background: rgba(0, 107, 63, 0.035);
+      border-bottom: 2px solid rgba(0, 107, 63, 0.32);      // acento bajo el encabezado
+    }
+
+    tbody tr {
+      transition: background-color 0.12s ease;
+    }
+
+    tbody tr:hover {
+      background-color: rgba(0, 107, 63, 0.045);            // resalta la fila al pasar
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;                                  // sin línea bajo la última fila
+    }
   }
 
   // blockquote {
@@ -45,11 +110,196 @@
   // }
 }
 
+// ─── Mermaid (diagramas UML / flujo) ────────────────────────────────────────
+//
+// Los colores internos del SVG se definen en `_includes/mermaid_config.js`.
+// Acá solo damos aire, borde y scroll horizontal al bloque renderizado.
+
+.main-content {
+  .mermaid,
+  pre:has(> code.language-mermaid) {
+    display: block;
+    margin: 1.25rem 0;
+    padding: 1rem;
+    overflow-x: auto;
+    background: #fffef7;
+    border: 1px solid rgba(0, 107, 63, 0.18);
+    border-radius: 6px;
+  }
+
+  code.language-mermaid {
+    display: block;
+    padding: 0;
+    background: transparent;
+  }
+
+  .mermaid svg,
+  .language-mermaid svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+    background: #fffef7;
+  }
+
+  .mermaid-zoomable {
+    cursor: zoom-in;
+  }
+}
+
+.mermaid-modal[hidden] {
+  display: none;
+}
+
+.mermaid-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.mermaid-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 24, 21, 0.72);
+}
+
+.mermaid-modal__panel {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: min(96vw, 1180px);
+  max-height: min(92vh, 900px);
+  overflow: hidden;
+  background: #fffef7;
+  border: 1px solid rgba(0, 107, 63, 0.18);
+  border-radius: 8px;
+  box-shadow: 0 24px 80px rgba(17, 24, 21, 0.28);
+}
+
+.mermaid-modal__close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  z-index: 2;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  color: var(--site-accent-dark);
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(0, 107, 63, 0.18);
+  border-radius: 999px;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.mermaid-modal__close:hover,
+.mermaid-modal__close:focus-visible {
+  background: #ffffff;
+  border-color: rgba(0, 107, 63, 0.32);
+  outline: none;
+}
+
+.mermaid-modal__stage {
+  flex: 1;
+  min-height: 0;
+  padding: 2.75rem 1rem 1rem;
+  overflow: auto;
+  background: #fffef7;
+}
+
+.mermaid-modal__stage svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+  margin: 0 auto;
+}
+
+body.mermaid-modal-open {
+  overflow: hidden;
+}
+
+// ─── Callouts: paleta accesible para light mode ─────────────────────────────
+//
+// Unificamos los cinco callouts con buenas prácticas de UX para admoniciones:
+//  • un acento de alto contraste por cada tipo,
+//  • tonos diferenciados (azul / amarillo / rojo / ámbar / teal) para que el
+//    tipo de callout se reconozca de un vistazo,
+//  • un fondo translúcido tenue (relleno suave) que separa el bloque del cuerpo
+//    sin "gritar".
+// El acento se aplica al borde izquierdo (jerarquía visual) y al título.
+
+$callouts-acentos: (
+  "note":       #0969da,  // Nota — azul info
+  "important":  #8a6a00,  // Importante — amarillo accesible
+  "warning":    #cf222e,  // Atención — rojo
+  "enunciado":  #9a6700,  // Enunciado — ámbar
+  "resolucion": #0a7f72,  // Resolución — teal
+);
+
+@each $nombre, $acento in $callouts-acentos {
+  p.#{$nombre},
+  blockquote.#{$nombre} {
+    background-color: rgba($acento, 0.08);
+    border: 1px solid rgba($acento, 0.28);
+    border-left: 0.25rem solid $acento;
+
+    &::before { color: $acento; }   // título (Nota, Importante, …)
+  }
+}
+
 // ─── Sidebar nav ─────────────────────────────────────────────────────────────
+
+.side-bar {
+  background: #f8f9f8;
+  border-right-color: var(--site-border);
+}
+
+.site-title,
+.site-title:hover {
+  color: var(--site-accent-dark);
+}
+
+.search-input {
+  background-color: var(--site-surface);
+  border-color: var(--site-border);
+
+  &:focus {
+    border-color: rgba(0, 107, 63, 0.55);
+    box-shadow: 0 0 0 3px rgba(0, 107, 63, 0.12);
+  }
+}
 
 .nav-list .nav-list-item .nav-list-link {
   font-size: 0.875rem;
   border-radius: 4px;
+
+  &:hover,
+  &.active {
+    color: var(--site-accent-dark);
+    background: rgba(0, 107, 63, 0.075);
+  }
+}
+
+.main-header {
+  background-color: rgba(255, 255, 255, 0.92);
+  border-bottom-color: var(--site-border);
+}
+
+.breadcrumb-nav-list-item,
+.breadcrumb-nav-list-item a {
+  color: var(--site-muted);
+}
+
+.btn-primary {
+  background-color: var(--site-accent);
+  background-image: linear-gradient(180deg, var(--site-accent), var(--site-accent-dark));
 }
 
 // ─── Override del layout expansivo de just-the-docs en pantallas anchas ──────

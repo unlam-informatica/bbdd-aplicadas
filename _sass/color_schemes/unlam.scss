@@ -1,0 +1,45 @@
+// Color scheme base UNLaM para just-the-docs.
+// Definido como esquema propio según la documentación del tema:
+// https://just-the-docs.com/docs/customization/#custom-schemes
+
+$site-accent: #006b3f;
+$site-accent-dark: #004f30;
+$site-highlight: #f3c300;
+$site-ink: #17231d;
+$site-muted: #5d6b64;
+$site-surface: #ffffff;
+$site-page: #fdfdfb;
+$site-border: #d8e0dc;
+$site-code: #f7f8f7;
+
+$body-background-color: $site-surface;
+$body-heading-color: $site-accent-dark;
+$body-text-color: $site-ink;
+$link-color: $site-accent;
+$nav-child-link-color: $site-muted;
+$sidebar-color: #f8f9f8;
+$border-color: $site-border;
+$search-background-color: $site-surface;
+$table-background-color: $site-surface;
+$code-background-color: $site-code;
+$feedback-color: #edf4f0;
+$base-button-color: #f4f5f4;
+$btn-primary-color: $site-accent;
+
+// Colores del tema para utilidades/callouts.
+$green-000: #e8f4ee;
+$green-100: #cce5da;
+$green-200: #80b59f;
+$green-300: $site-accent;
+
+// `note` usa `color: blue` en _config.yml; se conserva azul para
+// diferenciar notas informativas del color principal.
+$blue-000: #e8f1ff;
+$blue-100: #cfe0ff;
+$blue-200: #79a8e8;
+$blue-300: #0969da;
+
+$yellow-000: #fff8da;
+$yellow-100: #ffef9f;
+$yellow-200: #f7d84c;
+$yellow-300: #8a6a00;

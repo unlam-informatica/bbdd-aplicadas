@@ -4,4 +4,31 @@
 <link rel="apple-touch-icon" sizes="192x192" href="{{ '/assets/favicon/favicon-192.png' | relative_url }}">
 <link rel="manifest" href="{{ '/assets/favicon/site.webmanifest' | relative_url }}">
 
+<!-- MathJax 3: renderizado de LaTeX en todas las páginas. -->
+<link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" crossorigin>
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']],
+      displayMath: [['$$', '$$'], ['\\[', '\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      tags: 'ams'
+    },
+    chtml: {
+      matchFontHeight: false
+    },
+    options: {
+      skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      enableMenu: false,
+      renderActions: {
+        assistiveMml: []
+      }
+    }
+  };
+</script>
+<script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 <script defer src="{{ '/assets/js/page-toc.js' | relative_url }}"></script>
+<script defer src="{{ '/assets/js/mermaid-zoom.js' | relative_url }}"></script>

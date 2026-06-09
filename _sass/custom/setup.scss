@@ -1,2 +1,13 @@
-// setup.scss — se importa antes del tema.
-// Sin overrides de color: se respeta la paleta original de just-the-docs dark.
+// Variables SCSS compartidas por el tema y por los estilos propios del sitio.
+// Just the Docs importa este archivo antes de emitir las clases CSS, por lo
+// que acá van definiciones de variables nuevas, no estilos de layout.
+
+$amber-000: #fff8e1;
+$amber-100: #ffe082;
+$amber-200: #ffd54f;
+$amber-300: #9a6700;
+
+$teal-000: #e0f2f1;
+$teal-100: #80cbc4;
+$teal-200: #4db6ac;
+$teal-300: #0a7f72;
