@@ -4,7 +4,7 @@ title: MongoDB — CRUD y consultas
 parent: Teoría
 grand_parent: Unidad 4
 nav_order: 4
-permalink: /unidad-4/guias/mongodb-crud/
+permalink: /unidad-4/teoria/mongodb-crud/
 ---
 
 [← Unidad 4](../)

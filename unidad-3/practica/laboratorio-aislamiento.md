@@ -1,13 +1,13 @@
 ---
 layout: default
 title: Laboratorio — Niveles de aislamiento
-parent: Teoría
+parent: Práctica
 grand_parent: Unidad 3
-nav_order: 7
+nav_order: 2
 permalink: /unidad-3/practica/laboratorio-aislamiento/
 ---
 
-[← Transacciones y concurrencia](/unidad-3/guias/transacciones-y-concurrencia/)
+[← Transacciones y concurrencia](/unidad-3/teoria/transacciones-y-concurrencia/)
 
 # Laboratorio — Niveles de aislamiento
 

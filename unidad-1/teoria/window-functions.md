@@ -4,7 +4,7 @@ title: Window Functions
 parent: Teoría
 grand_parent: Unidad 1
 nav_order: 3
-permalink: /unidad-1/guias/window-functions/
+permalink: /unidad-1/teoria/window-functions/
 ---
 
 # Window Functions

@@ -4,7 +4,7 @@ title: Práctica
 parent: Práctica
 grand_parent: Unidad 4
 nav_order: 1
-permalink: /unidad-4/practica/
+permalink: /unidad-4/practica/ejercicios/
 ---
 
 [← Unidad 4](../)

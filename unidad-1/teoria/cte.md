@@ -4,7 +4,7 @@ title: Common Table Expressions
 parent: Teoría
 grand_parent: Unidad 1
 nav_order: 5
-permalink: /unidad-1/guias/cte/
+permalink: /unidad-1/teoria/cte/
 ---
 
 ## ¿Qué es una CTE?

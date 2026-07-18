@@ -134,7 +134,7 @@ Reglas clave:
 - Usar `THROW` en código nuevo, no `RAISERROR` — propaga el error original sin modificarlo.
 - El COMMIT debe estar dentro del TRY, nunca fuera.
 
-Ver la [guía de Transacciones y Concurrencia](/unidad-3/guias/transacciones-y-concurrencia/) para `XACT_ABORT`, el laboratorio TCL completo y detección de deadlocks con DMVs.
+Ver la [guía de Transacciones y Concurrencia](/unidad-3/teoria/transacciones-y-concurrencia/) para `XACT_ABORT`, el laboratorio TCL completo y detección de deadlocks con DMVs.
 
 ---
 
@@ -275,7 +275,7 @@ Sesión B: Lock en Fila 2 → quiere Fila 1 ← SQL Server detecta el ciclo → 
 4. Usar SNAPSHOT o RCSI para eliminar bloqueos de lectura como fuente de deadlocks.
 5. `SET DEADLOCK_PRIORITY LOW` en la sesión que se prefiere sea víctima.
 
-Ver la [guía de Transacciones y Concurrencia](/unidad-3/guias/transacciones-y-concurrencia/) para la query de detección de deadlocks via `system_health` y ejemplos de wait stats.
+Ver la [guía de Transacciones y Concurrencia](/unidad-3/teoria/transacciones-y-concurrencia/) para la query de detección de deadlocks via `system_health` y ejemplos de wait stats.
 
 ---
 

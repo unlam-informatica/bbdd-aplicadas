@@ -4,7 +4,7 @@ title: XML en SQL Server
 parent: Teoría
 grand_parent: Unidad 2
 nav_order: 7
-permalink: /unidad-2/guias/xml-en-sql/
+permalink: /unidad-2/teoria/xml-en-sql/
 ---
 
 [← Unidad 2](../)

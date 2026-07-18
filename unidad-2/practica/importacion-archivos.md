@@ -9,7 +9,7 @@ permalink: /unidad-2/practica/importacion-archivos/
 
 # Práctica — Importación de archivos
 
-> Ver guía de referencia: [Importación de archivos](../guias/importacion-de-archivos/)
+> Ver guía de referencia: [Importación de archivos](../teoria/importacion-de-archivos/)
 
 ---
 

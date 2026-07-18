@@ -4,7 +4,7 @@ title: Métricas de rendimiento
 parent: Teoría
 grand_parent: Unidad 3
 nav_order: 5
-permalink: /unidad-3/guias/metricas-de-rendimiento/
+permalink: /unidad-3/teoria/metricas-de-rendimiento/
 ---
 
 [← Unidad 3](../)

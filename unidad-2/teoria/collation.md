@@ -4,7 +4,7 @@ title: Collation / Intercalación
 parent: Teoría
 grand_parent: Unidad 2
 nav_order: 3
-permalink: /unidad-2/guias/collation/
+permalink: /unidad-2/teoria/collation/
 ---
 
 [← Unidad 2](../)

@@ -4,7 +4,7 @@ title: MongoDB — Aggregation, Índices y Vistas
 parent: Teoría
 grand_parent: Unidad 4
 nav_order: 5
-permalink: /unidad-4/guias/mongodb-agregacion/
+permalink: /unidad-4/teoria/mongodb-agregacion/
 ---
 
 [← Unidad 4](../)

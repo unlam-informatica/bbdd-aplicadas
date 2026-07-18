@@ -14,20 +14,14 @@ Bases de datos transaccionales (OLTP), propiedades ACID, commit/rollback, OLTP v
 | Archivo | Tema |
 |---------|------|
 | [bd-transaccionales](./teoria/bd-transaccionales/) | OLTP, ACID, concurrencia, niveles de aislamiento, OLAP, DWH, SQL Server motor |
+| [bd-en-memoria](./teoria/bd-en-memoria/) | Tablas en memoria (In-Memory OLTP): configuración, índices, comparativa |
+| [collation](./teoria/collation/) | Collation en SQL Server: sensibilidades, niveles, consultas y cláusula COLLATE |
 | [formatos-conectividad](./teoria/formatos-conectividad/) | ODBC/JDBC, formatos EDI/CSV/XML/JSON/YAML, APIs REST |
-
-## Guías
-
-| Archivo | Tema |
-|---------|------|
-| [collation](./guias/collation/) | Collation en SQL Server: sensibilidades, niveles, consultas y cláusula COLLATE |
-| [bd-en-memoria](./guias/bd-en-memoria/) | Tablas en memoria (In-Memory OLTP): configuración, índices, comparativa |
-| [formatos-de-intercambio](./guias/formatos-de-intercambio/) | EDI, CSV, XML, JSON, YAML: ejemplos y operaciones T-SQL |
-| [importacion-de-archivos](./guias/importacion-de-archivos/) | BULK INSERT (CSV) y OPENROWSET + OPENJSON (JSON): sintaxis y opciones |
-| [json-en-sql](./guias/json-en-sql/) | OPENJSON, FOR JSON, JSON_VALUE/QUERY/MODIFY: parseo y generación de JSON |
-| [xml-en-sql](./guias/xml-en-sql/) | Importar XML con OPENROWSET + .nodes(), OPENXML y exportar con FOR XML |
-| [apis-desde-sql](./guias/apis-desde-sql/) | Llamadas HTTP desde T-SQL con Ole Automation Procedures: GET y POST |
-| [transacciones](./guias/transacciones/) | BEGIN/COMMIT/ROLLBACK, TRY/CATCH, XACT_ABORT, niveles de aislamiento, deadlocks |
+| [formatos-de-intercambio](./teoria/formatos-de-intercambio/) | EDI, CSV, XML, JSON, YAML: ejemplos y operaciones T-SQL |
+| [json-en-sql](./teoria/json-en-sql/) | OPENJSON, FOR JSON, JSON_VALUE/QUERY/MODIFY: parseo y generación de JSON |
+| [xml-en-sql](./teoria/xml-en-sql/) | Importar XML con OPENROWSET + .nodes(), OPENXML y exportar con FOR XML |
+| [importacion-de-archivos](./teoria/importacion-de-archivos/) | BULK INSERT (CSV) y OPENROWSET + OPENJSON (JSON): sintaxis y opciones |
+| [apis-desde-sql](./teoria/apis-desde-sql/) | Llamadas HTTP desde T-SQL con Ole Automation Procedures: GET y POST |
 
 ## Práctica
 

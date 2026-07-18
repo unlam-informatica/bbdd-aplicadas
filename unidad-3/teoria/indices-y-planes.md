@@ -4,7 +4,7 @@ title: Planes de ejecución y estadísticas
 parent: Teoría
 grand_parent: Unidad 3
 nav_order: 4
-permalink: /unidad-3/guias/indices-y-planes/
+permalink: /unidad-3/teoria/indices-y-planes/
 ---
 
 [← Unidad 3](../)

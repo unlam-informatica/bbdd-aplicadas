@@ -9,7 +9,7 @@ permalink: /unidad-2/practica/json/
 
 # Práctica — JSON en SQL Server
 
-> Ver guía de referencia: [JSON en SQL Server](/unidad-2/guias/json-en-sql/)
+> Ver guía de referencia: [JSON en SQL Server](/unidad-2/teoria/json-en-sql/)
 
 ---
 

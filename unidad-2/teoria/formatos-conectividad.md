@@ -126,7 +126,7 @@ anio,mes,municipio_nombre,genero,cantidad
 2019,3,La Matanza,femenino,66
 ```
 
-Ver la [guía de Importación de Archivos](/unidad-2/guias/importacion-de-archivos/) para `BULK INSERT` y opciones de T-SQL.
+Ver la [guía de Importación de Archivos](/unidad-2/teoria/importacion-de-archivos/) para `BULK INSERT` y opciones de T-SQL.
 
 ### Ancho fijo
 
@@ -173,7 +173,7 @@ Se usa en sistemas legados (mainframes), archivos bancarios (COBRANZA, ACREDITAC
 </respuesta>
 ```
 
-Ver la [guía de XML en SQL](/unidad-2/guias/xml-en-sql/) para `FOR XML`, `OPENXML`, `.nodes()` y más.
+Ver la [guía de XML en SQL](/unidad-2/teoria/xml-en-sql/) para `FOR XML`, `OPENXML`, `.nodes()` y más.
 
 ### JSON — JavaScript Object Notation
 
@@ -201,7 +201,7 @@ Ver la [guía de XML en SQL](/unidad-2/guias/xml-en-sql/) para `FOR XML`, `OPENX
 ]
 ```
 
-Ver la [guía de JSON en SQL](/unidad-2/guias/json-en-sql/) para `OPENJSON`, `FOR JSON`, `JSON_VALUE`, `JSON_QUERY` y `JSON_MODIFY`.
+Ver la [guía de JSON en SQL](/unidad-2/teoria/json-en-sql/) para `OPENJSON`, `FOR JSON`, `JSON_VALUE`, `JSON_QUERY` y `JSON_MODIFY`.
 
 ### YAML — YAML Ain't a Markup Language
 
@@ -296,4 +296,4 @@ Content-Type: application/json
 - Escribir tests automatizados para las respuestas.
 - Generar documentación de la API.
 
-Ver la [guía de APIs desde SQL](/unidad-2/guias/apis-desde-sql/) para hacer llamadas HTTP directamente desde T-SQL con Ole Automation Procedures.
+Ver la [guía de APIs desde SQL](/unidad-2/teoria/apis-desde-sql/) para hacer llamadas HTTP directamente desde T-SQL con Ole Automation Procedures.

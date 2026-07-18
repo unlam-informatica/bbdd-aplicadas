@@ -164,7 +164,7 @@ WITH (
 GO
 ```
 
-> Consulte la guía [importacion-de-archivos](../guias/importacion-de-archivos/) para referencia completa de las opciones de `BULK INSERT`.
+> Consulte la guía [importacion-de-archivos](../teoria/importacion-de-archivos/) para referencia completa de las opciones de `BULK INSERT`.
 
 ---
 

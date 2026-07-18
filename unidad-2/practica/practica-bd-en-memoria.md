@@ -9,7 +9,7 @@ permalink: /unidad-2/practica/bd-en-memoria/
 
 # Práctica — BD en memoria (In-Memory OLTP)
 
-> Ver guía de referencia: [BD en memoria](/unidad-2/guias/bd-en-memoria/)
+> Ver guía de referencia: [BD en memoria](/unidad-2/teoria/bd-en-memoria/)
 
 ---
 

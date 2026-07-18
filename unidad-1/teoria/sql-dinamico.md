@@ -4,7 +4,7 @@ title: SQL Dinámico
 parent: Teoría
 grand_parent: Unidad 1
 nav_order: 6
-permalink: /unidad-1/guias/sql-dinamico/
+permalink: /unidad-1/teoria/sql-dinamico/
 ---
 
 ## ¿Qué es SQL dinámico?

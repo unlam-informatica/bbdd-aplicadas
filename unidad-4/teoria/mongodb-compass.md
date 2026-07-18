@@ -4,7 +4,7 @@ title: MongoDB Compass
 parent: Teoría
 grand_parent: Unidad 4
 nav_order: 6
-permalink: /unidad-4/guias/mongodb-compass/
+permalink: /unidad-4/teoria/mongodb-compass/
 ---
 
 [← Unidad 4](../)

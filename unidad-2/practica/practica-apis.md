@@ -9,7 +9,7 @@ permalink: /unidad-2/practica/apis/
 
 # Práctica — APIs desde SQL Server
 
-> Ver guía de referencia: [APIs desde SQL Server](/unidad-2/guias/apis-desde-sql/)
+> Ver guía de referencia: [APIs desde SQL Server](/unidad-2/teoria/apis-desde-sql/)
 
 > **Nota**: Estas prácticas requieren que `Ole Automation Procedures` esté habilitado y que el servidor SQL tenga acceso a Internet. Verificar con el administrador antes de ejecutar en un entorno de producción o educativo con restricciones de red.
 

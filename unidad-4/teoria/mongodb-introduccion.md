@@ -4,7 +4,7 @@ title: MongoDB — Introducción
 parent: Teoría
 grand_parent: Unidad 4
 nav_order: 3
-permalink: /unidad-4/guias/mongodb-introduccion/
+permalink: /unidad-4/teoria/mongodb-introduccion/
 ---
 
 [← Unidad 4](../)

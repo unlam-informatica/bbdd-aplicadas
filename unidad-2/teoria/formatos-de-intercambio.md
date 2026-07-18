@@ -4,7 +4,7 @@ title: Formatos de intercambio
 parent: Teoría
 grand_parent: Unidad 2
 nav_order: 5
-permalink: /unidad-2/guias/formatos-de-intercambio/
+permalink: /unidad-2/teoria/formatos-de-intercambio/
 ---
 
 [← Unidad 2](../)

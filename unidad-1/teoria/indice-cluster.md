@@ -4,7 +4,7 @@ title: Índice Clustered
 parent: Teoría
 grand_parent: Unidad 1
 nav_order: 7
-permalink: /unidad-1/guias/indice-cluster/
+permalink: /unidad-1/teoria/indice-cluster/
 ---
 
 ## Inserción en una tabla con índice clustered en SQL Server

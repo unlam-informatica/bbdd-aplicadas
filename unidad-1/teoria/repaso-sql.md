@@ -64,7 +64,7 @@ CREATE DATABASE unlam;
 USE unlam;
 ```
 
-La cláusula `COLLATE` define las reglas de comparación y orden de texto (mayúsculas/minúsculas, acentos, etc.). Ver la [guía de Collation](/unidad-2/guias/collation/) para el detalle completo.
+La cláusula `COLLATE` define las reglas de comparación y orden de texto (mayúsculas/minúsculas, acentos, etc.). Ver la [guía de Collation](/unidad-2/teoria/collation/) para el detalle completo.
 
 ```sql
 CREATE DATABASE unlam
@@ -584,8 +584,8 @@ Los siguientes temas tienen una guía dedicada con mayor profundidad y ejemplos:
 
 | Tema | Guía |
 |------|------|
-| Window Functions | [Window Functions](/unidad-1/guias/window-functions/) |
-| Common Table Expressions | [CTE](/unidad-1/guias/cte/) |
-| SQL Dinámico | [SQL Dinámico](/unidad-1/guias/sql-dinamico/) |
-| PIVOT / UNPIVOT | [PIVOT](/unidad-1/guias/pivot/) |
-| Índice Clustered | [Índice Clustered](/unidad-1/guias/indice-cluster/) |
+| Window Functions | [Window Functions](/unidad-1/teoria/window-functions/) |
+| Common Table Expressions | [CTE](/unidad-1/teoria/cte/) |
+| SQL Dinámico | [SQL Dinámico](/unidad-1/teoria/sql-dinamico/) |
+| PIVOT / UNPIVOT | [PIVOT](/unidad-1/teoria/pivot/) |
+| Índice Clustered | [Índice Clustered](/unidad-1/teoria/indice-cluster/) |

@@ -4,7 +4,7 @@ title: Apunte completo
 parent: Teoría
 grand_parent: Unidad 4
 nav_order: 1
-permalink: /unidad-4/teoria/
+permalink: /unidad-4/teoria/apunte-completo/
 ---
 
 [← Unidad 4](../)

@@ -169,7 +169,7 @@ SQL define cuatro niveles, cada uno bloqueando más problemas a cambio de mayor 
 
 La mayoría de los sistemas usan `READ COMMITTED` (el default en SQL Server y PostgreSQL) porque evita el problema más grave sin el costo de bloquear todo. `SERIALIZABLE` garantiza aislamiento total pero puede degradar el rendimiento en sistemas con alta concurrencia.
 
-SQL Server agrega además `SNAPSHOT ISOLATION`, que usa versiones de fila en lugar de bloqueos. Ver la [guía de Transacciones](/unidad-2/guias/transacciones/) para la sintaxis completa de `BEGIN/COMMIT/ROLLBACK`, `TRY/CATCH`, `XACT_ABORT` y ejemplos de cada nivel.
+SQL Server agrega además `SNAPSHOT ISOLATION`, que usa versiones de fila en lugar de bloqueos. Ver la [guía de Transacciones](/unidad-3/teoria/transacciones-y-concurrencia/) para la sintaxis completa de `BEGIN/COMMIT/ROLLBACK`, `TRY/CATCH`, `XACT_ABORT` y ejemplos de cada nivel.
 
 ### OLTP vs OLAP
 
@@ -310,7 +310,7 @@ El nombre sigue el patrón `Idioma_Sensibilidades`, por ejemplo `Modern_Spanish_
 | **CI/CS** | Case Insensitive/Sensitive | `'a'` = `'A'` / `'a'` ≠ `'A'` |
 | **AI/AS** | Accent Insensitive/Sensitive | `'a'` = `'á'` / `'a'` ≠ `'á'` |
 
-El collation se puede definir a nivel de instancia, base de datos o columna, y heredarse en cascada. Ver la [guía de Collation](/unidad-2/guias/collation/) para consultas, cambios y cláusula `COLLATE` en queries.
+El collation se puede definir a nivel de instancia, base de datos o columna, y heredarse en cascada. Ver la [guía de Collation](/unidad-2/teoria/collation/) para consultas, cambios y cláusula `COLLATE` en queries.
 
 ---
 
@@ -332,4 +332,4 @@ SQL Server incluye soporte nativo mediante **In-Memory OLTP**. Las tablas en mem
 | Estadísticas | No | Sí | Sí |
 | Concurrencia | Baja | Media | Muy alta (lock-free) |
 
-Ver la [guía de BD en Memoria](/unidad-2/guias/bd-en-memoria/) para la implementación completa con `FILEGROUP`, índices hash y comparativas de rendimiento.
+Ver la [guía de BD en Memoria](/unidad-2/teoria/bd-en-memoria/) para la implementación completa con `FILEGROUP`, índices hash y comparativas de rendimiento.

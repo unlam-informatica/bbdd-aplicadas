@@ -4,7 +4,7 @@ title: NoSQL — Conceptos y modelos
 parent: Teoría
 grand_parent: Unidad 4
 nav_order: 2
-permalink: /unidad-4/guias/nosql-conceptos/
+permalink: /unidad-4/teoria/nosql-conceptos/
 ---
 
 [← Unidad 4](../)

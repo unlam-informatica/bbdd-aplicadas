@@ -4,7 +4,7 @@ title: TCL - Control de Transacciones
 parent: Teoría
 grand_parent: Unidad 3
 nav_order: 2
-permalink: /unidad-3/guias/transacciones-y-concurrencia/
+permalink: /unidad-3/teoria/transacciones-y-concurrencia/
 ---
 
 # Transacciones y concurrencia en SQL Server

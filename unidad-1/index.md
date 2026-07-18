@@ -15,16 +15,11 @@ DDL, DML, constraints, NULL, JOINs, vistas, procedimientos almacenados, triggers
 |---------|------|
 | [conceptos-basicos](./teoria/conceptos-basicos/) | Qué es una BD, DBMS, cómo elegir, DBA vs programador |
 | [repaso-sql](./teoria/repaso-sql/) | DDL, DML, constraints, NULL, JOINs, vistas, SPs, triggers, funciones |
-
-## Guías
-
-| Archivo | Tema |
-|---------|------|
-| [window-functions](./guias/window-functions/) | RANK, DENSE_RANK, ROW_NUMBER, LAG, LEAD, frames, funciones de agregado OVER |
-| [pivot](./guias/pivot/) | PIVOT estático, dinámico, UNPIVOT |
-| [cte](./guias/cte/) | CTE simple, múltiple, recursiva, con DML |
-| [sql-dinamico](./guias/sql-dinamico/) | EXEC, sp_executesql, SQL injection, columnas variables |
-| [indice-cluster](./guias/indice-cluster/) | Índice clustered: inserción, almacenamiento, comparativa |
+| [window-functions](./teoria/window-functions/) | RANK, DENSE_RANK, ROW_NUMBER, LAG, LEAD, frames, funciones de agregado OVER |
+| [pivot](./teoria/pivot/) | PIVOT estático, dinámico, UNPIVOT |
+| [cte](./teoria/cte/) | CTE simple, múltiple, recursiva, con DML |
+| [sql-dinamico](./teoria/sql-dinamico/) | EXEC, sp_executesql, SQL injection, columnas variables |
+| [indice-cluster](./teoria/indice-cluster/) | Índice clustered: inserción, almacenamiento, comparativa |
 
 ## Práctica
 

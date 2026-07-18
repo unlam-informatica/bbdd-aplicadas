@@ -118,7 +118,7 @@ Aparece junto a un NONCLUSTERED INDEX SEEK cuando la consulta necesita columnas 
 
 **Solución**: crear un índice de cobertura con `INCLUDE` para las columnas adicionales.
 
-Ver la [guía de Índices, planes de ejecución y estadísticas](/unidad-3/guias/indices-y-planes/) para las queries de plan cache, ejemplos con StackOverflow2013 y el detalle completo de operadores.
+Ver la [guía de Índices, planes de ejecución y estadísticas](/unidad-3/teoria/indices-y-planes/) para las queries de plan cache, ejemplos con StackOverflow2013 y el detalle completo de operadores.
 
 ---
 
@@ -151,7 +151,7 @@ SQL Server actualiza estadísticas automáticamente cuando `AUTO_UPDATE_STATISTI
 
 **Variables de tabla vs tablas temporales**: las variables de tabla (`DECLARE @t TABLE ...`) no tienen estadísticas — el optimizador asume siempre 1 fila. Las tablas temporales (`#tmp`) sí las generan, lo que produce mejores planes cuando el volumen es significativo.
 
-Ver la [guía de Índices, planes de ejecución y estadísticas](/unidad-3/guias/indices-y-planes/) para la sintaxis completa de `UPDATE STATISTICS`, `sp_MSforeachdb` y las columnas del histograma.
+Ver la [guía de Índices, planes de ejecución y estadísticas](/unidad-3/teoria/indices-y-planes/) para la sintaxis completa de `UPDATE STATISTICS`, `sp_MSforeachdb` y las columnas del histograma.
 
 ---
 
@@ -189,4 +189,4 @@ El modelo de recuperación de la base de datos determina qué se escribe al tran
 | **Tamaño del log** | Se mantiene pequeño | Puede crecer indefinidamente sin backups regulares |
 | **Uso típico** | Desarrollo, bases no críticas | Producción, datos críticos |
 
-Ver la [guía de Métricas de rendimiento](/unidad-3/guias/metricas-de-rendimiento/) para las queries completas de `dm_db_partition_stats`, `dm_io_virtual_file_stats`, backupset y esperas activas.
+Ver la [guía de Métricas de rendimiento](/unidad-3/teoria/metricas-de-rendimiento/) para las queries completas de `dm_db_partition_stats`, `dm_io_virtual_file_stats`, backupset y esperas activas.

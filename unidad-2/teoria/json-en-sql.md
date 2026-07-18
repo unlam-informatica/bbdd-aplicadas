@@ -4,7 +4,7 @@ title: JSON en SQL Server
 parent: Teoría
 grand_parent: Unidad 2
 nav_order: 6
-permalink: /unidad-2/guias/json-en-sql/
+permalink: /unidad-2/teoria/json-en-sql/
 ---
 
 [← Unidad 2](../)

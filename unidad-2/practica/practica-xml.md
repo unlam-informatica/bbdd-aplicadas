@@ -9,7 +9,7 @@ permalink: /unidad-2/practica/xml/
 
 # Práctica — XML en SQL Server
 
-> Ver guía de referencia: [XML en SQL Server](/unidad-2/guias/xml-en-sql/)
+> Ver guía de referencia: [XML en SQL Server](/unidad-2/teoria/xml-en-sql/)
 
 ---
 

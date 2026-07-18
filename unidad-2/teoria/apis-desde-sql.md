@@ -4,7 +4,7 @@ title: APIs desde SQL Server
 parent: Teoría
 grand_parent: Unidad 2
 nav_order: 9
-permalink: /unidad-2/guias/apis-desde-sql/
+permalink: /unidad-2/teoria/apis-desde-sql/
 ---
 
 [← Unidad 2](../)

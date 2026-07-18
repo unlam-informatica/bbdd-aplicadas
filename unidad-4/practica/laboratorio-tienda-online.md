@@ -1,10 +1,10 @@
 ---
 layout: default
 title: Laboratorio — tienda_online
-parent: Teoría
+parent: Práctica
 grand_parent: Unidad 4
-nav_order: 7
-permalink: /unidad-4/guias/laboratorio-tienda-online/
+nav_order: 2
+permalink: /unidad-4/practica/laboratorio-tienda-online/
 ---
 
 [← Unidad 4](../)

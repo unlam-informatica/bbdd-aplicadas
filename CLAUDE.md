@@ -12,8 +12,7 @@ Each unit follows the same internal layout:
 
 ```
 unidad-N/
-├── teoria/      # Full unit summary in Markdown
-├── guias/       # Focused reference guides on specific topics
+├── teoria/      # Full unit summary plus focused reference guides on specific topics
 ├── practica/    # .sql exercise files
 └── images/      # Images referenced from the Markdown files
 ```
@@ -25,8 +24,7 @@ Units 2–6 are planned but not yet created. When adding content, follow the sam
 - **Language**: All content is written in Spanish.
 - **SQL dialect**: SQL Server / T-SQL (the course uses SQL Server).
 - **Markdown**: GitHub-flavored Markdown. Tables, fenced code blocks with language tags (` ```sql `), and heading-based `#` anchors are used throughout. All pages must have Jekyll front matter with at minimum `layout: default` and `title`. Non-index pages (e.g. `teoria/unidad-X.md`) also need an explicit `permalink` so that relative back-links resolve correctly.
-- **Guides** (`guias/`) are self-contained reference documents with examples — not summaries of the teoria. They cover a single specific topic (e.g., window functions).
-- **Teoria files** (`teoria/`) are comprehensive unit summaries covering all topics in the syllabus for that unit.
+- **Teoria files** (`teoria/`) live together in the same folder and come in two flavors: the main unit summary (comprehensive, covers all syllabus topics for that unit) and focused reference guides on a single specific topic with examples (e.g., window functions) — not summaries of the main file. Both are listed together under "Teoría" on the unit's `index.md`, with no separate "Guías" section.
 - SQL files in `practica/` contain commented exercises, not runnable scripts with setup DDL.
 
 ## Units and syllabus

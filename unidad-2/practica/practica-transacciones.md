@@ -9,7 +9,7 @@ permalink: /unidad-2/practica/transacciones/
 
 # Práctica — Transacciones
 
-> Ver guía de referencia: [Transacciones](/unidad-2/guias/transacciones/)
+> Ver guía de referencia: [Transacciones](/unidad-3/teoria/transacciones-y-concurrencia/)
 
 ---
 
