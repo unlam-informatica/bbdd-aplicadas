@@ -45,8 +45,10 @@ mongodb://localhost:27017
 ### Conectar a MongoDB Atlas
 
 ```
-mongodb+srv://estudiante:XJFIpIdyxgdSWkUT@cluster0.tjnu3hi.mongodb.net/
+mongodb+srv://<usuario>:<password>@<cluster>/<base>
 ```
+
+Usar la cadena generada por el clúster y mantener usuario y contraseña fuera del repositorio.
 
 Pestaña **My Queries** guarda las consultas guardadas.  
 Panel lateral izquierdo muestra todas las bases de datos y sus colecciones.
@@ -183,11 +185,24 @@ La barra de filtros acepta la misma sintaxis que `find()`. Las consultas siempre
 ### Opciones adicionales en Compass
 
 Además del filtro, se pueden configurar:
+
 - **Project**: campos a incluir/excluir (`{ _id:0, nombre:1 }`).
 - **Sort**: orden de resultados (`{ nombre: 1 }`).
 - **Skip**: cantidad de documentos a omitir.
 - **Limit**: máximo de documentos a devolver.
 - **Collation**: opciones de comparación de texto (locale, strength, etc.).
+
+Una collation puede indicar:
+
+| Opción | Función |
+|--------|---------|
+| `locale` | Reglas lingüísticas, por ejemplo `es`, `en` o `fr` |
+| `strength` | Nivel de diferencias consideradas; niveles bajos pueden ignorar acentos o mayúsculas |
+| `caseLevel` | Agrega comparación de mayúsculas/minúsculas cuando corresponde |
+| `caseFirst` | Ordena mayúsculas primero, minúsculas primero o usa el valor predeterminado |
+| `numericOrdering` | Ordena cadenas numéricas por valor (`"2"` antes que `"10"`) |
+
+La collation cambia comparación y ordenamiento; para aprovechar un índice, su collation debe ser compatible con la consulta.
 
 ---
 
@@ -273,7 +288,7 @@ La vista aparece en el panel izquierdo junto a las colecciones (marcada como REA
 ### Crear índice por shell
 
 ```javascript
-db.cc_info.createIndex({ "city": 1 })
+db.cc_info.createIndex({ city: 1 }, { name: "city_indx" })
 db.cc_info.getIndexes()
 db.cc_info.dropIndex("city_indx")
 ```

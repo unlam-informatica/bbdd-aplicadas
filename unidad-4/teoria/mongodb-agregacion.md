@@ -33,6 +33,16 @@ db.coleccion.aggregate([
 - Una consulta compleja se puede dividir en varias etapas más simples.
 - Los resultados se pueden guardar en una colección (`$out`) o convertirse en vistas.
 
+```mermaid
+flowchart LR
+    A[(Colección)] --> M[$match]
+    M --> U[$unwind]
+    U --> L[$lookup]
+    L --> G[$group]
+    G --> P[$project]
+    P --> S[$sort / $limit]
+```
+
 **Usos principales:**
 - Agrupar valores de varios documentos (sumar, contar, promediar).
 - Operaciones matemáticas y transformaciones.
@@ -470,6 +480,8 @@ db.datosventas.createIndex({ "cliente.localidad": 1, "producto.marca": 1 })
 
 Permite consultas eficientes que involucren ambos campos simultáneamente. El orden de los campos importa.
 
+Por la regla del **prefijo**, el índice `{ localidad: 1, marca: 1 }` puede ayudar a filtrar por `localidad` sola o por ambos campos, pero normalmente no es la mejor opción para filtrar solo por `marca`.
+
 ```javascript
 db.datosventas.getIndexes()
 // [
@@ -512,7 +524,7 @@ db.tipoProducto.find({ categorias: "computadoras" })
 
 ### Índice sparse (disperso)
 
-Solo indexa los documentos que **contienen** el campo especificado, omitiendo aquellos donde el campo no existe o es `null`. Útil en colecciones schema-less donde no todos los documentos tienen los mismos campos.
+Solo indexa los documentos que **contienen** el campo especificado, omitiendo aquellos donde el campo no existe. Un campo existente con valor `null` sí forma parte del índice. Es útil en colecciones flexibles donde no todos los documentos tienen los mismos campos.
 
 ```javascript
 db.datosventas.createIndex({ "producto.marca": 1 }, { "sparse": true })
@@ -567,7 +579,7 @@ db.datosventas.dropIndexes()
 
 ### reIndex()
 
-Borra todos los índices de una colección y los recrea. Operación costosa para colecciones grandes. Útil cuando el tamaño de la colección cambió mucho o el espacio usado por los índices es desproporcionado.
+El material histórico presenta `reIndex()` como una operación que elimina y recrea los índices. Es costosa, bloqueante según la versión y no está disponible en todos los entornos administrados; no debe usarse como mantenimiento rutinario. En instalaciones modernas se consulta primero la documentación de la versión y se reconstruye solo el índice necesario.
 
 ```javascript
 db.datosvendedores.reIndex()

@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Práctica
+title: Ejercicios MongoDB
 parent: Práctica
 grand_parent: Unidad 4
 nav_order: 1
@@ -202,7 +202,7 @@ db.cc_info.getIndexes()
 
 **Crear un índice sobre el campo `city`:**
 ```javascript
-db.cc_info.createIndex({ "city_indx": 1 })
+db.cc_info.createIndex({ city: 1 }, { name: "city_indx" })
 db.cc_info.getIndexes()
 ```
 
@@ -420,18 +420,24 @@ db.datosventas.updateMany(
 
 // 12. Ventas realizadas durante el año 2024:
 db.datosventas.find({
-  fecha: { $gte: "2024-01-01", $lt: "2025-01-01" }
+  fecha: {
+    $gte: ISODate("2024-01-01T00:00:00Z"),
+    $lt: ISODate("2025-01-01T00:00:00Z")
+  }
 })
 
 // 13. Ventas realizadas después del 1 de julio de 2025:
-db.datosventas.find({ fecha: { $gt: "2025-07-01" } })
+db.datosventas.find({ fecha: { $gt: ISODate("2025-07-01T00:00:00Z") } })
 
 // 14. Ventas realizadas antes del 1 de junio de 2024:
-db.datosventas.find({ fecha: { $lt: "2024-06-01" } })
+db.datosventas.find({ fecha: { $lt: ISODate("2024-06-01T00:00:00Z") } })
 
 // 15. Ventas en 2025 con cantidad mayor a 3:
 db.datosventas.find({
-  fecha: { $gte: "2025-01-01", $lt: "2026-01-01" },
+  fecha: {
+    $gte: ISODate("2025-01-01T00:00:00Z"),
+    $lt: ISODate("2026-01-01T00:00:00Z")
+  },
   cantidad: { $gt: 3 }
 })
 
@@ -456,7 +462,10 @@ db.datosventas.updateOne(
 // 20. Ventas en 2025 con dolar:true e importe mayor a 1000, mostrando fecha, cliente y producto:
 db.datosventas.find(
   {
-    fecha: { $gte: "2025-01-01", $lt: "2026-01-01" },
+    fecha: {
+      $gte: ISODate("2025-01-01T00:00:00Z"),
+      $lt: ISODate("2026-01-01T00:00:00Z")
+    },
     dolar: true,
     importe: { $gt: 1000 }
   },

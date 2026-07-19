@@ -116,7 +116,7 @@ Las bases de datos NoSQL priorizan disponibilidad y rendimiento con el modelo **
 
 ### Teorema CAP
 
-Formulado por Eric Brewer (2000): un sistema distribuido **solo puede garantizar 2 de 3 propiedades simultáneamente**.
+Formulado por Eric Brewer (2000): **ante una partición de red**, un sistema distribuido debe priorizar consistencia o disponibilidad; no puede garantizar ambas para todas las operaciones mientras tolera la partición.
 
 | Propiedad | Descripción |
 |-----------|-------------|
@@ -181,9 +181,10 @@ MongoDB es una base de datos NoSQL orientada a documentos. Su nombre proviene de
 
 MongoDB almacena los datos en **BSON** (Binary JSON):
 
-- **Más rápido de procesar** que JSON puro.
-- **Mejor almacenamiento** que JSON de texto.
+- Representación binaria recorrible por el motor.
+- Conserva nombres y tipos; no siempre ocupa menos que JSON de texto.
 - **Más tipos de datos** que JSON: incluye Integer, Double, Decimal128, Date, ObjectId, etc.
+- Tamaño máximo de un documento BSON normal: **16 MiB**.
 
 ### Terminología
 
@@ -232,8 +233,8 @@ El campo `_id` es la clave primaria de cada documento. Por defecto MongoDB gener
 | Bytes | Contenido |
 |-------|-----------|
 | 4 bytes | Timestamp (segundos desde epoch Unix) |
-| 5 bytes | Identificador de máquina + PID |
-| 3 bytes | Contador aleatorio |
+| 5 bytes | Valor aleatorio generado para la máquina/proceso |
+| 3 bytes | Contador incremental inicializado aleatoriamente |
 
 ```
 { "_id": ObjectId("68dec97896a0c6359e5a5851") }
@@ -279,7 +280,7 @@ mongosh
 
 **Conectar a MongoDB Atlas:**
 ```
-mongosh "mongodb+srv://estudiante:XJFIpIdyxgdSWkUT@cluster0.tjnu3hi.mongodb.net/"
+mongosh "mongodb+srv://<usuario>:<password>@<cluster>/<base>"
 ```
 
 **Comandos básicos del shell:**
@@ -581,7 +582,7 @@ db.cc_info.getIndexes()
 
 **Crear índice:**
 ```javascript
-db.cc_info.createIndex({ "city_indx": 1 })
+db.cc_info.createIndex({ city: 1 }, { name: "city_indx" })
 // 1 = ascendente, -1 = descendente
 ```
 
@@ -672,21 +673,36 @@ Un **Data Lake** es un repositorio centralizado que almacena **grandes volúmene
 | **Formatos** | Cualquiera (JSON, CSV, imágenes, video) | Solo estructurados/tabulares |
 | **Usuarios** | Data scientists, ingenieros | Analistas de negocio |
 
+Un lago útil requiere catálogo, seguridad, trazabilidad y reglas de calidad. Sin gobierno puede convertirse en un **data swamp**, un depósito del que no se puede localizar ni confiar en los datos. Consultar la guía de [Datos, Data Lake y KDD](../datos-data-lake-kdd/) para el flujo completo y el caso de abandono de clientes.
+
 ---
 
 ## KDD — Knowledge Discovery in Databases
 
-El proceso **KDD** (Knowledge Discovery in Databases) es el proceso completo de extraer conocimiento útil a partir de grandes volúmenes de datos. También se conoce como **Data Mining** o minería de datos.
+El proceso **KDD** (Knowledge Discovery in Databases) es el proceso completo de extraer conocimiento útil a partir de grandes volúmenes de datos. **Data Mining** o minería de datos es la etapa algorítmica del proceso, no su sinónimo exacto.
 
 **Etapas del proceso KDD:**
 
 1. **Selección**: identificar y seleccionar las fuentes de datos relevantes.
 2. **Preprocesamiento / Limpieza**: eliminar ruido, valores faltantes y datos inconsistentes.
-3. **Transformación**: convertir los datos al formato adecuado para el análisis (normalización, agregación).
-4. **Minería de datos**: aplicar algoritmos para encontrar patrones (clasificación, clustering, regresión, asociación).
-5. **Evaluación / Interpretación**: evaluar los patrones descubiertos y determinar si son útiles y novedosos.
-6. **Presentación**: comunicar los resultados de forma comprensible.
+3. **Integración**: combinar fuentes y resolver identidades, unidades y formatos.
+4. **Transformación**: normalizar, agregar o construir variables adecuadas para el análisis.
+5. **Minería de datos**: aplicar algoritmos para encontrar patrones (clasificación, clustering, regresión, asociación o anomalías).
+6. **Evaluación / Interpretación**: evaluar los patrones descubiertos y determinar si son válidos, útiles y novedosos.
+7. **Presentación y decisión**: comunicar los resultados y transformarlos en una acción verificable.
 
 Para datos no estructurados (texto, imágenes, audio) se usan:
 - **OCR** (Optical Character Recognition): extrae texto de imágenes o documentos escaneados.
 - **NLP** (Natural Language Processing): procesa y analiza texto en lenguaje natural.
+
+---
+
+## Ruta de estudio recomendada
+
+1. Comprender [NoSQL, BASE, CAP y los cuatro modelos](../nosql-conceptos/).
+2. Estudiar [BSON, documentos, schema y administración básica](../mongodb-introduccion/).
+3. Resolver [CRUD y operadores de consulta](../mongodb-crud/).
+4. Razonar [Aggregation Pipeline, índices y vistas](../mongodb-agregacion/).
+5. Practicar la interfaz con [MongoDB Compass](../mongodb-compass/).
+6. Integrar la dimensión analítica con [Datos, Data Lake y KDD](../datos-data-lake-kdd/).
+7. Cerrar con la [Guía para el parcial](../guia-parcial/) y los laboratorios.

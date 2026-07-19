@@ -17,7 +17,7 @@ Referencia sobre BSON, terminología, tipos de datos, ObjectId, schema, shell y 
 
 ## ¿Qué es MongoDB?
 
-MongoDB es una base de datos NoSQL orientada a **documentos**. Su nombre proviene de "hu**mongo**us" (enorme). Es una base de datos **CP** según el Teorema CAP: prioriza consistencia sobre disponibilidad durante particiones de red.
+MongoDB es una base de datos NoSQL orientada a **documentos**. Su nombre proviene de "hu**mongo**us" (enorme). En el modelo simplificado de la cátedra se clasifica como **CP**: durante una partición de red prioriza la consistencia de las escrituras confirmadas aunque una elección de primario pueda interrumpir temporalmente el servicio.
 
 ### Características principales
 
@@ -25,7 +25,7 @@ MongoDB es una base de datos NoSQL orientada a **documentos**. Su nombre provien
 |---------------|-------------|
 | **Flexibilidad** | Schema-less: los documentos de una colección pueden tener estructuras diferentes |
 | **Escalabilidad horizontal** | Sharding: los datos se distribuyen entre múltiples nodos |
-| **Alto rendimiento** | Almacenamiento en BSON, más eficiente que JSON de texto |
+| **Alto rendimiento** | Lectura por documentos, índices y arquitectura distribuible según el patrón de acceso |
 | **Desarrollo ágil** | Drivers para JavaScript, Python, Java, Node.js y otros |
 
 ---
@@ -34,9 +34,11 @@ MongoDB es una base de datos NoSQL orientada a **documentos**. Su nombre provien
 
 MongoDB almacena los datos internamente en **BSON** (Binary JSON):
 
-- **Más rápido de procesar** que JSON puro (formato binario).
-- **Mejor almacenamiento** que JSON de texto.
+- Es una representación **binaria y recorrible** por el motor.
+- Conserva nombres de campos y tipos; no debe asumirse que siempre ocupa menos que JSON de texto.
 - **Más tipos de datos** que JSON estándar: incluye Integer (32/64-bit), Double, Decimal128, Date, ObjectId, etc.
+
+El tamaño máximo de un documento BSON normal es **16 MiB**. Si un archivo excede ese límite se lo divide, se lo guarda fuera del documento o se evalúa GridFS. El límite obliga a diseñar arrays que no crezcan sin control.
 
 ---
 
@@ -69,6 +71,18 @@ MongoDB almacena los datos internamente en **BSON** (Binary JSON):
 | **ObjectId** | Identificador único de 12 bytes | `ObjectId("64d59...")` |
 | **Object** | Documento embebido (subdocumento) | `"contacto": { "email": "a@b.com" }` |
 
+Para importación y exportación, **Extended JSON** representa tipos BSON que JSON puro no posee:
+
+```json
+{
+  "fecha": { "$date": "2025-07-16T00:00:00Z" },
+  "saldo": { "$numberDecimal": "1250.50" },
+  "_id": { "$oid": "68dec97896a0c6359e5a5851" }
+}
+```
+
+Después de importarlo como Extended JSON, `fecha` es BSON `Date`, no un string.
+
 **Trabajar con fechas:**
 ```javascript
 // Fecha actual:
@@ -91,8 +105,8 @@ El campo **`_id`** es la clave primaria de cada documento. Si no se especifica, 
 | Bytes | Contenido |
 |-------|-----------|
 | 4 bytes | Timestamp en segundos desde epoch Unix |
-| 5 bytes | Identificador de máquina + PID del proceso |
-| 3 bytes | Contador aleatorio incremental |
+| 5 bytes | Valor aleatorio generado para la máquina/proceso |
+| 3 bytes | Contador incremental inicializado aleatoriamente |
 
 ```javascript
 { "_id": ObjectId("68dec97896a0c6359e5a5851") }
@@ -112,7 +126,7 @@ db.coleccion.insertOne({ _id: 1, nombre: "Juan" })
 - Evitar el punto `.` (se usa para acceso anidado: `"contacto.email"`) y el signo pesos `$` (prefijo de operadores).
 - MongoDB es **case-sensitive**: `"Nombre"` y `"nombre"` son campos distintos.
 - No se permiten claves duplicadas en un documento (MongoDB conserva el último valor).
-- El **orden de los campos BSON importa** para la identidad del documento.
+- El **orden de los campos BSON puede importar** en comparaciones de documentos embebidos y en la representación binaria; no conviene depender de él como regla de negocio.
 
 ---
 
@@ -168,8 +182,14 @@ MongoServerError: Document failed validation
 
 ## Shell mongosh
 
-El servidor MongoDB es `mongod.exe` (escucha en puerto **27017** por defecto).  
-El cliente de shell es `mongosh` (o el antiguo `mongo.exe`).
+El servidor MongoDB es `mongod` —`mongod.exe` en Windows— y escucha en el puerto **27017** por defecto. El cliente actual de shell es `mongosh`; `mongo.exe` corresponde al shell histórico.
+
+```mermaid
+flowchart LR
+    MS[mongosh] -->|MQL| MD[(mongod :27017)]
+    CO[Compass] -->|MQL| MD
+    AP[Aplicación + driver] -->|operaciones| MD
+```
 
 **Conectar al servidor local:**
 ```
@@ -178,8 +198,11 @@ mongosh
 
 **Conectar a MongoDB Atlas:**
 ```
-mongosh "mongodb+srv://estudiante:XJFIpIdyxgdSWkUT@cluster0.tjnu3hi.mongodb.net/"
+mongosh "mongodb+srv://<usuario>:<password>@<cluster>/<base>"
 ```
+
+{: .warning }
+Nunca se deben publicar credenciales reales dentro de una URI. Para los pasos completos de instalación y diagnóstico, consultar [Instalación y conexión](../instalacion-mongodb/).
 
 ### Comandos del shell
 
