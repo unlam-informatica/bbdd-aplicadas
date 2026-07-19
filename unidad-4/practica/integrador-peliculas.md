@@ -15,7 +15,7 @@ Esta práctica utiliza dos datasets entregados con la unidad y reúne documentos
 
 ## Preparación
 
-Descargar [Peliculas.json]({% link unidad-4/references/Unidad 4/Peliculas.json %}) y [Prestamos.json]({% link unidad-4/references/Unidad 4/Prestamos.json %}). En Compass:
+Usar los archivos `Peliculas.json` y `Prestamos.json` provistos con el material de la cátedra. No se enlazan mediante la etiqueta Liquid `{% raw %}{% link %}{% endraw %}` porque la carpeta de referencias puede no formar parte del sitio publicado. En Compass:
 
 1. Crear la base `videoclub`.
 2. Crear las colecciones `peliculas` y `prestamos`.
@@ -321,4 +321,3 @@ Las vistas son de solo lectura y ejecutan su pipeline al consultarse; no almacen
 4. Clasificar importes en rangos con `$bucket`.
 5. Usar `$facet` para devolver en una consulta un ranking por localidad y otro por película.
 6. Explicar qué índices puede aprovechar cada desafío y demostrarlo con `explain("executionStats")`.
-
