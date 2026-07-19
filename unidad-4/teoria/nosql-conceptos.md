@@ -11,7 +11,7 @@ permalink: /unidad-4/teoria/nosql-conceptos/
 
 # NoSQL — Conceptos y modelos
 
-Referencia rápida sobre qué es NoSQL, por qué existe, y los cuatro modelos de almacenamiento.
+Referencia sobre el surgimiento de NoSQL, sus compromisos de distribución y los cuatro modelos de almacenamiento.
 
 ---
 
@@ -21,12 +21,28 @@ Referencia rápida sobre qué es NoSQL, por qué existe, y los cuatro modelos de
 
 El término fue acuñado en 1998 por Carlo Strozzi. Su significado actual reconoce que SQL puede coexistir con otros modelos de acceso.
 
+### Del almacenamiento específico al modelo NoSQL
+
+| Año | Hito | Aporte |
+|-----|------|--------|
+| 1960 | IDS de Charles Bachman | Primeros sistemas con acceso concurrente |
+| 1966 | IMS de IBM | Modelo jerárquico usado en el programa Apolo |
+| 1967 | CODASYL | Modelo de base de datos en red y extensiones para COBOL |
+| 1970 | Modelo relacional de E. F. Codd | Separación lógica/física y fundamento de los RDBMS |
+| Década de 1980 | SQL y productos relacionales | Consolidación del lenguaje y del modelo tabular |
+| Década de 1990 | Web y sistemas masivos | Crecen volumen, concurrencia y disponibilidad requerida |
+| 1998 en adelante | NoSQL | Modelos especializados y orientados a distribución |
+
+Un RDBMS integra, como mínimo, gestión de almacenamiento y memoria, diccionario de datos —esquemas, tablas, índices, restricciones y vistas— y un lenguaje para definir y manipular datos. NoSQL no elimina esas necesidades: cambia el modelo, las garantías y la forma de distribuirlas.
+
 ### Limitaciones del modelo relacional
 
 - **Escala vertical costosa**: más CPU y RAM para un solo servidor tiene un techo y un precio muy alto.
 - **Esquema rígido**: agregar o cambiar columnas en tablas con miles de millones de filas es una operación lenta y disruptiva.
 - **Latencia**: los joins entre múltiples tablas grandes pueden ser lentos para aplicaciones de tiempo real.
 - **Alta disponibilidad**: los RDBMS tradicionales complican la replicación y el failover automático.
+
+La **desnormalización** puede reducir joins y mejorar lecturas, pero introduce duplicación y riesgo de anomalías. Distribuir un único RDBMS entre muchos servidores también es posible, aunque aumenta la complejidad de coordinación y el costo de transacciones globales.
 
 ---
 
@@ -65,11 +81,14 @@ Los datos no estructurados requieren herramientas adicionales para ser procesado
 
 BASE prioriza disponibilidad y rendimiento sobre la consistencia inmediata.
 
+{: .important }
+ACID y BASE no dividen el mundo en productos “con transacciones” y “sin transacciones”. Son modelos de garantías. MongoDB puede ofrecer operaciones ACID —incluidas transacciones multidocumento— y, a la vez, participar en una arquitectura distribuida con compromisos configurables.
+
 ---
 
 ## Teorema CAP
 
-Formulado por Eric Brewer (2000): un sistema distribuido **solo puede garantizar 2 de estas 3 propiedades** simultáneamente.
+Formulado por Eric Brewer (2000): **cuando existe una partición de red**, un sistema distribuido no puede garantizar simultáneamente consistencia y disponibilidad para todas las operaciones; debe priorizar una de ellas mientras tolera la partición.
 
 | Propiedad | Descripción |
 |-----------|-------------|
@@ -87,6 +106,18 @@ Formulado por Eric Brewer (2000): un sistema distribuido **solo puede garantizar
 
 **MongoDB es CP**: un único nodo primario recibe todas las escrituras. Si hay una partición de red, el sistema puede dejar de responder momentáneamente para mantener la consistencia.
 
+```mermaid
+flowchart TB
+    P{Se interrumpe la<br/>comunicación entre nodos}
+    P --> C[Priorizar C]
+    P --> A[Priorizar A]
+    C --> CP[CP: rechazar o demorar operaciones<br/>que no puedan ser consistentes]
+    A --> AP[AP: responder aun si algunas réplicas<br/>todavía divergen]
+    N[Sin partición] --> CA[Es posible ofrecer<br/>consistencia y disponibilidad]
+```
+
+En un **replica set** de MongoDB, el primario recibe escrituras y los secundarios replican su registro de operaciones. Si el primario deja de estar disponible, los miembros elegibles realizan una elección; durante ese intervalo pueden interrumpirse escrituras. La etiqueta CP es la simplificación usada por la cátedra. En la práctica, `readPreference`, `readConcern` y `writeConcern` permiten ajustar garantías.
+
 Cada modelo NoSQL usa un almacenamiento **optimizado para sus requisitos específicos**; no existe un modelo único que se adapte a todos los casos de uso.
 
 ---
@@ -97,6 +128,8 @@ Cada modelo NoSQL usa un almacenamiento **optimizado para sus requisitos especí
 |------|-------------|-----------------|
 | **Clúster en la nube** | Servidores gestionados por un proveedor (AWS, GCP, Azure, MongoDB Atlas) | Opex — pago por uso, sin inversión inicial |
 | **Clúster de servidores dedicados** | Hardware propio en datacenter | Capex — inversión inicial alta, menor costo a largo plazo |
+
+La decisión debe considerar **costo** (Capex inicial y Opex operativo), **complejidad** de infraestructura y personal, **tiempo de implementación** y grado de personalización. La nube suele acelerar la puesta en marcha; el hardware dedicado ofrece mayor control a costa de operación propia.
 
 ---
 
@@ -110,6 +143,7 @@ La estructura más simple: cada elemento es un par `{clave: valor}`. El motor no
 - Lecturas y escrituras muy rápidas (O(1) con la clave).
 - Ideal para caché y sesiones.
 - No permite consultar por el contenido del valor.
+- Normalmente no requiere joins, bloqueos complejos, agregaciones ni índices secundarios.
 
 **Casos de uso:** sesiones web, caché de aplicación, configuración distribuida, tablas de símbolos.
 
@@ -132,6 +166,8 @@ Almacena documentos (generalmente JSON o BSON). Cada documento es autodescriptiv
 - Admite documentos embebidos y arrays.
 - Soporta consultas sobre cualquier campo del documento.
 - Escalabilidad horizontal mediante sharding.
+- Inserciones y actualizaciones son comunes; el documento suele leerse y escribirse como un bloque.
+- El modelo puede evitar el desajuste entre objetos de la aplicación y filas relacionales.
 
 **Casos de uso:** catálogos de productos, gestión de contenido, perfiles de usuario, sistemas de e-commerce.
 
@@ -161,6 +197,7 @@ Almacena **vértices** (entidades) y **aristas** (relaciones), ambos con propied
 - Consultas de relaciones complejas son muy eficientes.
 - Pensar en grafos en lugar de tablas y joins.
 - Las aristas tienen dirección y pueden tener propiedades.
+- Cada nodo mantiene referencias a elementos adyacentes, facilitando recorridos de muchos saltos.
 
 **Casos de uso:** redes sociales, detección de fraudes, motores de recomendaciones, organigramas, gestión de dependencias.
 
@@ -192,6 +229,7 @@ Una **columna** es una unidad básica (nombre + valor). Un conjunto de columnas 
 - Baja latencia en acceso a un subconjunto de campos dentro de un registro grande.
 - Escalable a gran escala.
 - Acceso a celdas individuales con `GET` y `PUT`; múltiples filas con `SCAN`.
+- Las filas de una misma estructura pueden contener columnas diferentes y agruparlas en familias relacionadas.
 
 **Casos de uso:** análisis de redes sociales, telemetría, datos de sensores, series temporales, análisis web, mensajería.
 
@@ -215,3 +253,16 @@ WHERE event_type = 'myEvent'
 | **Documentos** | JSON/BSON autodescriptivos | Contenido flexible, perfiles | MongoDB, CouchDB |
 | **Grafos** | Vértices y aristas | Relaciones complejas | Neo4j, JanusGraph |
 | **Columnas** | Familias de columnas | Series temporales, analítica | Cassandra, HBase |
+
+### Método de elección
+
+```mermaid
+flowchart TD
+    Q{¿Cuál es el patrón<br/>dominante?}
+    Q -->|Acceso por una clave| KV[Clave-valor]
+    Q -->|Agregar contenido jerárquico| DOC[Documentos]
+    Q -->|Recorrer relaciones profundas| G[Grafo]
+    Q -->|Escritura masiva por partición<br/>y columnas dispersas| COL[Familias de columnas]
+```
+
+No se elige por moda ni solo por volumen. Primero se identifican consultas, escrituras, consistencia requerida, distribución, latencia y evolución del esquema; después se adopta el modelo optimizado para esa carga.

@@ -213,6 +213,9 @@ db.socios.find({
 | `$regex` | Busca patrones en cadenas (similar a LIKE en SQL) | `{ nombre: { $regex: "^A" } }` |
 | `$type` | Filtra documentos según el tipo BSON del campo | `{ edad: { $type: "int" } }` |
 | `$mod` | Filtra según el resto de una división (módulo) | `{ numero: { $mod: [2, 0] } }` |
+| `$expr` | Usa expresiones de agregación dentro del filtro | `{ $expr: { $gt: ["$importe", "$limite"] } }` |
+| `$text` | Busca términos usando un índice de texto | `{ $text: { $search: "base de datos" } }` |
+| `$where` | Evalúa JavaScript por documento | `{ $where: "this.a > this.b" }` |
 
 **Búsqueda case-insensitive con regex:**
 ```javascript
@@ -225,6 +228,34 @@ db.datosvendedores.find({ apellidos: { $regex: "López", $options: "i" } })
 // Documentos donde el segundo elemento del array intereses es "lectura":
 db.personas.find({ 'intereses.1': 'lectura' })
 ```
+
+### Consultar fechas BSON
+
+El operador no convierte tipos automáticamente. Si `fecha` fue importada como BSON `Date`, los límites también deben ser fechas:
+
+```javascript
+db.datosventas.find({
+  fecha: {
+    $gte: ISODate("2025-01-01T00:00:00Z"),
+    $lt: ISODate("2026-01-01T00:00:00Z")
+  }
+})
+```
+
+Comparar ese campo con `"2025-01-01"` compara `Date` contra `String` según el orden de tipos BSON y **no expresa un rango cronológico**.
+
+### `$expr`, `$text` y `$where`
+
+```javascript
+// Comparar dos campos del mismo documento:
+db.ventas.find({ $expr: { $gt: ["$importe", "$presupuesto"] } })
+
+// La búsqueda de texto requiere primero un índice de texto:
+db.articulos.createIndex({ titulo: "text", cuerpo: "text" })
+db.articulos.find({ $text: { $search: "MongoDB índices" } })
+```
+
+`$where` forma parte de los operadores enumerados en el material, pero ejecuta JavaScript, suele impedir optimizaciones e introduce riesgos si se construye con entrada externa. En una solución real se prefieren operadores MQL o `$expr`.
 
 ---
 
@@ -309,6 +340,18 @@ El primer parámetro `{}` es un filtro vacío que coincide con **todos** los doc
 db.productos.updateOne(
   { _id: 1 },
   { $inc: { stock: -1 } }  // decrementa stock en 1
+)
+```
+
+Otros operadores habituales son `$mul` para multiplicar, `$rename` para renombrar, `$push` para agregar a un array, `$addToSet` para agregar sin duplicar y `$pull` para quitar elementos coincidentes.
+
+```javascript
+db.productos.updateOne(
+  { _id: 1 },
+  {
+    $mul: { precio: 1.10 },
+    $addToSet: { etiquetas: "actualizado" }
+  }
 )
 ```
 
