@@ -8,6 +8,9 @@
   --site-muted: #5d6b64;
   --site-surface: #ffffff;
   --site-border: #d8e0dc;
+  --code-surface: #f3f6f4;
+  --code-border: #84968c;
+  --code-ink: #1f2924;
 }
 
 body {
@@ -43,11 +46,160 @@ body {
   //   margin-top: 1.75rem;
   // }
 
-  pre.highlight,
-  div.highlighter-rouge {
+  // ─── Código: paleta accesible para fondo claro ──────────────────────────
+  //
+  // El contenedor se diferencia de la página por luminancia y borde, mientras
+  // que los tokens usan colores oscuros (no tonos pastel) para mantener al
+  // menos contraste AA. El significado nunca depende solo del color: Rouge
+  // conserva negrita/cursiva en palabras clave y comentarios.
+
+  code {
+    color: var(--code-ink);
+    background-color: var(--code-surface);
+    border: 1px solid var(--code-border);
+    border-radius: 4px;
+    padding: 0.12em 0.35em;
+  }
+
+  div.highlighter-rouge,
+  pre.highlight {
+    color: var(--code-ink);
+    background: var(--code-surface);
+    border: 1px solid var(--code-border);
     border-radius: 6px;
-    border: 1px solid var(--border-color);
     font-size: 0.875rem;
+    line-height: 1.55;
+  }
+
+  div.highlighter-rouge {
+    margin: 1rem 0;
+    overflow: hidden;
+
+    pre.highlight {
+      margin: 0;
+      border: 0;
+      border-radius: 0;
+    }
+  }
+
+  pre.highlight {
+    padding: 1rem 1.125rem;
+    overflow-x: auto;
+
+    code {
+      color: inherit;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      padding: 0;
+    }
+  }
+
+  // Tokens generados por Rouge. Se agrupan por función para que SQL, JSON,
+  // JavaScript y shell compartan una jerarquía visual consistente.
+  .highlight {
+    color: var(--code-ink);
+    background: var(--code-surface);
+
+    // Comentarios: secundarios, pero todavía legibles sobre #f3f6f4.
+    .c,
+    .ch,
+    .cm,
+    .cp,
+    .cpf,
+    .c1,
+    .cs {
+      color: #58665f;
+      font-style: italic;
+    }
+
+    // Palabras reservadas y operadores de control.
+    .k,
+    .kc,
+    .kd,
+    .kn,
+    .kp,
+    .kr,
+    .kt {
+      color: #7a1f5c;
+      font-weight: 600;
+    }
+
+    // Nombres de funciones, clases, etiquetas y propiedades.
+    .na,
+    .nb,
+    .nc,
+    .nd,
+    .ne,
+    .nf,
+    .nl,
+    .nt {
+      color: #075985;
+    }
+
+    // Los identificadores comunes quedan cerca del color base: así no compiten
+    // visualmente con palabras reservadas, funciones y valores.
+    .n,
+    .nn,
+    .nx,
+    .py {
+      color: #253b31;
+    }
+
+    // Cadenas y valores literales.
+    .s,
+    .sa,
+    .sb,
+    .sc,
+    .dl,
+    .sd,
+    .s2,
+    .se,
+    .sh,
+    .si,
+    .sx,
+    .sr,
+    .s1,
+    .ss {
+      color: #176b3a;
+    }
+
+    // Números, constantes y variables.
+    .m,
+    .mb,
+    .mf,
+    .mh,
+    .mi,
+    .il,
+    .mo,
+    .no,
+    .nv,
+    .vc,
+    .vg,
+    .vi,
+    .vm {
+      color: #8a4b08;
+    }
+
+    .o,
+    .ow,
+    .p { color: #37463f; }
+
+    .gd {
+      color: #9f1d28;
+      background-color: #ffebe9;
+    }
+
+    .gi {
+      color: #116329;
+      background-color: #dafbe1;
+    }
+
+    .err {
+      color: #a40e26;
+      background-color: #ffebe9;
+      text-decoration: underline wavy #cf222e;
+    }
   }
 
   // ─── Tablas ─────────────────────────────────────────────────────────────
@@ -131,6 +283,8 @@ body {
     display: block;
     padding: 0;
     background: transparent;
+    border: 0;
+    border-radius: 0;
   }
 
   .mermaid svg,
