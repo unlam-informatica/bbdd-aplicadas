@@ -8,9 +8,6 @@
   --site-muted: #5d6b64;
   --site-surface: #ffffff;
   --site-border: #d8e0dc;
-  --code-surface: #f3f6f4;
-  --code-border: #84968c;
-  --code-ink: #1f2924;
 }
 
 body {
@@ -46,62 +43,17 @@ body {
   //   margin-top: 1.75rem;
   // }
 
-  // ─── Código: paleta accesible para fondo claro ──────────────────────────
-  //
-  // El contenedor se diferencia de la página por luminancia y borde, mientras
-  // que los tokens usan colores oscuros (no tonos pastel) para mantener al
-  // menos contraste AA. El significado nunca depende solo del color: Rouge
-  // conserva negrita/cursiva en palabras clave y comentarios.
-
-  code {
-    color: var(--code-ink);
-    background-color: var(--code-surface);
-    border: 1px solid var(--code-border);
-    border-radius: 4px;
-    padding: 0.12em 0.35em;
-  }
-
-  div.highlighter-rouge,
-  pre.highlight {
-    color: var(--code-ink);
-    background: var(--code-surface);
-    border: 1px solid var(--code-border);
-    border-radius: 6px;
-    font-size: 0.875rem;
-    line-height: 1.55;
-  }
-
+  pre.highlight,
   div.highlighter-rouge {
-    margin: 1rem 0;
-    overflow: hidden;
-
-    pre.highlight {
-      margin: 0;
-      border: 0;
-      border-radius: 0;
-    }
-  }
-
-  pre.highlight {
-    padding: 1rem 1.125rem;
-    overflow-x: auto;
-
-    code {
-      color: inherit;
-      background: transparent;
-      border: 0;
-      border-radius: 0;
-      padding: 0;
-    }
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 0.875rem;
   }
 
   // Tokens generados por Rouge. Se agrupan por función para que SQL, JSON,
   // JavaScript y shell compartan una jerarquía visual consistente.
   .highlight {
-    color: var(--code-ink);
-    background: var(--code-surface);
-
-    // Comentarios: secundarios, pero todavía legibles sobre #f3f6f4.
+    // Comentarios: secundarios, pero todavía legibles sobre fondo claro.
     .c,
     .ch,
     .cm,
@@ -283,8 +235,6 @@ body {
     display: block;
     padding: 0;
     background: transparent;
-    border: 0;
-    border-radius: 0;
   }
 
   .mermaid svg,
